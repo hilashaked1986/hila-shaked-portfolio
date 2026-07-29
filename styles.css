@@ -147,3 +147,51 @@
   .arrow-mark{width:27px;height:27px}
   .hero-rail{bottom:44px}
 }
+
+/* FINAL POLISH — CTA scale and mobile alignment */
+@media (min-width:521px){
+  .arrow-mark{
+    width:34px;
+    height:34px;
+  }
+}
+
+@media (max-width:520px){
+  .hero-services{
+    font-size:10px;
+    letter-spacing:.29em;
+  }
+  .hero-work-link{
+    left:48px;
+    bottom:50px;
+    gap:11px;
+    font-size:11px;
+    line-height:1;
+    letter-spacing:.22em;
+    align-items:center;
+  }
+  .arrow-mark{
+    width:27px;
+    height:27px;
+  }
+  .hero-rail{
+    bottom:50px;
+  }
+  .rail-index{
+    bottom:0;
+    font-size:10px;
+    line-height:1;
+  }
+}
+
+@media (max-width:380px){
+  .hero-services{font-size:9px}
+  .hero-work-link{
+    left:46px;
+    bottom:42px;
+    font-size:10px;
+    gap:9px;
+  }
+  .arrow-mark{width:25px;height:25px}
+  .hero-rail{bottom:42px}
+}
