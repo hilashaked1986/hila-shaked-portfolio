@@ -1,0 +1,27 @@
+UPLOAD INSTRUCTIONS — PREVIEW V2
+
+1. Open:
+   https://github.com/hilashaked1986/hila-shaked-portfolio
+
+2. Click:
+   Add file > Upload files
+
+3. Upload these two files into the repository root:
+   - selected-work-preview-v2.html
+   - selected-work-preview-v2.css
+
+4. Commit directly to the main branch.
+
+5. Open this preview:
+   https://hilashaked1986.github.io/hila-shaked-portfolio/selected-work-preview-v2.html
+
+This does not replace or modify index.html, styles.css, script.js, or the live homepage.
+
+Notes:
+- Every project card has exactly the same 3:4 size.
+- Every image uses the same object-fit: contain behaviour.
+- No project receives a different crop or larger visual weight.
+- The large Selected Work headline was removed.
+- The two-column offset remains subtle.
+- Existing low-resolution source files may still look soft; replacing the original asset
+  with a higher-resolution export is the only way to restore missing detail.
