@@ -1,0 +1,633 @@
+/* SELECTED WORK PREVIEW V6
+   Approved direction:
+   - exactly two columns
+   - smaller equal 3:4 cards
+   - no repeated Selected Work label
+   - stronger but still subtle asymmetry
+   - full-bleed cover images
+   - no internal black strips
+   - softer Hero-to-gallery blend
+*/
+
+:root{
+  --portfolio-black:#0f1012;
+}
+
+html{
+  scroll-behavior:smooth;
+  background:var(--portfolio-black);
+}
+
+body,
+main{
+  margin:0;
+  background:var(--portfolio-black);
+}
+
+/* The section overlaps the final part of the hero very slightly.
+   The fade sits over both areas, so there is no new hard background edge. */
+.work-v5{
+  position:relative;
+  z-index:2;
+  width:min(calc(100% - (2 * var(--pad))),1180px);
+  margin:-92px auto 0;
+  padding:150px 0 clamp(135px,10vw,190px);
+  background:transparent;
+  isolation:isolate;
+}
+
+.work-v5::before{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  left:50%;
+  top:-180px;
+  width:100vw;
+  height:440px;
+  transform:translateX(-50%);
+  pointer-events:none;
+  background:linear-gradient(
+    180deg,
+    rgba(15,16,18,0) 0%,
+    rgba(15,16,18,.22) 30%,
+    rgba(15,16,18,.68) 63%,
+    var(--portfolio-black) 100%
+  );
+}
+
+.work-v5::after{
+  content:"";
+  position:absolute;
+  z-index:-2;
+  left:50%;
+  top:240px;
+  bottom:0;
+  width:100vw;
+  transform:translateX(-50%);
+  background:var(--portfolio-black);
+}
+
+.work-v5__grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  column-gap:clamp(34px,4vw,58px);
+  align-items:start;
+  overflow:visible;
+}
+
+.work-v5__column{
+  display:flex;
+  flex-direction:column;
+  gap:clamp(40px,4vw,62px);
+  min-width:0;
+}
+
+/* Slightly stronger asymmetry, as approved. */
+.work-v5__column--offset{
+  padding-top:74px;
+}
+
+.work-card-v5{
+  position:relative;
+  display:block;
+  width:100%;
+  aspect-ratio:3/4;
+  overflow:hidden;
+  border-radius:8px;
+  background:transparent;
+  isolation:isolate;
+  line-height:0;
+}
+
+.work-card-v5 figure{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  margin:0;
+  padding:0;
+  overflow:hidden;
+  border-radius:inherit;
+  background:transparent;
+  line-height:0;
+}
+
+.work-card-v5 img{
+  position:absolute;
+  inset:0;
+  display:block;
+  width:100%;
+  height:100%;
+  max-width:none;
+  object-fit:cover;
+  object-position:center;
+  border:0;
+  border-radius:inherit;
+  image-rendering:auto;
+  transform-origin:center;
+  transition:
+    transform 850ms cubic-bezier(.2,.72,.2,1),
+    filter 550ms ease;
+}
+
+/* Individual focal positioning.
+   The card dimensions stay identical; only the content is centered. */
+.card-checkpoint img{
+  object-position:50% 66%;
+  transform:scale(1.08);
+}
+
+.card-red-access img{
+  object-position:50% 49%;
+  transform:scale(1.06);
+}
+
+.card-skyhawk img{
+  object-position:50% 56%;
+  transform:scale(1.03);
+}
+
+.card-harmony img{
+  object-position:52% 51%;
+  transform:scale(1.05);
+}
+
+.card-dfend img{
+  object-position:50% 49%;
+  transform:scale(1.04);
+}
+
+.card-ixden img{
+  object-position:50% 50%;
+  transform:scale(1.02);
+}
+
+.card-carmel img{
+  object-position:50% 55%;
+  transform:scale(1.06);
+}
+
+.card-tami4 img{
+  object-position:50% 52%;
+  transform:scale(1.05);
+}
+
+.work-card-v5::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:1;
+  border-radius:inherit;
+  background:linear-gradient(
+    180deg,
+    rgba(8,9,10,0) 42%,
+    rgba(8,9,10,.14) 68%,
+    rgba(8,9,10,.82) 100%
+  );
+  opacity:0;
+  transition:opacity 420ms ease;
+}
+
+.work-card-v5__overlay{
+  position:absolute;
+  z-index:2;
+  inset:auto 0 0;
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  gap:24px;
+  padding:clamp(21px,1.7vw,29px);
+  color:#f4f1eb;
+  line-height:1.2;
+  opacity:0;
+  transform:translateY(8px);
+  transition:
+    opacity 400ms ease,
+    transform 580ms cubic-bezier(.2,.72,.2,1);
+}
+
+.work-card-v5__overlay h3{
+  margin:7px 0 0;
+  font-family:"Playfair Display",serif;
+  font-size:clamp(25px,1.7vw,33px);
+  font-weight:400;
+  line-height:1;
+  letter-spacing:-.02em;
+}
+
+.work-card-v5__overlay p,
+.work-card-v5__overlay span{
+  margin:0;
+  font-family:Inter,Arial,sans-serif;
+  font-size:9px;
+  line-height:1.4;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+}
+
+.work-card-v5__overlay p{
+  color:rgba(244,241,235,.68);
+}
+
+.work-card-v5__overlay span{
+  flex:0 0 auto;
+  padding-bottom:2px;
+  color:rgba(244,241,235,.9);
+}
+
+.card-checkpoint:hover img,
+.card-checkpoint:focus-visible img{transform:scale(1.092)}
+.card-red-access:hover img,
+.card-red-access:focus-visible img{transform:scale(1.072)}
+.card-skyhawk:hover img,
+.card-skyhawk:focus-visible img{transform:scale(1.042)}
+.card-harmony:hover img,
+.card-harmony:focus-visible img{transform:scale(1.062)}
+.card-dfend:hover img,
+.card-dfend:focus-visible img{transform:scale(1.052)}
+.card-ixden:hover img,
+.card-ixden:focus-visible img{transform:scale(1.032)}
+.card-carmel:hover img,
+.card-carmel:focus-visible img{transform:scale(1.072)}
+.card-tami4:hover img,
+.card-tami4:focus-visible img{transform:scale(1.062)}
+
+.work-card-v5:hover img,
+.work-card-v5:focus-visible img{
+  filter:brightness(.95);
+}
+
+.work-card-v5:hover::after,
+.work-card-v5:focus-visible::after,
+.work-card-v5:hover .work-card-v5__overlay,
+.work-card-v5:focus-visible .work-card-v5__overlay{
+  opacity:1;
+}
+
+.work-card-v5:hover .work-card-v5__overlay,
+.work-card-v5:focus-visible .work-card-v5__overlay{
+  transform:none;
+}
+
+.work-card-v5:focus-visible{
+  outline:1px solid var(--accent);
+  outline-offset:5px;
+}
+
+/* Gentle scroll stagger only. */
+.work-v5__column .work-card-v5:nth-child(2){transition-delay:25ms}
+.work-v5__column .work-card-v5:nth-child(3){transition-delay:50ms}
+.work-v5__column .work-card-v5:nth-child(4){transition-delay:75ms}
+
+.preview-footer{
+  max-width:1180px;
+  background:var(--portfolio-black);
+}
+
+@media (min-width:1200px) and (max-height:920px){
+  .work-v5{
+    width:min(calc(100% - (2 * var(--pad))),1100px);
+    margin-top:-88px;
+    padding-top:138px;
+  }
+
+  .work-v5__column{
+    gap:44px;
+  }
+
+  .work-v5__column--offset{
+    padding-top:68px;
+  }
+}
+
+@media (hover:none){
+  .work-card-v5::after{
+    opacity:.62;
+    background:linear-gradient(180deg,transparent 54%,rgba(8,9,10,.72) 100%);
+  }
+
+  .work-card-v5__overlay{
+    opacity:1;
+    transform:none;
+  }
+
+  .work-card-v5__overlay span{
+    display:none;
+  }
+}
+
+@media (max-width:900px){
+  .work-v5{
+    width:calc(100% - (2 * var(--pad)));
+    margin-top:-54px;
+    padding-top:102px;
+    padding-bottom:125px;
+  }
+
+  .work-v5::before{
+    top:-120px;
+    height:300px;
+  }
+
+  .work-v5__grid{
+    grid-template-columns:1fr;
+    gap:36px;
+  }
+
+  .work-v5__column{
+    gap:36px;
+  }
+
+  .work-v5__column--offset{
+    padding-top:0;
+  }
+}
+
+@media (max-width:520px){
+  .work-v5{
+    margin-top:-34px;
+    padding-top:74px;
+    padding-bottom:92px;
+  }
+
+  .work-v5__grid,
+  .work-v5__column{
+    gap:25px;
+  }
+
+  .work-card-v5__overlay{
+    padding:19px;
+  }
+
+  .work-card-v5__overlay h3{
+    font-size:27px;
+  }
+}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+
+  .work-card-v5 img,
+  .work-card-v5::after,
+  .work-card-v5__overlay{
+    transition:none;
+  }
+}
+
+
+/* ABOUT — HOME PREVIEW V9
+   Unified directly with the existing Hero design system.
+*/
+.about-v9{
+  position:relative;
+  display:grid;
+  grid-template-columns:42px minmax(390px,.9fr) minmax(500px,1.1fr);
+  align-items:center;
+  gap:clamp(42px,5vw,84px);
+  width:min(calc(100% - (2 * var(--pad))),1380px);
+  min-height:720px;
+  margin:0 auto;
+  padding:90px 0 125px;
+  background:var(--dark);
+}
+
+/* Same visual logic as the Hero rail:
+   ivory line, bronze number, then a clear section label beneath it. */
+.about-v9__rail{
+  position:relative;
+  align-self:stretch;
+  min-height:570px;
+}
+
+.about-v9__rail-line{
+  display:block;
+  width:1px;
+  height:calc(100% - 54px);
+  margin-left:4px;
+  background:rgba(244,241,235,.46);
+}
+
+.about-v9__rail-index{
+  display:block;
+  margin-top:10px;
+  font-family:Inter,Arial,sans-serif;
+  font-size:10px;
+  font-weight:400;
+  line-height:1;
+  letter-spacing:.08em;
+  color:var(--accent);
+}
+
+.about-v9__rail-title{
+  display:block;
+  margin-top:13px;
+  font-family:Inter,Arial,sans-serif;
+  font-size:9px;
+  font-weight:400;
+  line-height:1;
+  letter-spacing:.24em;
+  color:var(--accent);
+}
+
+.about-v9__portrait{
+  position:relative;
+  align-self:end;
+  height:620px;
+  min-width:0;
+  overflow:visible;
+}
+
+.about-v9__portrait img{
+  position:absolute;
+  left:50%;
+  bottom:0;
+  width:auto;
+  max-width:none;
+  height:100%;
+  object-fit:contain;
+  object-position:center bottom;
+  transform:translateX(-50%);
+  filter:saturate(.9) contrast(1.03);
+}
+
+/* Inter is already the global body typeface and is reused here. */
+.about-v9__content{
+  align-self:center;
+  max-width:680px;
+  min-width:0;
+  transform:translateY(-22px);
+}
+
+.about-v9__content h2{
+  margin:0 0 34px;
+  font-family:"Playfair Display",serif;
+  font-size:clamp(54px,4.8vw,76px);
+  font-weight:400;
+  line-height:1;
+  letter-spacing:-.035em;
+  color:var(--light);
+}
+
+.about-v9__copy{
+  max-width:650px;
+  font-family:Inter,Arial,sans-serif;
+  font-size:clamp(15px,1.02vw,17px);
+  font-weight:400;
+  line-height:1.72;
+  letter-spacing:-.008em;
+  color:var(--body);
+}
+
+.about-v9__copy p{
+  margin:0 0 20px;
+}
+
+.about-v9__copy .about-v9__lead{
+  margin-bottom:24px;
+  color:var(--light);
+}
+
+/* Exact compact logic of the approved original table:
+   one top rule, four tight cells, short vertical separators, no bottom rule. */
+.about-v9__expertise{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  align-items:start;
+  margin-top:38px;
+  padding-top:13px;
+  border-top:1px solid rgba(244,241,235,.42);
+}
+
+.about-v9__expertise span{
+  position:relative;
+  display:flex;
+  align-items:flex-start;
+  justify-content:center;
+  min-height:50px;
+  padding:0 12px;
+  font-family:"Playfair Display",serif;
+  font-size:clamp(14px,.95vw,17px);
+  font-weight:400;
+  line-height:1.38;
+  letter-spacing:.01em;
+  text-align:center;
+  text-transform:uppercase;
+  color:var(--light);
+}
+
+.about-v9__expertise span + span::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:1px;
+  width:1px;
+  height:43px;
+  background:rgba(244,241,235,.58);
+}
+
+/* Reuses the exact Hero CTA component and hover.
+   Only spacing is scoped to the About placement. */
+.about-v9__resume{
+  margin-top:30px;
+  margin-left:0;
+}
+
+@media (max-width:1100px){
+  .about-v9{
+    grid-template-columns:38px minmax(320px,.82fr) minmax(430px,1.18fr);
+    gap:36px;
+    padding-top:78px;
+  }
+
+  .about-v9__portrait{
+    height:560px;
+  }
+}
+
+@media (max-width:900px){
+  .about-v9{
+    grid-template-columns:28px 1fr;
+    gap:20px;
+    min-height:0;
+    padding:84px 0 110px;
+  }
+
+  .about-v9__rail{
+    grid-column:1;
+    grid-row:1 / span 2;
+    min-height:100%;
+  }
+
+  .about-v9__content{
+    grid-column:2;
+    grid-row:1;
+    transform:none;
+  }
+
+  .about-v9__portrait{
+    grid-column:2;
+    grid-row:2;
+    height:500px;
+    margin-top:18px;
+  }
+
+  .about-v9__content h2{
+    font-size:clamp(48px,12vw,66px);
+  }
+
+  .about-v9__expertise span{
+    padding:0 6px;
+    font-size:12px;
+  }
+}
+
+@media (max-width:560px){
+  .about-v9{
+    width:calc(100% - (2 * var(--pad)));
+    grid-template-columns:22px 1fr;
+    gap:14px;
+    padding-top:72px;
+  }
+
+  .about-v9__rail-line{
+    margin-left:2px;
+  }
+
+  .about-v9__rail-index{
+    font-size:9px;
+  }
+
+  .about-v9__rail-title{
+    font-size:8px;
+    letter-spacing:.17em;
+  }
+
+  .about-v9__content h2{
+    margin-bottom:28px;
+    font-size:46px;
+  }
+
+  .about-v9__copy{
+    font-size:14px;
+    line-height:1.68;
+  }
+
+  .about-v9__expertise{
+    padding-top:11px;
+  }
+
+  .about-v9__expertise span{
+    min-height:44px;
+    padding:0 3px;
+    font-size:10px;
+    line-height:1.35;
+  }
+
+  .about-v9__expertise span + span::before{
+    height:38px;
+  }
+
+  .about-v9__portrait{
+    height:420px;
+  }
+}
