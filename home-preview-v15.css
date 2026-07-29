@@ -459,6 +459,7 @@ main{
   flex-direction:column;
   align-items:flex-start;
   gap:9px;
+  width:max-content;
   min-width:0;
   padding:10px 12px;
   background:rgba(15,16,18,.96);
@@ -500,8 +501,8 @@ main{
   gap:clamp(58px,5.2vw,92px);
   width:min(calc(100% - (2 * var(--pad))),1380px);
   min-height:700px;
-  margin:96px auto 0;
-  padding:48px 0 96px clamp(76px,6.2vw,104px);
+  margin:78px auto 0;
+  padding:18px 0 96px clamp(76px,6.2vw,104px);
   background:var(--dark);
   overflow:visible;
   scroll-margin-top:72px;
@@ -609,7 +610,7 @@ main{
 }
 
 .about-v14__resume{
-  margin-top:48px;
+  margin-top:46px;
 }
 
 @media (max-width:1100px){
@@ -678,7 +679,7 @@ main{
   }
 
   .about-v14__copy{
-    margin-top:48px;
+    margin-top:34px;
     gap:24px;
   }
 
@@ -728,7 +729,7 @@ main{
   }
 
   .about-v14__expertise{
-    margin-top:48px;
+    margin-top:34px;
     padding-top:11px;
   }
 
