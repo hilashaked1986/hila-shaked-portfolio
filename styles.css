@@ -312,3 +312,134 @@
   .cta-label{height:28px}
   .arrow-mark{width:28px}
 }
+
+/* FINAL HERO FIX — exact uploaded arrow geometry, alignment and tall mobile screens */
+.arrow-mark{
+  display:block;
+  flex:0 0 auto;
+  width:32px;
+  height:32px;
+  overflow:visible;
+  color:currentColor;
+  fill:currentColor;
+  stroke:currentColor;
+  stroke-width:1;
+  vector-effect:non-scaling-stroke;
+  paint-order:stroke fill;
+  shape-rendering:geometricPrecision;
+  transition:transform .25s ease,color .25s ease;
+}
+
+.arrow-mark path{
+  fill:currentColor;
+  stroke:currentColor;
+  stroke-width:1;
+  vector-effect:non-scaling-stroke;
+  paint-order:stroke fill;
+}
+
+.hero-work-link:hover{
+  color:var(--light);
+  transform:translateX(2px);
+}
+.hero-work-link:hover .arrow-mark{
+  color:var(--light);
+  transform:none;
+}
+
+@media (min-width:521px){
+  /* One desktop row: 01, label and the original SVG are aligned together. */
+  .hero-rail .rail-index{display:none}
+  .hero-work-link{
+    position:absolute;
+    left:var(--pad);
+    bottom:118px;
+    margin:0;
+    display:grid;
+    grid-template-columns:88px max-content 34px;
+    column-gap:12px;
+    align-items:center;
+    width:max-content;
+    font-size:11px;
+    line-height:1;
+    letter-spacing:.28em;
+  }
+  .cta-index{
+    display:flex;
+    align-items:center;
+    height:34px;
+    font-size:10px;
+    line-height:1;
+    letter-spacing:.08em;
+    color:inherit;
+  }
+  .cta-label{
+    display:flex;
+    align-items:center;
+    height:34px;
+    white-space:nowrap;
+  }
+  .arrow-mark{width:32px;height:32px}
+}
+
+@media (max-width:520px){
+  .hero,
+  .hero-content{
+    min-height:100vh;
+    min-height:100dvh;
+    height:100vh;
+    height:100dvh;
+  }
+  .hero-media,
+  .hero-image,
+  .hero-vignette{inset:0;min-height:100%}
+  .hero-image{
+    background-size:cover;
+    background-position:60% center;
+  }
+  .hero-services,
+  .hero-work-link,
+  .cta-index{
+    font-size:10px;
+    line-height:1;
+  }
+  .hero-work-link{
+    left:15px;
+    right:auto;
+    bottom:max(34px,calc(env(safe-area-inset-bottom) + 18px));
+    display:grid;
+    grid-template-columns:25px max-content 32px;
+    column-gap:11px;
+    align-items:center;
+    width:max-content;
+    margin:0;
+  }
+  .cta-index,
+  .cta-label{
+    display:flex;
+    align-items:center;
+    height:32px;
+  }
+  .hero-rail{
+    bottom:max(48px,calc(env(safe-area-inset-bottom) + 32px));
+  }
+  .hero-rail .rail-index{display:none}
+  .arrow-mark{width:32px;height:32px}
+}
+
+@media (max-width:380px){
+  .hero-work-link{
+    left:14px;
+    grid-template-columns:24px max-content 30px;
+    column-gap:9px;
+  }
+  .cta-index,
+  .cta-label{height:30px}
+  .arrow-mark{width:30px;height:30px}
+}
+
+@media (max-width:520px) and (min-height:850px){
+  .hero-image{background-position:58% center}
+  .hero-rail{bottom:max(58px,calc(env(safe-area-inset-bottom) + 40px))}
+  .hero-work-link{bottom:max(44px,calc(env(safe-area-inset-bottom) + 24px))}
+}
