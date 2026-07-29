@@ -195,3 +195,68 @@
   .arrow-mark{width:25px;height:25px}
   .hero-rail{bottom:42px}
 }
+
+/* HERO LOCK — use the uploaded arrow SVG unchanged */
+.cta-index{display:none}
+.arrow-mark{
+  display:block;
+  flex:0 0 auto;
+  width:28px;
+  height:auto;
+  object-fit:contain;
+  transition:transform .35s cubic-bezier(.22,.75,.2,1),opacity .35s ease;
+}
+
+@media (min-width:521px){
+  .hero-work-link{gap:12px}
+  .arrow-mark{width:25px}
+}
+
+@media (max-width:520px){
+  .hero-services,
+  .hero-work-link{
+    font-size:10px;
+    line-height:1;
+    letter-spacing:.25em;
+  }
+
+  .hero-work-link{
+    left:15px;
+    right:auto;
+    bottom:42px;
+    display:grid;
+    grid-template-columns:24px max-content 26px;
+    align-items:center;
+    column-gap:12px;
+    width:max-content;
+    margin:0;
+  }
+
+  .cta-index{
+    display:block;
+    font-size:10px;
+    line-height:1;
+    letter-spacing:.08em;
+    color:var(--accent);
+  }
+
+  .cta-label{white-space:nowrap}
+  .arrow-mark{width:26px;height:auto}
+
+  /* The mobile index now belongs to the CTA row, not the vertical rail. */
+  .hero-rail .rail-index{display:none}
+  .hero-rail{bottom:64px}
+}
+
+@media (max-width:380px){
+  .hero-services,
+  .hero-work-link,
+  .cta-index{font-size:9px}
+  .hero-work-link{
+    left:14px;
+    bottom:34px;
+    grid-template-columns:22px max-content 24px;
+    column-gap:10px;
+  }
+  .arrow-mark{width:24px}
+}
