@@ -1,0 +1,323 @@
+/* SELECTED WORK PREVIEW V4
+   Two columns, smaller equal cards, smoother hero transition,
+   full-bleed images with manual image positioning.
+*/
+
+:root{
+  --portfolio-black:#0f1012;
+}
+
+html{scroll-behavior:smooth}
+
+body,
+main{
+  background:var(--portfolio-black);
+}
+
+/* Remove the visible visual break between Hero and Work. */
+.hero{
+  margin-bottom:0 !important;
+}
+
+.work-v4{
+  position:relative;
+  width:min(100%,1460px);
+  margin:-1px auto 0;
+  padding:clamp(34px,3.5vw,58px) var(--pad) clamp(145px,11vw,210px);
+  background:transparent;
+}
+
+.work-v4::before{
+  content:"";
+  position:absolute;
+  inset:0 50% auto;
+  width:100vw;
+  height:520px;
+  transform:translateX(-50%);
+  pointer-events:none;
+  z-index:0;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(15,16,18,0) 0%,
+      rgba(15,16,18,.42) 26%,
+      var(--portfolio-black) 74%,
+      var(--portfolio-black) 100%
+    );
+}
+
+.work-v4 > *{
+  position:relative;
+  z-index:1;
+}
+
+.work-v4__label{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  margin:0 0 clamp(34px,3.8vw,54px);
+  color:rgba(244,241,235,.62);
+  font-family:Inter,Arial,sans-serif;
+  font-size:9px;
+  line-height:1;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+}
+
+.work-v4__label::after{
+  content:"";
+  width:min(105px,8vw);
+  height:1px;
+  margin-left:6px;
+  background:rgba(244,241,235,.15);
+}
+
+.work-v4__label span,
+.work-v4__label p{
+  margin:0;
+}
+
+.work-v4__grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  column-gap:clamp(28px,3.5vw,54px);
+  align-items:start;
+  overflow:visible;
+}
+
+.work-v4__column{
+  display:flex;
+  flex-direction:column;
+  gap:clamp(48px,5vw,78px);
+  min-width:0;
+}
+
+.work-v4__column--offset{
+  padding-top:clamp(34px,3.8vw,58px);
+}
+
+.work-card-v4{
+  position:relative;
+  display:block;
+  width:100%;
+  aspect-ratio:3/4;
+  overflow:hidden;
+  border-radius:8px;
+  background:#151619;
+  isolation:isolate;
+}
+
+.work-card-v4 figure{
+  position:absolute;
+  inset:0;
+  margin:0;
+  overflow:hidden;
+}
+
+.work-card-v4 img{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transform:scale(1.001);
+  transition:
+    transform 900ms cubic-bezier(.2,.72,.2,1),
+    filter 650ms ease;
+  image-rendering:auto;
+  backface-visibility:hidden;
+}
+
+/* Manual visual centering per project.
+   Cards remain equal; only the focal point changes. */
+.card-checkpoint img{object-position:50% 58%}
+.card-red-access img{object-position:50% 53%}
+.card-skyhawk img{object-position:50% 54%}
+.card-harmony img{object-position:50% 50%}
+.card-dfend img{object-position:50% 48%}
+.card-ixden img{object-position:50% 51%}
+.card-carmel img{object-position:50% 52%}
+.card-tami4 img{object-position:50% 50%}
+
+.work-card-v4::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:1;
+  background:linear-gradient(
+    180deg,
+    rgba(8,9,10,0) 40%,
+    rgba(8,9,10,.15) 68%,
+    rgba(8,9,10,.82) 100%
+  );
+  opacity:0;
+  transition:opacity 450ms ease;
+}
+
+.work-card-v4__overlay{
+  position:absolute;
+  z-index:2;
+  inset:auto 0 0;
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  gap:28px;
+  padding:clamp(22px,1.8vw,31px);
+  color:#f4f1eb;
+  opacity:0;
+  transform:translateY(9px);
+  transition:
+    opacity 420ms ease,
+    transform 620ms cubic-bezier(.2,.72,.2,1);
+}
+
+.work-card-v4__overlay h3{
+  margin:7px 0 0;
+  font-family:"Playfair Display",serif;
+  font-size:clamp(26px,1.8vw,35px);
+  font-weight:400;
+  line-height:1;
+  letter-spacing:-.02em;
+}
+
+.work-card-v4__overlay p,
+.work-card-v4__overlay span{
+  margin:0;
+  font-family:Inter,Arial,sans-serif;
+  font-size:9px;
+  line-height:1.4;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+}
+
+.work-card-v4__overlay p{
+  color:rgba(244,241,235,.68);
+}
+
+.work-card-v4__overlay span{
+  flex:0 0 auto;
+  padding-bottom:2px;
+  color:rgba(244,241,235,.9);
+}
+
+.work-card-v4:hover img,
+.work-card-v4:focus-visible img{
+  transform:scale(1.014);
+  filter:brightness(.94);
+}
+
+.work-card-v4:hover::after,
+.work-card-v4:focus-visible::after,
+.work-card-v4:hover .work-card-v4__overlay,
+.work-card-v4:focus-visible .work-card-v4__overlay{
+  opacity:1;
+}
+
+.work-card-v4:hover .work-card-v4__overlay,
+.work-card-v4:focus-visible .work-card-v4__overlay{
+  transform:none;
+}
+
+.work-card-v4:focus-visible{
+  outline:1px solid var(--accent);
+  outline-offset:5px;
+}
+
+/* Subtle reveal timing without changing card sizes. */
+.work-v4__column .work-card-v4:nth-child(2){transition-delay:30ms}
+.work-v4__column .work-card-v4:nth-child(3){transition-delay:60ms}
+.work-v4__column .work-card-v4:nth-child(4){transition-delay:90ms}
+
+.preview-footer{
+  max-width:1460px;
+  background:var(--portfolio-black);
+}
+
+/* Keeps one complete card comfortable inside a common desktop viewport. */
+@media (min-width:1200px) and (max-height:900px){
+  .work-v4{
+    width:min(100%,1320px);
+  }
+
+  .work-v4__column{
+    gap:52px;
+  }
+
+  .work-v4__column--offset{
+    padding-top:38px;
+  }
+}
+
+@media (hover:none){
+  .work-card-v4::after{
+    opacity:.64;
+    background:linear-gradient(180deg,transparent 52%,rgba(8,9,10,.72) 100%);
+  }
+
+  .work-card-v4__overlay{
+    opacity:1;
+    transform:none;
+  }
+
+  .work-card-v4__overlay span{
+    display:none;
+  }
+}
+
+@media (max-width:900px){
+  .work-v4{
+    width:100%;
+    padding-top:42px;
+    padding-bottom:130px;
+  }
+
+  .work-v4__label{
+    margin-bottom:38px;
+  }
+
+  .work-v4__grid{
+    grid-template-columns:1fr;
+    gap:40px;
+  }
+
+  .work-v4__column{
+    gap:40px;
+  }
+
+  .work-v4__column--offset{
+    padding-top:0;
+  }
+}
+
+@media (max-width:520px){
+  .work-v4{
+    padding-top:34px;
+    padding-bottom:96px;
+  }
+
+  .work-v4__label{
+    margin-bottom:30px;
+  }
+
+  .work-v4__grid,
+  .work-v4__column{
+    gap:27px;
+  }
+
+  .work-card-v4__overlay{
+    padding:20px;
+  }
+
+  .work-card-v4__overlay h3{
+    font-size:28px;
+  }
+}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+
+  .work-card-v4 img,
+  .work-card-v4::after,
+  .work-card-v4__overlay{
+    transition:none;
+  }
+}

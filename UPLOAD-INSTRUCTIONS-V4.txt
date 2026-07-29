@@ -1,0 +1,25 @@
+UPLOAD INSTRUCTIONS — PREVIEW V4
+
+Upload these two files to the repository root:
+- selected-work-preview-v4.html
+- selected-work-preview-v4.css
+
+Open:
+https://hilashaked1986.github.io/hila-shaked-portfolio/selected-work-preview-v4.html
+
+This preview does not replace or modify the live homepage.
+
+V4 changes:
+- Still exactly 2 projects per row.
+- Cards are smaller than V3.
+- Hero and gallery share the same near-black background.
+- The gallery begins closer to the Hero.
+- All images use object-fit: cover.
+- Each image has a manual object-position so the focal point sits better.
+- The right-column offset is smaller.
+- Grid clipping is prevented.
+- Hover styling stays essentially unchanged.
+
+Important:
+Low-resolution source images may still look soft. Smaller cards reduce the problem,
+but only replacing the original asset with a larger export can fully restore sharpness.
