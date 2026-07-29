@@ -260,3 +260,55 @@
   }
   .arrow-mark{width:24px}
 }
+
+/* FINAL HERO LOCK — typography scale + uploaded SVG visibility */
+@media (min-width:521px){
+  .brand,
+  .desktop-nav{font-size:12px}
+
+  .hero-services,
+  .hero-work-link{font-size:11px}
+
+  /* Same uploaded artwork; only its rendered size changes. */
+  .arrow-mark{width:29px;height:auto}
+}
+
+@media (max-width:520px){
+  .brand{font-size:11px}
+
+  /* One consistent secondary type size throughout the mobile hero. */
+  .hero-services,
+  .hero-work-link,
+  .cta-index{font-size:10px;line-height:1}
+
+  /* Keep 01, label and the uploaded SVG on one exact baseline. */
+  .hero-work-link{
+    left:15px;
+    bottom:42px;
+    display:grid;
+    grid-template-columns:26px max-content 30px;
+    column-gap:11px;
+    align-items:center;
+  }
+
+  .cta-index,
+  .cta-label{display:flex;align-items:center;height:30px}
+
+  .arrow-mark{width:30px;height:auto;align-self:center}
+}
+
+@media (max-width:380px){
+  .brand{font-size:10px}
+  .hero-services,
+  .hero-work-link,
+  .cta-index{font-size:10px}
+  .hero-work-link{
+    left:14px;
+    bottom:36px;
+    grid-template-columns:25px max-content 28px;
+    column-gap:9px;
+  }
+  .cta-index,
+  .cta-label{height:28px}
+  .arrow-mark{width:28px}
+}
