@@ -1,0 +1,17 @@
+UPLOAD INSTRUCTIONS
+
+1. Open your GitHub repository:
+   hilashaked1986/hila-shaked-portfolio
+
+2. Click "Add file" > "Upload files".
+
+3. Upload both files from this package into the repository root:
+   - selected-work-preview.html
+   - selected-work-preview.css
+
+4. Commit the files to the main branch.
+
+5. Open:
+   https://hilashaked1986.github.io/hila-shaked-portfolio/selected-work-preview.html
+
+The existing homepage is not changed.
