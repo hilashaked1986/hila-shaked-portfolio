@@ -1,0 +1,28 @@
+UPLOAD INSTRUCTIONS — PREVIEW V5
+
+Upload these two files to the repository root:
+- selected-work-preview-v5.html
+- selected-work-preview-v5.css
+
+Open:
+https://hilashaked1986.github.io/hila-shaked-portfolio/selected-work-preview-v5.html
+
+The live homepage is not replaced or modified.
+
+V5 changes:
+- Exactly 2 projects per row.
+- Cards are smaller again.
+- The repeated small “01 — Selected Work” title was removed.
+- The gallery overlaps the Hero transition slightly and fades into the exact site black.
+- The right column sits 74px lower for slightly stronger asymmetry.
+- Every card remains the same 3:4 size.
+- Every image fills the entire card with object-fit: cover.
+- Each image has an individual focal position and restrained zoom.
+- Figure, image and card are all absolutely aligned to prevent internal black strips.
+- Hover zoom is reduced to help preserve sharpness.
+
+Note:
+The preview still reads the image files already stored in the GitHub assets folder.
+Uploading a high-resolution image in chat does not automatically replace the matching
+repository asset. If a specific image remains pixelated, that image file in /assets
+must be replaced with the high-resolution version.
