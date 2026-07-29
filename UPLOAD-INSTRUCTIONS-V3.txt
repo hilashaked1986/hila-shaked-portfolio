@@ -1,0 +1,18 @@
+UPLOAD INSTRUCTIONS — PREVIEW V3
+
+Upload these two files to the repository root:
+- selected-work-preview-v3.html
+- selected-work-preview-v3.css
+
+Open:
+https://hilashaked1986.github.io/hila-shaked-portfolio/selected-work-preview-v3.html
+
+This preview does not replace or modify the homepage.
+
+V3 changes:
+- The work section starts higher, closer to the hero.
+- The gallery background continues the hero's near-black tonal world.
+- Images fill every card again using object-fit: cover.
+- Cards are smaller than V2 while remaining equal 3:4 rectangles.
+- Grid overflow is visible and columns use min-width: 0 to prevent clipped cards.
+- The right-column offset remains subtle.
