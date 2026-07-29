@@ -1,17 +1,17 @@
-UPLOAD INSTRUCTIONS
+PREVIEW V6 — CORRECTED
 
-1. Open your GitHub repository:
-   hilashaked1986/hila-shaked-portfolio
+Upload these two files to the repository root, alongside index.html and styles.css:
 
-2. Click "Add file" > "Upload files".
+1. selected-work-preview-v6.html
+2. selected-work-preview-v6.css
 
-3. Upload both files from this package into the repository root:
-   - selected-work-preview.html
-   - selected-work-preview.css
+No image folder needs to be uploaded.
 
-4. Commit the files to the main branch.
+This corrected version uses:
+- assets/skyhawk.png
+- assets/ixden.png
 
-5. Open:
-   https://hilashaked1986.github.io/hila-shaked-portfolio/selected-work-preview.html
+After committing the files, open:
+https://hilashaked1986.github.io/hila-shaked-portfolio/selected-work-preview-v6.html
 
-The existing homepage is not changed.
+If GitHub Pages still shows 404 immediately after upload, wait 1–3 minutes and refresh.
