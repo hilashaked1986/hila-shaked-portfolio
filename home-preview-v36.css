@@ -1,0 +1,165 @@
+/* HOME PREVIEW V36 — CONTACT GRID MATCHED TO REFERENCE */
+@import url("home-preview-v29.css");
+
+.contact-v36__small-divider{
+  display:block;
+  width:38px;
+  height:1px;
+  background:var(--ui-accent);
+  opacity:.68;
+}
+
+@media (min-width:901px){
+  .contact-v22__inner{
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    width:100% !important;
+    min-height:330px !important;
+    padding:46px var(--pad) 38px !important;
+    box-sizing:border-box;
+  }
+
+  /*
+    Exact grid:
+    equal 240px columns, 38px spacing on each side of the divider.
+    Full composition width: 557px.
+  */
+  .contact-v22__block{
+    display:grid !important;
+    grid-template-columns:240px 1px 240px !important;
+    column-gap:38px !important;
+    align-items:start !important;
+    justify-content:center !important;
+    width:557px !important;
+    min-width:557px !important;
+    height:186px !important;
+    min-height:186px !important;
+    margin:0 auto !important;
+    padding:0 !important;
+    transform:none !important;
+  }
+
+  /* LEFT — label and title use fixed rows matching the marked guide lines. */
+  .contact-v22__intro{
+    display:grid !important;
+    grid-template-rows:18px 27px 141px !important;
+    align-items:start !important;
+    justify-items:start !important;
+    width:240px !important;
+    height:186px !important;
+    margin:0 !important;
+    padding:0 !important;
+  }
+
+  .contact-v22__eyebrow{
+    grid-row:1;
+    margin:0 !important;
+    line-height:1 !important;
+  }
+
+  .contact-v22 h2{
+    grid-row:3;
+    align-self:start !important;
+    display:flex !important;
+    flex-direction:column;
+    align-items:flex-start;
+    margin:0 !important;
+    white-space:normal !important;
+    font-family:"Playfair Display",serif;
+    font-size:68px !important;
+    font-weight:400 !important;
+    line-height:.82 !important;
+    letter-spacing:-.045em !important;
+    color:var(--contact-ink);
+  }
+
+  .contact-v22 h2 span{
+    display:block !important;
+  }
+
+  .contact-v22__note{
+    display:none !important;
+  }
+
+  /* CENTER LINE — exact height of the reference grid. */
+  .contact-v22__separator{
+    align-self:start !important;
+    width:1px !important;
+    height:186px !important;
+    min-height:186px !important;
+    margin:0 !important;
+    transform:none !important;
+    opacity:.52 !important;
+  }
+
+  /* RIGHT — top label, email, divider, phone label and number. */
+  .contact-v22__details{
+    display:grid !important;
+    grid-template-rows:18px 27px 24px 37px 18px 27px 35px !important;
+    align-items:start !important;
+    justify-items:start !important;
+    width:240px !important;
+    height:186px !important;
+    margin:0 !important;
+    padding:0 !important;
+    gap:0 !important;
+    transform:none !important;
+  }
+
+  .contact-v22__item{
+    display:contents !important;
+  }
+
+  .contact-v22__item:first-child .contact-v22__label{
+    grid-row:1;
+    line-height:1 !important;
+  }
+
+  .contact-v22__item:first-child a{
+    grid-row:3;
+    align-self:start;
+    margin:0 !important;
+  }
+
+  .contact-v36__small-divider{
+    grid-row:4;
+    align-self:center;
+  }
+
+  .contact-v22__item:last-child .contact-v22__label{
+    grid-row:5;
+    line-height:1 !important;
+  }
+
+  .contact-v22__item:last-child a{
+    grid-row:7;
+    align-self:end;
+    margin:0 !important;
+  }
+
+  .contact-v22__item a{
+    font-size:15px !important;
+    line-height:1.2 !important;
+  }
+}
+
+@media (max-width:900px){
+  .contact-v22 h2{
+    display:flex;
+    flex-direction:column;
+    line-height:.86;
+  }
+
+  .contact-v22 h2 span{
+    display:block;
+  }
+
+  .contact-v22__note{
+    display:none;
+  }
+
+  .contact-v36__small-divider{
+    margin:22px 0;
+  }
+}

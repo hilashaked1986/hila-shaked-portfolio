@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Hila Shaked — Portfolio Home Preview V36.">
+  <title>Hila Shaked — Home Preview V36</title>
+  <script>
+    fetch("home-preview-v29.html")
+      .then(function (response) {
+        if (!response.ok) throw new Error("Unable to load V29");
+        return response.text();
+      })
+      .then(function (markup) {
+        markup = markup
+          .replaceAll("home-preview-v29.css", "home-preview-v36.css")
+          .replaceAll("Home Preview V29", "Home Preview V36")
+          .replaceAll("Portfolio Home Preview V29", "Portfolio Home Preview V36")
+
+          /* Keep the original V29 renderer; only strengthen it slightly. */
+          .replace(
+            'data-count="24" data-opacity="0.16" data-speed="0.012"',
+            'data-count="34" data-opacity="0.19" data-speed="0.010"'
+          )
+          .replace(
+            'data-count="40" data-opacity="0.14" data-speed="0.009"',
+            'data-count="54" data-opacity="0.17" data-speed="0.008"'
+          );
+
+        const oldContact = `<h2 id="contact-title">Let’s <span class="contact-v29__talk">talk</span>.</h2>
+            <p class="contact-v22__note">I'd love to hear from you.</p>`;
+
+        markup = markup
+          .replace(
+            oldContact,
+            `<h2 id="contact-title"><span>Let’s</span><span>talk.</span></h2>`
+          )
+          .replace(
+            `<div class="contact-v22__item">
+              <span class="contact-v22__label">PHONE</span>`,
+            `<span class="contact-v36__small-divider" aria-hidden="true"></span>
+
+            <div class="contact-v22__item">
+              <span class="contact-v22__label">PHONE</span>`
+          );
+
+        document.open();
+        document.write(markup);
+        document.close();
+      })
+      .catch(function (error) {
+        console.error(error);
+        document.body.innerHTML =
+          '<p style="font-family:Arial,sans-serif;padding:40px">Unable to load the portfolio preview.</p>';
+      });
+  </script>
+</head>
+<body></body>
+</html>
