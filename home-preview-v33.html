@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Hila Shaked — Portfolio Home Preview V33.">
+  <title>Hila Shaked — Home Preview V33</title>
+  <script>
+    /*
+      V33 starts directly from the approved V29 markup.
+      It replaces only the Contact markup and ambient canvases,
+      then loads the dedicated V33 CSS and particle script.
+    */
+    fetch("home-preview-v29.html")
+      .then(function (response) {
+        if (!response.ok) throw new Error("Unable to load V29");
+        return response.text();
+      })
+      .then(function (markup) {
+        markup = markup
+          .replaceAll("home-preview-v29.css", "home-preview-v33.css")
+          .replaceAll("Home Preview V29", "Home Preview V33")
+          .replaceAll("Portfolio Home Preview V29", "Portfolio Home Preview V33")
+
+          /* Disable the old ambient renderer and hand both canvases to V33. */
+          .replace(
+            '<canvas class="ambient-air" data-ambient-air data-count="24" data-opacity="0.16" data-speed="0.012" aria-hidden="true"></canvas>',
+            '<canvas class="ambient-air ambient-air-v33" data-v33-air data-density="hero" aria-hidden="true"></canvas>'
+          )
+          .replace(
+            '<canvas class="ambient-air" data-ambient-air data-count="40" data-opacity="0.14" data-speed="0.009" aria-hidden="true"></canvas>',
+            '<canvas class="ambient-air ambient-air-v33" data-v33-air data-density="about" aria-hidden="true"></canvas>'
+          )
+
+          /* Contact: two-line headline, no bottom sentence, small divider. */
+          .replace(
+            '<h2 id="contact-title">Let’s <span class="contact-v29__talk">talk</span>.</h2>\n            <p class="contact-v22__note">I\\'d love to hear from you.</p>',
+            '<h2 id="contact-title"><span>Let’s</span><span>talk.</span></h2>'
+          )
+          .replace(
+            '<div class="contact-v22__item">\n              <span class="contact-v22__label">PHONE</span>',
+            '<span class="contact-v33__small-divider" aria-hidden="true"></span>\n\n            <div class="contact-v22__item">\n              <span class="contact-v22__label">PHONE</span>'
+          )
+
+          /* Load the dedicated V33 particle renderer after the existing scripts. */
+          .replace(
+            '</body>',
+            '<script src="ambient-v33.js"></' + 'script></body>'
+          );
+
+        document.open();
+        document.write(markup);
+        document.close();
+      })
+      .catch(function () {
+        document.body.innerHTML =
+          '<p style="font-family:Arial,sans-serif;padding:40px">Unable to load the portfolio preview.</p>';
+      });
+  </script>
+</head>
+<body></body>
+</html>
