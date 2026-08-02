@@ -1,0 +1,114 @@
+/* V37 — exact contact grid, no inherited contact layout */
+@media (min-width:901px){
+  .contact-v37 .contact-v22__inner{
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    min-height:330px !important;
+    padding:46px var(--pad) 38px !important;
+  }
+
+  .contact-v37__grid{
+    display:grid;
+    grid-template-columns:250px 1px 250px;
+    column-gap:38px;
+    width:577px;
+    height:186px;
+    margin:0 auto;
+    align-items:stretch;
+    transform:none !important;
+  }
+
+  .contact-v37__left{
+    display:grid;
+    grid-template-rows:18px 28px 140px;
+    width:250px;
+    height:186px;
+  }
+
+  .contact-v37__left .contact-v22__eyebrow{
+    grid-row:1;
+    margin:0;
+    line-height:1;
+  }
+
+  .contact-v37__left h2{
+    grid-row:3;
+    display:flex;
+    flex-direction:column;
+    justify-content:start;
+    margin:0;
+    font-family:"Playfair Display",serif;
+    font-size:68px;
+    font-weight:400;
+    line-height:.82;
+    letter-spacing:-.045em;
+    color:var(--contact-ink);
+  }
+
+  .contact-v37__left h2 span{display:block}
+
+  .contact-v37__separator{
+    display:block;
+    width:1px;
+    height:186px;
+    background:var(--contact-ink);
+    opacity:.52;
+  }
+
+  .contact-v37__right{
+    display:grid;
+    grid-template-rows:18px 29px 24px 37px 18px 25px 35px;
+    width:250px;
+    height:186px;
+    justify-items:start;
+  }
+
+  .contact-v37__right .contact-v22__label:first-child{grid-row:1}
+  .contact-v37__right .contact-v22__email{grid-row:3}
+  .contact-v37__small-divider{
+    grid-row:4;
+    align-self:center;
+    width:38px;
+    height:1px;
+    background:var(--ui-accent);
+    opacity:.68;
+  }
+  .contact-v37__right .contact-v22__label:nth-of-type(2){grid-row:5}
+  .contact-v37__right a[href^="tel:"]{grid-row:7;align-self:end}
+
+  .contact-v37__right a{
+    font-family:Inter,Arial,sans-serif;
+    font-size:15px;
+    line-height:1.2;
+    color:var(--contact-ink);
+  }
+}
+
+@media (max-width:900px){
+  .contact-v37__grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:30px;
+  }
+  .contact-v37__left h2{
+    display:flex;
+    flex-direction:column;
+  }
+  .contact-v37__separator{
+    width:86px;
+    height:1px;
+    background:var(--contact-ink);
+    opacity:.5;
+  }
+  .contact-v37__right{
+    display:grid;
+    gap:14px;
+  }
+  .contact-v37__small-divider{
+    width:38px;
+    height:1px;
+    background:var(--ui-accent);
+    margin:8px 0;
+  }
+}
