@@ -1,0 +1,186 @@
+/* V38 — final contact grid + guaranteed ambient visibility */
+
+/* Ensure the canvas is visible and layered correctly. */
+.hero,
+.about-v14{
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
+}
+
+.hero .ambient-air,
+.about-v14 .ambient-air{
+  position:absolute;
+  inset:0;
+  z-index:1;
+  display:block;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+  mix-blend-mode:screen;
+}
+
+.hero .ambient-air{opacity:.94 !important}
+.about-v14 .ambient-air{opacity:.88 !important}
+.hero .hero-media{position:relative;z-index:0}
+.hero .hero-content{position:relative;z-index:2}
+.about-v14 > *:not(.ambient-air){position:relative;z-index:2}
+
+@media (min-width:901px){
+  .contact-v38 .contact-v22__inner{
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    width:100% !important;
+    min-height:336px !important;
+    padding:48px var(--pad) 40px !important;
+    box-sizing:border-box;
+  }
+
+  .contact-v38__grid{
+    display:grid;
+    grid-template-columns:252px 1px 252px;
+    column-gap:38px;
+    width:581px;
+    height:188px;
+    margin:0 auto;
+    align-items:stretch;
+    transform:none !important;
+  }
+
+  .contact-v38__left{
+    display:grid;
+    grid-template-rows:18px 32px 138px;
+    width:252px;
+    height:188px;
+    align-items:start;
+  }
+
+  /* EXACT same top/baseline as EMAIL. */
+  .contact-v38__left .contact-v22__eyebrow,
+  .contact-v38__email-label{
+    margin:0 !important;
+    padding:0 !important;
+    font-family:Inter,Arial,sans-serif !important;
+    font-size:8px !important;
+    font-weight:500 !important;
+    line-height:18px !important;
+    letter-spacing:.25em !important;
+    text-transform:uppercase;
+    align-self:start !important;
+  }
+
+  .contact-v38__left .contact-v22__eyebrow{
+    grid-row:1;
+  }
+
+  .contact-v38__left h2{
+    grid-row:3;
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    justify-content:flex-start;
+    margin:0 !important;
+    font-family:"Playfair Display",serif;
+    font-size:66px !important;
+    font-weight:400 !important;
+    line-height:.84 !important;
+    letter-spacing:-.042em !important;
+    color:var(--contact-ink);
+  }
+
+  .contact-v38__left h2 span{
+    display:block;
+  }
+
+  .contact-v38__separator{
+    display:block;
+    width:1px;
+    height:188px;
+    background:var(--contact-ink);
+    opacity:.5;
+  }
+
+  .contact-v38__right{
+    display:grid;
+    grid-template-rows:18px 31px 24px 39px 18px 23px 35px;
+    width:252px;
+    height:188px;
+    justify-items:start;
+    align-items:start;
+  }
+
+  .contact-v38__email-label{
+    grid-row:1;
+  }
+
+  .contact-v38__right .contact-v22__email{
+    grid-row:3;
+    align-self:start;
+  }
+
+  .contact-v38__small-divider{
+    grid-row:4;
+    align-self:center;
+    width:38px;
+    height:1px;
+    background:var(--ui-accent);
+    opacity:.68;
+  }
+
+  .contact-v38__phone-label{
+    grid-row:5;
+    margin:0 !important;
+    padding:0 !important;
+    font-family:Inter,Arial,sans-serif !important;
+    font-size:8px !important;
+    font-weight:500 !important;
+    line-height:18px !important;
+    letter-spacing:.25em !important;
+    text-transform:uppercase;
+  }
+
+  .contact-v38__right a[href^="tel:"]{
+    grid-row:7;
+    align-self:end;
+  }
+
+  .contact-v38__right a{
+    font-family:Inter,Arial,sans-serif;
+    font-size:15px;
+    line-height:1.2;
+    color:var(--contact-ink);
+  }
+}
+
+@media (max-width:900px){
+  .contact-v38__grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:30px;
+  }
+
+  .contact-v38__left h2{
+    display:flex;
+    flex-direction:column;
+  }
+
+  .contact-v38__separator{
+    width:86px;
+    height:1px;
+    background:var(--contact-ink);
+    opacity:.5;
+  }
+
+  .contact-v38__right{
+    display:grid;
+    gap:14px;
+  }
+
+  .contact-v38__small-divider{
+    width:38px;
+    height:1px;
+    background:var(--ui-accent);
+    margin:8px 0;
+  }
+}
