@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Hila Shaked — Portfolio Home Preview V31.">
+  <title>Hila Shaked — Home Preview V31</title>
+  <script>
+    /*
+      V31 keeps the approved V30 structure and updates only:
+      1. the version-specific stylesheet
+      2. the number and opacity of ambient-air particles
+    */
+    fetch("home-preview-v30.html")
+      .then(function (response) {
+        if (!response.ok) throw new Error("Unable to load V30");
+        return response.text();
+      })
+      .then(function (markup) {
+        markup = markup
+          .replaceAll("home-preview-v30.css", "home-preview-v31.css")
+          .replaceAll("Home Preview V30", "Home Preview V31")
+          .replaceAll("Portfolio Home Preview V30", "Portfolio Home Preview V31")
+          .replace(
+            'data-count="24" data-opacity="0.16" data-speed="0.012"',
+            'data-count="36" data-opacity="0.18" data-speed="0.012"'
+          )
+          .replace(
+            'data-count="40" data-opacity="0.14" data-speed="0.009"',
+            'data-count="58" data-opacity="0.17" data-speed="0.009"'
+          );
+
+        document.open();
+        document.write(markup);
+        document.close();
+      })
+      .catch(function () {
+        document.body.innerHTML =
+          '<p style="font-family:Arial,sans-serif;padding:40px">Unable to load the portfolio preview.</p>';
+      });
+  </script>
+</head>
+<body></body>
+</html>

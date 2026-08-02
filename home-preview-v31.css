@@ -1,0 +1,128 @@
+/* HOME PREVIEW V31 — CONTACT UNITY + RICHER AMBIENT AIR
+   Extends V30 and changes only the approved Contact and ambient-air details. */
+@import url("home-preview-v30.css");
+
+/* Slightly richer presence, still soft and breathable. */
+.hero .ambient-air{
+  opacity:.86;
+}
+
+.about-v14 .ambient-air{
+  opacity:.84;
+}
+
+@media (min-width:901px){
+  .contact-v22__inner{
+    min-height:320px;
+    padding:44px var(--pad) 36px;
+  }
+
+  /* Equal-width typographic blocks around a truly centered divider. */
+  .contact-v22__block{
+    grid-template-columns:270px 1px 270px;
+    column-gap:24px;
+    width:589px;
+    min-height:138px;
+    align-items:stretch;
+    transform:translateX(-10px);
+  }
+
+  .contact-v22__intro{
+    width:270px;
+    min-height:138px;
+    justify-self:end;
+    display:grid;
+    grid-template-rows:auto 1fr auto;
+    align-items:start;
+  }
+
+  .contact-v22__eyebrow{
+    margin:0;
+    align-self:start;
+  }
+
+  .contact-v22 h2{
+    align-self:center;
+    margin:0;
+    font-size:58px;
+    line-height:.94;
+    letter-spacing:-.028em;
+  }
+
+  .contact-v22 h2 .contact-v29__talk{
+    letter-spacing:.006em;
+  }
+
+  .contact-v22__note{
+    align-self:end;
+    margin:0;
+    font-size:14px;
+    line-height:1.4;
+  }
+
+  .contact-v22__separator{
+    align-self:center;
+    height:148px;
+    margin-block:-5px;
+    transform:none;
+    opacity:.46;
+  }
+
+  .contact-v22__details{
+    width:270px;
+    min-height:138px;
+    justify-self:start;
+    display:grid;
+    grid-template-rows:auto 1fr auto auto;
+    align-items:start;
+    gap:0;
+    padding:0;
+    transform:none;
+  }
+
+  .contact-v22__item{
+    display:contents;
+  }
+
+  .contact-v22__item:first-child .contact-v22__label{
+    grid-row:1;
+    align-self:start;
+  }
+
+  .contact-v22__item:first-child a{
+    grid-row:2;
+    align-self:start;
+    margin-top:15px;
+  }
+
+  .contact-v22__item:last-child .contact-v22__label{
+    grid-row:3;
+    align-self:end;
+    margin-bottom:9px;
+  }
+
+  .contact-v22__item:last-child a{
+    grid-row:4;
+    align-self:end;
+  }
+
+  .contact-v22__item a{
+    font-size:15px;
+  }
+}
+
+@media (min-width:1300px){
+  .contact-v22__block{
+    transform:translateX(-14px);
+  }
+}
+
+@media (max-width:900px){
+  .hero .ambient-air{
+    opacity:.79;
+  }
+
+  .about-v14 .ambient-air{
+    opacity:.76;
+  }
+}
