@@ -1,0 +1,177 @@
+/* HOME PREVIEW V34 — CONTACT GRID + CONTROLLED AMBIENT AIR
+   Loads V29 directly, then applies only the approved changes. */
+@import url("home-preview-v29.css");
+
+/* V34 owns the ambient rendering. */
+.ambient-air-v34{
+  position:absolute;
+  inset:0;
+  z-index:1;
+  display:block;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+  opacity:1;
+  mix-blend-mode:screen;
+}
+
+.contact-v34__small-divider{
+  display:block;
+  width:38px;
+  height:1px;
+  background:var(--ui-accent);
+  opacity:.72;
+}
+
+@media (min-width:901px){
+  .contact-v22__inner{
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    width:100% !important;
+    min-height:342px !important;
+    padding:48px var(--pad) 40px !important;
+    box-sizing:border-box;
+  }
+
+  /*
+    300px left + 34px gap + 1px line + 34px gap + 300px right.
+    The vertical divider is the exact center of the 669px composition.
+  */
+  .contact-v22__block{
+    display:grid !important;
+    grid-template-columns:300px 1px 300px !important;
+    column-gap:34px !important;
+    align-items:stretch !important;
+    justify-content:center !important;
+    width:669px !important;
+    min-width:669px !important;
+    min-height:166px !important;
+    margin:0 auto !important;
+    padding:0 !important;
+    transform:none !important;
+  }
+
+  .contact-v22__intro{
+    display:grid !important;
+    grid-template-rows:auto 1fr !important;
+    align-items:start !important;
+    justify-items:start !important;
+    width:300px !important;
+    min-height:166px !important;
+    margin:0 !important;
+    padding:0 !important;
+  }
+
+  .contact-v22__eyebrow{
+    grid-row:1;
+    align-self:start;
+    margin:0 !important;
+  }
+
+  .contact-v22 h2{
+    grid-row:2;
+    align-self:end;
+    display:flex !important;
+    flex-direction:column;
+    align-items:flex-start;
+    margin:0 !important;
+    white-space:normal !important;
+    font-family:"Playfair Display",serif;
+    font-size:64px !important;
+    font-weight:400;
+    line-height:.82 !important;
+    letter-spacing:-.045em !important;
+    color:var(--contact-ink);
+  }
+
+  .contact-v22 h2 span{
+    display:block !important;
+  }
+
+  .contact-v22__note{
+    display:none !important;
+  }
+
+  .contact-v22__separator{
+    align-self:stretch !important;
+    width:1px !important;
+    height:auto !important;
+    min-height:166px !important;
+    margin:0 !important;
+    transform:none !important;
+    opacity:.5 !important;
+  }
+
+  .contact-v22__details{
+    display:grid !important;
+    grid-template-rows:auto auto 1fr auto auto !important;
+    align-items:start !important;
+    justify-items:start !important;
+    width:300px !important;
+    min-height:166px !important;
+    gap:0 !important;
+    margin:0 !important;
+    padding:0 !important;
+    transform:none !important;
+  }
+
+  .contact-v22__item{
+    display:contents !important;
+  }
+
+  .contact-v22__item:first-child .contact-v22__label{
+    grid-row:1;
+    align-self:start;
+  }
+
+  .contact-v22__item:first-child a{
+    grid-row:2;
+    align-self:start;
+    margin-top:14px;
+  }
+
+  .contact-v34__small-divider{
+    grid-row:3;
+    align-self:center;
+  }
+
+  .contact-v22__item:last-child .contact-v22__label{
+    grid-row:4;
+    align-self:end;
+    margin-bottom:10px;
+  }
+
+  .contact-v22__item:last-child a{
+    grid-row:5;
+    align-self:end;
+  }
+
+  .contact-v22__item a{
+    font-size:15px !important;
+  }
+}
+
+@media (max-width:900px){
+  .contact-v22 h2{
+    display:flex;
+    flex-direction:column;
+    line-height:.86;
+  }
+
+  .contact-v22 h2 span{
+    display:block;
+  }
+
+  .contact-v22__note{
+    display:none;
+  }
+
+  .contact-v34__small-divider{
+    margin:22px 0;
+  }
+}
+
+@media (prefers-reduced-motion:reduce){
+  .ambient-air-v34{display:none}
+}
