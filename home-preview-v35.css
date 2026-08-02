@@ -1,0 +1,186 @@
+/* HOME PREVIEW V35 — EXACT CONTACT GRID */
+@import url("home-preview-v29.css");
+
+.ambient-air-v35{
+  position:absolute;
+  inset:0;
+  z-index:1;
+  display:block;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+  opacity:1;
+  mix-blend-mode:screen;
+}
+
+.contact-v35__small-divider{
+  display:block;
+  width:38px;
+  height:1px;
+  background:var(--ui-accent);
+  opacity:.68;
+}
+
+@media (min-width:901px){
+  .contact-v22__inner{
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    width:100% !important;
+    min-height:350px !important;
+    padding:54px var(--pad) 46px !important;
+    box-sizing:border-box;
+  }
+
+  /*
+    Exact centered composition:
+    260px left + 42px + 1px divider + 42px + 260px right = 605px.
+    Divider is the exact visual center.
+  */
+  .contact-v22__block{
+    display:grid !important;
+    grid-template-columns:260px 1px 260px !important;
+    column-gap:42px !important;
+    align-items:stretch !important;
+    justify-content:center !important;
+    width:605px !important;
+    min-width:605px !important;
+    height:184px !important;
+    min-height:184px !important;
+    margin:0 auto !important;
+    padding:0 !important;
+    transform:none !important;
+  }
+
+  /* LEFT COLUMN — top label and headline share one exact vertical grid */
+  .contact-v22__intro{
+    display:grid !important;
+    grid-template-rows:24px 1fr !important;
+    align-items:start !important;
+    justify-items:start !important;
+    width:260px !important;
+    height:184px !important;
+    min-height:184px !important;
+    margin:0 !important;
+    padding:0 !important;
+  }
+
+  .contact-v22__eyebrow{
+    grid-row:1;
+    align-self:start;
+    margin:0 !important;
+    line-height:1 !important;
+  }
+
+  .contact-v22 h2{
+    grid-row:2;
+    align-self:end;
+    display:flex !important;
+    flex-direction:column;
+    align-items:flex-start;
+    margin:0 !important;
+    white-space:normal !important;
+    font-family:"Playfair Display",serif;
+    font-size:68px !important;
+    font-weight:400 !important;
+    line-height:.82 !important;
+    letter-spacing:-.045em !important;
+    color:var(--contact-ink);
+  }
+
+  .contact-v22 h2 span{
+    display:block !important;
+  }
+
+  .contact-v22__note{
+    display:none !important;
+  }
+
+  /* CENTER DIVIDER — exact full grid height */
+  .contact-v22__separator{
+    align-self:stretch !important;
+    width:1px !important;
+    height:184px !important;
+    min-height:184px !important;
+    margin:0 !important;
+    transform:none !important;
+    opacity:.52 !important;
+  }
+
+  /* RIGHT COLUMN — top label aligned with GET IN TOUCH,
+     phone number bottom aligned with talk. */
+  .contact-v22__details{
+    display:grid !important;
+    grid-template-rows:24px auto 1fr 24px auto !important;
+    align-items:start !important;
+    justify-items:start !important;
+    width:260px !important;
+    height:184px !important;
+    min-height:184px !important;
+    gap:0 !important;
+    margin:0 !important;
+    padding:0 !important;
+    transform:none !important;
+  }
+
+  .contact-v22__item{
+    display:contents !important;
+  }
+
+  .contact-v22__item:first-child .contact-v22__label{
+    grid-row:1;
+    align-self:start;
+    line-height:1 !important;
+  }
+
+  .contact-v22__item:first-child a{
+    grid-row:2;
+    align-self:start;
+    margin-top:10px;
+  }
+
+  .contact-v35__small-divider{
+    grid-row:3;
+    align-self:center;
+  }
+
+  .contact-v22__item:last-child .contact-v22__label{
+    grid-row:4;
+    align-self:start;
+    line-height:1 !important;
+  }
+
+  .contact-v22__item:last-child a{
+    grid-row:5;
+    align-self:end;
+  }
+
+  .contact-v22__item a{
+    font-size:15px !important;
+    line-height:1.2 !important;
+  }
+}
+
+@media (max-width:900px){
+  .contact-v22 h2{
+    display:flex;
+    flex-direction:column;
+    line-height:.86;
+  }
+
+  .contact-v22 h2 span{
+    display:block;
+  }
+
+  .contact-v22__note{
+    display:none;
+  }
+
+  .contact-v35__small-divider{
+    margin:22px 0;
+  }
+}
+
+@media (prefers-reduced-motion:reduce){
+  .ambient-air-v35{display:none}
+}
