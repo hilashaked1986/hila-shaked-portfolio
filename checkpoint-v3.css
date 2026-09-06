@@ -1,0 +1,69 @@
+:root{--cp-black:#0f1012;--cp-cream:#f4f0eb;--cp-width:1180px}
+html,body,main{background:var(--cp-black)!important}
+body{margin:0;color:#f4f1eb}
+.cp-intro{min-height:560px;display:flex;align-items:center;width:min(calc(100% - (2 * var(--pad))),var(--cp-width));margin:0 auto;padding:120px 0 90px}
+.cp-intro__copy{max-width:650px;margin-left:clamp(48px,7vw,110px)}
+.cp-intro h1{margin:0;font-family:"Playfair Display",serif;font-size:clamp(66px,6.6vw,104px);font-weight:400;line-height:.94;letter-spacing:-.045em;color:#f4f1eb}
+.cp-intro h2{margin:23px 0 0;font-family:"Playfair Display",serif;font-size:clamp(22px,1.9vw,31px);font-weight:400;line-height:1.18;letter-spacing:-.018em;color:#c8c2ba}
+.cp-intro p{max-width:590px;margin:30px 0 0;font-family:Inter,Arial,sans-serif;font-size:13px;line-height:1.78;letter-spacing:.002em;color:#888682}
+
+.cp-gallery{width:min(calc(100% - (2 * var(--pad))),var(--cp-width));margin:0 auto;padding:0 0 clamp(100px,9vw,150px)}
+.cp-frame{margin:0;overflow:hidden;border-radius:8px;background:var(--cp-cream);line-height:0}
+.cp-frame img,.cp-frame video{display:block;width:100%;height:auto;max-width:100%;image-rendering:auto}
+.cp-frame+.cp-frame,.cp-frame+.cp-pair,.cp-pair+.cp-frame{margin-top:clamp(28px,2.8vw,44px)}
+
+.cp-frame--hero{background:#f3f0eb}
+.cp-frame--hero img{width:100%;height:auto}
+
+.cp-frame--video{background:#08090b}
+.cp-frame--video video{width:100%;aspect-ratio:1920/950;object-fit:cover}
+
+.cp-frame--spread{background:#f3f0eb}
+.cp-frame--spread img{width:100%;height:auto}
+
+.cp-pair{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,2.4vw,38px);align-items:stretch}
+.cp-pair .cp-frame{height:100%}
+.cp-pair img{width:100%;height:100%;object-fit:cover}
+.cp-frame--analysis{aspect-ratio:1/1;background:#f3f0eb}
+.cp-frame--analysis img{object-position:50% 52%}
+.cp-frame--fold{aspect-ratio:1/1;background:#f3f0eb}
+.cp-frame--fold img{object-position:50% 50%}
+
+.cp-frame--closing{background:#f3f0eb}
+.cp-frame--closing img{width:100%;height:auto}
+
+.cp-more{width:min(calc(100% - (2 * var(--pad))),var(--cp-width));margin:0 auto;padding:clamp(70px,7vw,105px) 0 clamp(120px,10vw,170px);border-top:1px solid rgba(244,241,235,.13)}
+.cp-more>p{margin:0 0 38px;font:400 9px/1 Inter,Arial,sans-serif;letter-spacing:.28em;color:#b8a792}
+.cp-more__grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,2.4vw,38px)}
+.cp-more__card{display:block}
+.cp-more__image{display:block;aspect-ratio:16/10;border-radius:8px;background:#17181b center/cover no-repeat}
+.cp-more__image--skyhawk{background-image:url("https://hilashaked1986.github.io/hila-shaked-portfolio/assets/skyhawk.png")}
+.cp-more__image--red{background-image:url("https://hilashaked1986.github.io/hila-shaked-portfolio/assets/red-access.png")}
+.cp-more__meta{display:flex;justify-content:space-between;align-items:baseline;gap:20px;padding-top:16px}
+.cp-more__meta small{font:400 9px/1.4 Inter,Arial,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#777}
+.cp-more__meta strong{font:400 25px/1 "Playfair Display",serif;color:#f4f1eb}
+
+/* Keep contact exactly in the homepage system; only remove accidental dark inheritance. */
+.contact-v22{background:#f4f0eb!important}
+
+@media(max-width:900px){
+  .cp-intro{min-height:480px;padding:110px 0 70px}
+  .cp-intro__copy{margin-left:0;max-width:610px}
+  .cp-gallery{padding-bottom:95px}
+  .cp-pair{grid-template-columns:1fr;gap:26px}
+  .cp-frame--analysis,.cp-frame--fold{aspect-ratio:auto}
+  .cp-pair img{height:auto;object-fit:contain}
+}
+@media(max-width:520px){
+  .cp-intro{min-height:auto;padding:120px 0 72px}
+  .cp-intro h1{font-size:58px}
+  .cp-intro h2{font-size:23px}
+  .cp-intro p{font-size:13px;line-height:1.7}
+  .cp-gallery{width:100%;padding-bottom:84px}
+  .cp-frame{border-radius:0}
+  .cp-frame+.cp-frame,.cp-frame+.cp-pair,.cp-pair+.cp-frame{margin-top:14px}
+  .cp-pair{gap:14px}
+  .cp-more{padding-top:65px;padding-bottom:95px}
+  .cp-more__grid{grid-template-columns:1fr;gap:36px}
+  .cp-more__meta strong{font-size:23px}
+}
