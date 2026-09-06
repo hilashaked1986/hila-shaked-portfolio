@@ -1,0 +1,8 @@
+const header=document.querySelector('[data-header]');
+const menuButton=document.querySelector('[data-menu-button]');
+const menu=document.querySelector('[data-mobile-menu]');
+window.addEventListener('scroll',()=>header?.classList.toggle('scrolled',window.scrollY>35),{passive:true});
+menuButton?.addEventListener('click',()=>{const open=menu?.classList.toggle('open');menuButton.setAttribute('aria-expanded',String(open));document.body.style.overflow=open?'hidden':'';});
+menu?.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{menu.classList.remove('open');menuButton?.setAttribute('aria-expanded','false');document.body.style.overflow='';}));
+
+(()=>{const fine=window.matchMedia('(hover:hover) and (pointer:fine)');if(!fine.matches)return;const c=document.querySelector('.custom-cursor'),ring=c?.querySelector('.custom-cursor__ring'),dot=c?.querySelector('.custom-cursor__dot');if(!c||!ring||!dot)return;document.documentElement.classList.add('has-custom-cursor');let mx=innerWidth/2,my=innerHeight/2,rx=mx,ry=my,visible=false;const loop=()=>{rx+=(mx-rx)*.18;ry+=(my-ry)*.18;ring.style.transform=`translate3d(${rx-15}px,${ry-15}px,0)`;dot.style.transform=`translate3d(${mx-1.5}px,${my-1.5}px,0)`;requestAnimationFrame(loop)};requestAnimationFrame(loop);window.addEventListener('pointermove',e=>{mx=e.clientX;my=e.clientY;if(!visible){visible=true;c.classList.add('is-visible')}});window.addEventListener('pointerleave',()=>c.classList.remove('is-visible'));window.addEventListener('pointerenter',()=>c.classList.add('is-visible'));document.querySelectorAll('a,button').forEach(el=>{el.addEventListener('mouseenter',()=>c.classList.add('is-interactive'));el.addEventListener('mouseleave',()=>c.classList.remove('is-interactive'));});})();
