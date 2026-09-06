@@ -1,0 +1,475 @@
+:root{--cp-black:#0f1012;--cp-cream:#f4f0eb;--cp-gap:clamp(22px,2.2vw,36px)}
+html,body,main{background:var(--cp-black)!important}
+.grid-width{width:calc(100% - (2 * var(--pad)));margin-inline:auto}
+
+.cp-intro{min-height:535px;display:flex;align-items:center;padding:118px 0 82px}
+.cp-intro__inner{width:100%;text-align:center}
+.cp-intro h1{margin:0;font:400 clamp(68px,6.5vw,104px)/.96 "Playfair Display",serif;letter-spacing:-.043em;color:#f4f1eb}
+.cp-intro h2{margin:18px 0 0;font:400 clamp(22px,1.9vw,31px)/1.22 "Playfair Display",serif;color:#d1cbc4}
+.cp-intro p{max-width:720px;margin:28px auto 0;font:400 13px/1.72 Inter,Arial,sans-serif;color:#8c8984}
+
+.cp-gallery{padding-bottom:clamp(115px,9vw,155px)}
+.cp-frame{margin:0;overflow:hidden;border-radius:8px;background:var(--cp-cream);line-height:0}
+.cp-frame img,.cp-frame video{display:block;width:100%;height:auto;max-width:100%}
+.cp-gallery>.cp-frame+.cp-frame,.cp-gallery>.cp-frame+.cp-pair,.cp-gallery>.cp-pair+.cp-frame{margin-top:var(--cp-gap)}
+.cp-video video{width:100%;aspect-ratio:1920/950;object-fit:cover}
+.cp-pair{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--cp-gap);align-items:start}
+.cp-pair .cp-frame{width:100%;aspect-ratio:1/1}
+.cp-pair img{width:100%;height:100%;object-fit:contain}
+
+.cp-more{padding:clamp(62px,6vw,92px) 0 clamp(120px,9vw,160px);border-top:1px solid rgba(244,241,235,.12)}
+.cp-more__title{margin:0 0 28px;font:500 9px/1 Inter,Arial,sans-serif;letter-spacing:.27em;color:#b8a792}
+.cp-more__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(18px,1.8vw,28px)}
+.cp-more__card{display:block}
+.cp-more__image{position:relative;display:block;aspect-ratio:4/3;border-radius:7px;overflow:hidden;background:center/cover no-repeat;transition:transform .4s ease}
+.cp-more__image::after{content:"";position:absolute;inset:0;background:rgba(15,16,18,.32);opacity:0;transition:opacity .3s ease}
+.cp-more__hover{position:absolute;z-index:2;left:18px;bottom:16px;font:500 9px/1 Inter,Arial,sans-serif;letter-spacing:.18em;color:#fff;opacity:0;transform:translateY(7px);transition:.3s ease}
+.cp-more__card:hover .cp-more__image{transform:translateY(-3px)}
+.cp-more__card:hover .cp-more__image::after,.cp-more__card:hover .cp-more__hover{opacity:1}
+.cp-more__card:hover .cp-more__hover{transform:none}
+.cp-more__image.skyhawk{background-image:url("https://hilashaked1986.github.io/hila-shaked-portfolio/assets/skyhawk.png")}
+.cp-more__image.red{background-image:url("https://hilashaked1986.github.io/hila-shaked-portfolio/assets/red-access.png")}
+.cp-more__image.dfend{background-image:url("https://hilashaked1986.github.io/hila-shaked-portfolio/assets/dfend.png")}
+.cp-more__meta{display:flex;justify-content:space-between;align-items:baseline;gap:14px;padding-top:13px}
+.cp-more__meta small{font:400 8px/1.4 Inter,Arial,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#777}
+.cp-more__meta strong{font:400 21px/1 "Playfair Display",serif;color:#f4f1eb}
+
+.contact-v22{background:#f4f0eb!important}
+.contact-v22 .contact-final{opacity:1!important;visibility:visible!important}
+
+.custom-cursor__ring,.custom-cursor__dot{border-radius:50%}
+
+@media(max-width:900px){
+ .cp-intro{min-height:470px;padding-top:112px}
+ .cp-pair{grid-template-columns:1fr}
+ .cp-more__grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:520px){
+ .grid-width{width:calc(100% - 40px)}
+ .cp-intro{min-height:auto;padding:120px 0 72px}
+ .cp-intro h1{font-size:58px}
+ .cp-frame{border-radius:6px}
+ .cp-more__grid{grid-template-columns:1fr}
+}
+.cp-more__image{background:none!important}
+.cp-more__image>img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .5s cubic-bezier(.2,.72,.2,1),filter .35s ease}
+.cp-more__card:hover .cp-more__image>img,
+.cp-more__card:focus-visible .cp-more__image>img{transform:scale(1.035);filter:brightness(.82)}
+.cp-more__card:hover .cp-more__image,
+.cp-more__card:focus-visible .cp-more__image{transform:none}
+
+/* ===== V8 FINAL TYPOGRAPHY + GALLERY CLEANUP ===== */
+:root{
+  --cp-title-size:76px;
+  --cp-subtitle-size:24px;
+  --cp-body-size:14px;
+  --cp-label-size:9px;
+  --cp-card-title-size:22px;
+  --cp-tracking:.25em;
+}
+
+.cp-intro{
+  min-height:470px;
+  padding:112px 0 72px;
+}
+.cp-intro h1{
+  margin:0;
+  font-family:"Playfair Display",serif;
+  font-size:clamp(62px,5.1vw,var(--cp-title-size));
+  font-weight:400;
+  line-height:.98;
+  letter-spacing:-.038em;
+}
+.cp-intro h2{
+  margin:17px 0 0;
+  font-family:"Playfair Display",serif;
+  font-size:var(--cp-subtitle-size);
+  font-weight:400;
+  line-height:1.22;
+  letter-spacing:-.012em;
+}
+.cp-intro p{
+  max-width:700px;
+  margin:25px auto 0;
+  font-family:Inter,Arial,sans-serif;
+  font-size:var(--cp-body-size);
+  font-weight:400;
+  line-height:1.7;
+  letter-spacing:0;
+}
+
+/* Use exported compositions as-is */
+.cp-frame img{
+  display:block;
+  width:100%;
+  height:auto!important;
+  max-width:100%;
+  object-fit:initial!important;
+  object-position:initial!important;
+  transform:none!important;
+}
+.cp-frame,
+.cp-pair .cp-frame{
+  min-height:0!important;
+  max-height:none!important;
+  height:auto!important;
+  aspect-ratio:auto!important;
+}
+.cp-pair{
+  align-items:start!important;
+}
+.cp-pair img{
+  display:block;
+  width:100%;
+  height:auto!important;
+  object-fit:initial!important;
+}
+.cp-video video{
+  display:block;
+  width:100%;
+  height:auto;
+  aspect-ratio:1920/950;
+  object-fit:cover;
+}
+
+.cp-more__title{
+  font-family:Inter,Arial,sans-serif;
+  font-size:var(--cp-label-size);
+  font-weight:500;
+  line-height:1;
+  letter-spacing:var(--cp-tracking);
+}
+.cp-more__meta small{
+  font-family:Inter,Arial,sans-serif;
+  font-size:var(--cp-label-size);
+  font-weight:400;
+  line-height:1.45;
+  letter-spacing:.14em;
+}
+.cp-more__meta strong{
+  font-family:"Playfair Display",serif;
+  font-size:var(--cp-card-title-size);
+  font-weight:400;
+  line-height:1;
+  letter-spacing:-.015em;
+}
+.cp-more__hover{
+  font-family:Inter,Arial,sans-serif;
+  font-size:var(--cp-label-size);
+  font-weight:500;
+  line-height:1;
+  letter-spacing:var(--cp-tracking);
+}
+
+@media(max-width:900px){
+  .cp-intro{min-height:430px;padding:106px 0 66px}
+  .cp-intro h1{font-size:62px}
+  .cp-intro h2{font-size:23px}
+  .cp-intro p{font-size:14px}
+}
+@media(max-width:520px){
+  .cp-intro{padding:112px 0 64px}
+  .cp-intro h1{font-size:52px}
+  .cp-intro h2{font-size:21px}
+  .cp-intro p{font-size:13px;line-height:1.68}
+  .cp-more__meta strong{font-size:21px}
+}
+
+/* ===== V9 — TYPOGRAPHY MATCHED TO APPROVED HOMEPAGE ===== */
+
+/* Homepage text system:
+   --light #f4f1eb
+   --body  #c8c4be
+   Inter 400, body 15–17px / 1.72
+*/
+.cp-intro h1{
+  color:var(--light)!important;
+  font-family:"Playfair Display",serif!important;
+  font-weight:400!important;
+}
+.cp-intro h2{
+  color:var(--light)!important;
+  font-family:"Playfair Display",serif!important;
+  font-weight:400!important;
+}
+.cp-intro p{
+  max-width:650px!important;
+  font-family:Inter,Arial,sans-serif!important;
+  font-size:clamp(15px,1.02vw,17px)!important;
+  font-weight:400!important;
+  line-height:1.72!important;
+  letter-spacing:-.008em!important;
+  color:var(--body)!important;
+}
+
+/* Keep all utility labels on the same homepage micro-type system */
+.cp-more__title,
+.cp-more__meta small,
+.cp-more__hover{
+  font-family:Inter,Arial,sans-serif!important;
+  font-weight:400!important;
+  text-transform:uppercase;
+}
+.cp-more__title,
+.cp-more__hover{
+  font-size:9px!important;
+  line-height:1.4!important;
+  letter-spacing:.20em!important;
+}
+.cp-more__meta small{
+  font-size:9px!important;
+  line-height:1.4!important;
+  letter-spacing:.20em!important;
+  color:rgba(244,241,235,.68)!important;
+}
+.cp-more__meta strong{
+  font-family:"Playfair Display",serif!important;
+  font-size:22px!important;
+  font-weight:400!important;
+  line-height:1!important;
+  letter-spacing:-.02em!important;
+  color:var(--light)!important;
+}
+
+/* Perspective visual: intentionally narrower than the main gallery rhythm.
+   This prevents the 2048x1150 export from becoming a giant vertical block. */
+.cp-frame--perspective{
+  width:min(100%,1180px)!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+}
+.cp-gallery > .cp-frame + .cp-frame--perspective{
+  margin-top:var(--cp-gap)!important;
+}
+
+/* Video edge fix: the source itself has no white stripe.
+   Overscan by 2px to eliminate browser sub-pixel seams at the rounded edge. */
+.cp-video{
+  background:var(--cp-black)!important;
+  overflow:hidden!important;
+}
+.cp-video video{
+  width:calc(100% + 2px)!important;
+  max-width:none!important;
+  margin-left:-1px!important;
+  transform:translateZ(0);
+  backface-visibility:hidden;
+}
+
+/* Quality guard: never let the gallery become wider than the largest
+   full-width source exports. */
+.cp-gallery{
+  max-width:2048px;
+}
+
+/* Pair exports are 1200×1200 each; keep each tile below source width. */
+.cp-pair{
+  max-width:2048px;
+  margin-inline:auto;
+}
+
+@media(max-width:900px){
+  .cp-frame--perspective{width:100%!important}
+  .cp-intro p{font-size:15px!important}
+}
+
+/* ===== V10 — FINAL IMAGE EXPORTS ===== */
+
+/* Perspective image returns to the exact same grid width as every large visual. */
+.cp-frame--perspective{
+  width:100%!important;
+  max-width:none!important;
+  margin-left:0!important;
+  margin-right:0!important;
+}
+
+/* Final exports are already composed at their intended aspect ratios.
+   No crop, zoom, repositioning or forced aspect ratio in CSS. */
+.cp-frame--perspective img,
+.cp-gallery > .cp-frame:last-of-type img{
+  display:block!important;
+  width:100%!important;
+  height:auto!important;
+  max-width:none!important;
+  object-fit:initial!important;
+  object-position:initial!important;
+  transform:none!important;
+}
+
+/* =========================================================
+   V11 MOBILE — Check Point internal project page
+   Desktop remains V10. These rules only refine <= 900px.
+   ========================================================= */
+
+@media (max-width:900px){
+  /* Match approved homepage horizontal rhythm */
+  .grid-width{
+    width:calc(100% - (2 * var(--pad)))!important;
+    margin-inline:auto!important;
+  }
+
+  /* Opening fold */
+  .cp-intro{
+    min-height:auto!important;
+    padding:132px 0 72px!important;
+    text-align:left!important;
+  }
+  .cp-intro h1{
+    font-size:clamp(48px,13.2vw,66px)!important;
+    line-height:.96!important;
+    letter-spacing:-.04em!important;
+    text-align:left!important;
+  }
+  .cp-intro h2{
+    max-width:430px;
+    margin-top:16px!important;
+    font-size:clamp(21px,5.6vw,25px)!important;
+    line-height:1.18!important;
+    text-align:left!important;
+  }
+  .cp-intro p{
+    max-width:560px!important;
+    margin:25px 0 0!important;
+    font-size:15px!important;
+    line-height:1.72!important;
+    letter-spacing:-.008em!important;
+    text-align:left!important;
+    color:var(--body)!important;
+  }
+
+  /* Gallery */
+  .cp-gallery{
+    width:calc(100% - (2 * var(--pad)))!important;
+    max-width:none!important;
+    margin-inline:auto!important;
+  }
+  .cp-gallery > .cp-frame + .cp-frame,
+  .cp-gallery > .cp-frame + .cp-pair,
+  .cp-gallery > .cp-pair + .cp-frame,
+  .cp-gallery > .cp-video + .cp-frame,
+  .cp-gallery > .cp-frame + .cp-video{
+    margin-top:22px!important;
+  }
+  .cp-frame,
+  .cp-video{
+    width:100%!important;
+    border-radius:7px!important;
+    overflow:hidden!important;
+  }
+  .cp-frame--perspective{
+    width:100%!important;
+  }
+
+  /* Preserve exports exactly */
+  .cp-frame img,
+  .cp-frame--perspective img{
+    display:block!important;
+    width:100%!important;
+    height:auto!important;
+    object-fit:initial!important;
+    transform:none!important;
+  }
+
+  /* Video: same edge and width as images */
+  .cp-video{
+    background:#0f1012!important;
+  }
+  .cp-video video{
+    display:block!important;
+    width:calc(100% + 2px)!important;
+    max-width:none!important;
+    height:auto!important;
+    margin-left:-1px!important;
+    aspect-ratio:1920/950!important;
+    object-fit:cover!important;
+  }
+
+  /* The two square visuals become a vertical editorial sequence */
+  .cp-pair{
+    display:grid!important;
+    grid-template-columns:1fr!important;
+    gap:22px!important;
+    width:100%!important;
+    max-width:none!important;
+  }
+  .cp-pair .cp-frame{
+    width:100%!important;
+    aspect-ratio:auto!important;
+  }
+  .cp-pair img{
+    width:100%!important;
+    height:auto!important;
+  }
+
+  /* Explore */
+  .cp-more{
+    padding-top:94px!important;
+    padding-bottom:96px!important;
+  }
+  .cp-more__title{
+    margin-bottom:30px!important;
+  }
+  .cp-more__grid{
+    display:grid!important;
+    grid-template-columns:1fr!important;
+    gap:34px!important;
+  }
+  .cp-more__card{
+    width:100%!important;
+  }
+  .cp-more__image{
+    aspect-ratio:4/3!important;
+    border-radius:7px!important;
+    overflow:hidden!important;
+  }
+  .cp-more__image > img{
+    width:100%!important;
+    height:100%!important;
+    object-fit:cover!important;
+  }
+  .cp-more__meta{
+    margin-top:13px!important;
+  }
+  .cp-more__meta strong{
+    font-size:22px!important;
+  }
+
+  /* Contact uses the homepage component; only keep it inside the viewport */
+  .contact-v22{
+    overflow:hidden!important;
+  }
+}
+
+@media (max-width:520px){
+  .cp-intro{
+    padding:122px 0 62px!important;
+  }
+  .cp-intro h1{
+    font-size:clamp(46px,14vw,58px)!important;
+  }
+  .cp-intro h2{
+    font-size:21px!important;
+  }
+  .cp-intro p{
+    font-size:15px!important;
+  }
+
+  .cp-gallery > .cp-frame + .cp-frame,
+  .cp-gallery > .cp-frame + .cp-pair,
+  .cp-gallery > .cp-pair + .cp-frame,
+  .cp-gallery > .cp-video + .cp-frame,
+  .cp-gallery > .cp-frame + .cp-video{
+    margin-top:16px!important;
+  }
+  .cp-pair{
+    gap:16px!important;
+  }
+
+  .cp-more{
+    padding-top:82px!important;
+    padding-bottom:84px!important;
+  }
+  .cp-more__grid{
+    gap:30px!important;
+  }
+}
