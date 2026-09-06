@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Check Point — Interactive Cyber Security Report. A case study by Hila Shaked.">
+  <title>Check Point — Hila Shaked</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="checkpoint.css">
+</head>
+<body>
+<header class="site-header">
+  <a class="brand" href="home-preview-v36-mobile-final.html">HILA SHAKED</a>
+  <nav class="desktop-nav" aria-label="Primary navigation">
+    <a href="home-preview-v36-mobile-final.html#work">WORK</a>
+    <a href="home-preview-v36-mobile-final.html#about">ABOUT</a>
+    <a href="home-preview-v36-mobile-final.html#contact">CONTACT</a>
+  </nav>
+  <button class="menu-button" aria-label="Open menu"><span></span><span></span></button>
+</header>
+
+<aside class="page-rail" aria-hidden="true">
+  <span class="page-rail__line"></span>
+  <div class="page-rail__marker"><span>01</span><em>CHECK POINT</em></div>
+</aside>
+
+<main>
+  <section class="project-intro">
+    <p class="eyebrow">CASE STUDY · 2023</p>
+    <h1>Check Point</h1>
+    <p class="subtitle">Interactive Cyber Security Report</p>
+    <p class="lede">Designed to make complex cybersecurity research accessible through interactive storytelling, data visualization, and modular navigation.</p>
+  </section>
+
+  <section class="hero-film" aria-label="Check Point report motion preview">
+    <div class="hero-film__screen">
+      <video autoplay muted loop playsinline preload="metadata" poster="assets/hero-devices.jpg">
+        <source src="assets/hero.mp4" type="video/mp4">
+      </video>
+    </div>
+  </section>
+
+  <section class="project-meta">
+    <div><span>CLIENT</span><p>Check Point</p></div>
+    <div><span>ROLE</span><p>Web Design · UI Design</p></div>
+    <div><span>PROJECT</span><p>Interactive Report</p></div>
+    <div class="project-meta__story"><span>THE PROJECT</span><p>A digital report that turns dense cybersecurity research into a clear, visual experience — balancing editorial content, data, navigation and motion.</p></div>
+  </section>
+
+  <section class="showcase showcase--wide">
+    <img src="assets/hero-devices.jpg" alt="Check Point Cyber Security Report displayed across multiple screens">
+  </section>
+
+  <section class="chapter-head">
+    <p class="eyebrow">INSIDE THE REPORT</p>
+    <h2>Complex data,<br><em>made clear.</em></h2>
+  </section>
+
+  <section class="showcase showcase--wide">
+    <img src="assets/global-analysis.png" alt="Global analysis section of the Check Point report">
+  </section>
+
+  <section class="showcase-grid">
+    <figure><img src="assets/report-spreads.png" alt="Multiple report chapters shown as long editorial layouts"></figure>
+    <figure><img src="assets/fold-scroll.png" alt="Continuous scrolling report experience shown on a folding display"></figure>
+  </section>
+
+  <section class="statement">
+    <p>One system. Multiple chapters.<br><em>A single visual language.</em></p>
+  </section>
+
+  <section class="showcase showcase--wide showcase--closing">
+    <img src="assets/closing.png" alt="Check Point report shown on two laptops">
+  </section>
+
+  <a class="next-project" href="#" aria-label="View next project Skyhawk">
+    <span class="eyebrow">NEXT PROJECT</span>
+    <span class="next-project__row"><strong>Skyhawk</strong><i>→</i></span>
+  </a>
+
+  <section class="contact" id="contact">
+    <div>
+      <p class="contact__label">GET IN TOUCH</p>
+      <h2><span>Let’s</span><span><em>talk.</em></span></h2>
+    </div>
+    <div class="contact__details">
+      <a href="mailto:hilaalmagor@gmail.com">hilaalmagor@gmail.com</a>
+      <a href="tel:+972547704074">054-7704074</a>
+    </div>
+  </section>
+</main>
+
+<script>
+const header = document.querySelector('.site-header');
+window.addEventListener('scroll',()=>header.classList.toggle('is-scrolled',window.scrollY>30),{passive:true});
+</script>
+</body>
+</html>
