@@ -1,0 +1,44 @@
+@import url("skyhawk-v2.css");
+
+/* Skyhawk V3 — exact palette and Visual System refinements */
+
+/* Exact supplied palette */
+.sky-colors > span:nth-child(1) i { background:#0f172a !important; }
+.sky-colors > span:nth-child(2) i { background:#6b00dd !important; }
+.sky-colors > span:nth-child(3) i { background:#eaecfb !important; }
+.sky-colors .sky-gradient i {
+  background:linear-gradient(90deg,#0f1960 0%,#6b00dd 100%) !important;
+}
+
+/* Align the real icon strip with the left edge of the swatches above. */
+.sky-system__row--icons .sky-icons-art {
+  margin-left:-40px !important;
+  width:min(calc(100% + 40px),1020px) !important;
+}
+
+/* Keep the intended divider directly under the icon set. */
+.sky-system__row--icons {
+  border-bottom:1px solid #27282c !important;
+}
+
+/* Remove the second divider before Explore and bring that fold upward. */
+.cp-more {
+  border-top:0 !important;
+  margin-top:0 !important;
+  padding-top:clamp(24px,2.2vw,36px) !important;
+}
+.cp-more::before,
+.cp-more::after {
+  display:none !important;
+}
+.sky-system {
+  margin-bottom:0 !important;
+  padding-bottom:clamp(22px,2vw,32px) !important;
+}
+
+@media (max-width:900px) {
+  .sky-system__row--icons .sky-icons-art {
+    margin-left:0 !important;
+    width:100% !important;
+  }
+}
