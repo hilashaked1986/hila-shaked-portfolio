@@ -1,0 +1,579 @@
+
+:root{
+  --dark:#0f1012;
+  --light:#f4f1eb;
+  --accent:#b8a792;
+  --body:#c8c4be;
+  --line:#27282c;
+  --pad:clamp(22px,3.2vw,58px);
+  --gap:clamp(12px,1.25vw,20px);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--dark);color:var(--light);font-family:Inter,Arial,sans-serif}
+a{color:inherit;text-decoration:none}
+.grid-width{width:calc(100% - (2 * var(--pad)));margin-inline:auto}
+
+.ra-intro{min-height:535px;display:flex;align-items:center;padding:118px 0 82px}
+.ra-intro__inner{width:100%;text-align:center}
+.ra-intro h1{margin:0;font:400 clamp(68px,6.5vw,104px)/.96 "Playfair Display",serif;letter-spacing:-.043em;color:#f4f1eb}
+.ra-intro h2{margin:18px 0 0;font:400 clamp(22px,1.9vw,31px)/1.22 "Playfair Display",serif;color:#d1cbc4}
+.ra-intro p{max-width:760px;margin:28px auto 0;font:400 13px/1.72 Inter,Arial,sans-serif;color:#8c8984}
+
+.ra-gallery{padding-bottom:clamp(105px,9vw,155px)}
+.ra-gallery>*+*{margin-top:var(--gap)}
+.ra-frame{margin:0;overflow:hidden;border-radius:8px;line-height:0;background:#1a1a1c}
+.ra-frame img,.ra-frame video{display:block;width:100%;height:auto;max-width:100%}
+.ra-frame--video{aspect-ratio:1920/950;background:#14131c}
+.ra-frame--video video{width:100%;height:100%;object-fit:cover}
+.ra-pair{display:grid;grid-template-columns:1.62fr 1fr;gap:var(--gap)}
+.ra-pair .ra-frame{height:100%}
+.ra-pair .ra-frame img{width:100%;height:100%;object-fit:cover}
+
+.ra-system{margin-top:clamp(20px,2vw,36px);margin-bottom:clamp(110px,8vw,150px)}
+.ra-system__head{text-align:center;margin-bottom:clamp(65px,6vw,100px)}
+.ra-system__head span{display:inline-flex;align-items:center;gap:16px;font:400 9px/1.4 Inter,sans-serif;letter-spacing:.22em;color:#8e8b87}
+.ra-system__head span:before,.ra-system__head span:after{content:"";display:block;width:42px;height:1px;background:#4a4a4b}
+.ra-system__head h2{margin:14px 0 0;font:400 clamp(42px,4.2vw,68px)/1 "Playfair Display",serif;letter-spacing:-.035em;color:var(--light)}
+.ra-system__row{display:grid;grid-template-columns:minmax(150px,22%) 1fr;gap:clamp(30px,5vw,90px);align-items:center;min-height:250px;padding:48px 0;border-bottom:1px solid #27282c}
+.ra-system__row:first-of-type{border-top:1px solid #27282c}
+.ra-system__label strong{font:400 10px/1.4 Inter,sans-serif;letter-spacing:.18em;color:#bdb9b4}
+
+.ra-type{display:flex;align-items:center;gap:42px}
+.ra-type__sample{font:400 clamp(70px,7vw,118px)/.8 Poppins,Inter,sans-serif;color:#f4f1eb}
+.ra-type div{display:flex;gap:34px;align-items:center}
+.ra-type strong{font:500 16px Poppins,Inter,sans-serif;color:#f4f1eb}
+.ra-type div span{font:400 clamp(18px,1.8vw,28px)/1.35 Poppins,Inter,sans-serif;color:#c8c4be}
+
+.ra-colors{display:grid;grid-template-columns:repeat(4,minmax(90px,1fr));gap:16px;max-width:780px}
+.ra-colors i{display:block;aspect-ratio:1.5;border-radius:10px;background:var(--sw)}
+.ra-colors small{display:block;margin-top:12px;font:400 9px Inter,sans-serif;letter-spacing:.08em;color:#777}
+.ra-gradient i{background:linear-gradient(90deg,#BE1468,#FF002A)}
+
+.ra-icons{display:grid;grid-template-columns:repeat(5,minmax(72px,1fr));gap:14px;max-width:790px}
+.ra-icons span{display:flex;align-items:center;justify-content:center;aspect-ratio:1.28;border:1px solid #25262a;border-radius:10px;background:#121316}
+.ra-icons img{width:68%;height:68%;object-fit:contain}
+
+.cp-more{padding:clamp(24px,2.2vw,36px) 0 clamp(120px,9vw,160px)}
+.cp-more__title{margin:0 0 28px;font:500 9px/1 Inter,Arial,sans-serif;letter-spacing:.27em;color:#b8a792}
+.cp-more__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(18px,1.8vw,28px)}
+.cp-more__card{display:block}
+.cp-more__image{position:relative;display:block;aspect-ratio:4/3;border-radius:7px;overflow:hidden}
+.cp-more__image>img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .5s cubic-bezier(.2,.72,.2,1),filter .35s ease}
+.cp-more__image::after{content:"";position:absolute;inset:0;background:rgba(15,16,18,.32);opacity:0;transition:opacity .3s ease}
+.cp-more__hover{position:absolute;z-index:2;left:18px;bottom:16px;font:500 9px/1 Inter,sans-serif;letter-spacing:.18em;color:#fff;opacity:0;transform:translateY(7px);transition:.3s ease}
+.cp-more__card:hover .cp-more__image>img{transform:scale(1.035);filter:brightness(.82)}
+.cp-more__card:hover .cp-more__image::after,.cp-more__card:hover .cp-more__hover{opacity:1}
+.cp-more__card:hover .cp-more__hover{transform:none}
+.cp-more__meta{display:flex;justify-content:space-between;align-items:baseline;gap:14px;padding-top:13px}
+.cp-more__meta small{font:400 8px/1.4 Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#777}
+.cp-more__meta strong{font:400 21px/1 "Playfair Display",serif;color:#f4f1eb}
+
+.custom-cursor{position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:0;transition:opacity .2s}
+.custom-cursor__ring,.custom-cursor__dot{position:fixed;left:0;top:0;transform:translate(-50%,-50%);border-radius:50%}
+.custom-cursor__ring{width:42px;height:42px;border:1px solid rgba(184,167,146,.75);display:grid;place-items:center;transition:width .22s,height .22s,background .22s}
+.custom-cursor__dot{width:4px;height:4px;background:#b8a792}
+.custom-cursor__label{font:500 7px/1 Inter,sans-serif;letter-spacing:.12em;color:#0f1012;opacity:0}
+.custom-cursor.is-project .custom-cursor__ring{width:64px;height:64px;background:#b8a792;border-color:#b8a792}
+.custom-cursor.is-project .custom-cursor__label{opacity:1}
+.custom-cursor.is-project .custom-cursor__dot{opacity:0}
+
+@media (pointer:fine){
+  body{cursor:none}
+  a,button{cursor:none}
+  .custom-cursor{opacity:1}
+}
+@media(max-width:900px){
+  .ra-intro{min-height:auto;padding:142px 0 72px}
+  .ra-intro__inner{text-align:left}
+  .ra-intro h1{font-size:clamp(50px,13vw,72px)}
+  .ra-intro h2{font-size:22px}
+  .ra-intro p{margin-left:0;margin-right:0;max-width:620px}
+  .ra-gallery>*+*{margin-top:16px}
+  .ra-pair{grid-template-columns:1fr;gap:16px}
+  .ra-pair .ra-frame img{height:auto;object-fit:initial}
+  .ra-system{margin-top:72px;margin-bottom:72px}
+  .ra-system__head{text-align:left;margin-bottom:48px}
+  .ra-system__head span:before,.ra-system__head span:after{display:none}
+  .ra-system__row{grid-template-columns:1fr;gap:28px;min-height:0;padding:34px 0}
+  .ra-type{gap:28px}
+  .ra-type div{gap:22px}
+  .ra-colors{grid-template-columns:repeat(2,minmax(0,1fr));width:100%}
+  .ra-icons{grid-template-columns:repeat(2,minmax(0,1fr));width:100%}
+  .cp-more__grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:560px){
+  .cp-more__grid{grid-template-columns:1fr}
+}
+
+
+/* =========================================================
+   RED ACCESS V2 — vertical rhythm / exact icon assets
+   ========================================================= */
+
+/* Keep the approved site grid width, but make the large visual beats less tall. */
+.ra-gallery{
+  display:flex !important;
+  flex-direction:column !important;
+  gap:clamp(16px,1.35vw,22px) !important;
+}
+.ra-gallery > *{
+  margin-top:0 !important;
+  margin-bottom:0 !important;
+  flex:none !important;
+}
+
+/* Wide images: panoramic viewport, centered, without allowing one block to overlap another. */
+.ra-frame--wide{
+  width:100% !important;
+  aspect-ratio:2 / 1 !important;
+  height:auto !important;
+  position:relative !important;
+  overflow:hidden !important;
+}
+.ra-frame--wide > img{
+  width:100% !important;
+  height:100% !important;
+  display:block !important;
+  object-fit:cover !important;
+  object-position:center !important;
+  transform:none !important;
+}
+
+/* Hero keeps the important laptop/UI area visible while reducing excessive vertical weight. */
+.ra-frame--hero > img{
+  object-position:center 46% !important;
+}
+
+/* Video uses the same compact visual rhythm. */
+.ra-frame--video{
+  width:100% !important;
+  aspect-ratio:2 / 1 !important;
+  height:auto !important;
+  margin:0 !important;
+}
+.ra-frame--video video{
+  width:100% !important;
+  height:100% !important;
+  object-fit:cover !important;
+}
+
+/* Pair stays within its own row and cannot collide with neighboring visuals. */
+.ra-pair{
+  width:100% !important;
+  align-items:stretch !important;
+  margin:0 !important;
+}
+.ra-pair .ra-frame{
+  min-width:0 !important;
+  overflow:hidden !important;
+}
+
+/* Original icon exports are intentionally white-backed and should remain exactly as supplied. */
+.ra-icons span{
+  overflow:hidden !important;
+  background:#fff !important;
+  padding:0 !important;
+}
+.ra-icons img{
+  width:100% !important;
+  height:100% !important;
+  display:block !important;
+  object-fit:cover !important;
+}
+
+/* Project links use the same VIEW cursor behavior as the approved homepage. */
+@media (pointer:fine){
+  .cp-more__card,
+  .cp-more__card *{
+    cursor:none !important;
+  }
+}
+
+@media(max-width:900px){
+  .ra-gallery{gap:16px !important}
+  .ra-frame--wide,
+  .ra-frame--video{
+    aspect-ratio:auto !important;
+  }
+  .ra-frame--wide > img,
+  .ra-frame--video video{
+    width:100% !important;
+    height:auto !important;
+    object-fit:initial !important;
+  }
+}
+
+/* =========================================================
+   RED ACCESS V3 — approved portfolio typography + exact exports
+   ========================================================= */
+
+/* New 2400x1200 compositions are already art-directed: never crop them. */
+.ra-frame--hero,
+.ra-gallery > .ra-frame--wide:last-of-type{
+  aspect-ratio:auto !important;
+  height:auto !important;
+}
+.ra-frame--hero > img,
+.ra-gallery > .ra-frame--wide:last-of-type > img{
+  width:100% !important;
+  height:auto !important;
+  object-fit:initial !important;
+  object-position:initial !important;
+}
+
+/* Typography follows the approved internal-project system. */
+.ra-intro h1{
+  font-family:"Playfair Display",serif !important;
+  font-weight:400 !important;
+  letter-spacing:-.035em !important;
+  color:var(--light) !important;
+}
+.ra-intro h2{
+  font-family:"Inter",Arial,sans-serif !important;
+  font-weight:400 !important;
+  font-size:clamp(12px,.88vw,14px) !important;
+  line-height:1.45 !important;
+  letter-spacing:.13em !important;
+  text-transform:uppercase !important;
+  color:#b8a792 !important;
+}
+.ra-intro p{
+  font-family:"Inter",Arial,sans-serif !important;
+  font-weight:400 !important;
+  font-size:clamp(15px,1.02vw,17px) !important;
+  line-height:1.72 !important;
+  letter-spacing:-.008em !important;
+  color:#c8c4be !important;
+  max-width:720px !important;
+}
+
+/* Visual System uses the same hierarchy/rhythm as the approved Skyhawk/D-FEND system. */
+.ra-system__head span,
+.ra-system__label strong,
+.cp-more__title{
+  font-family:"Inter",Arial,sans-serif !important;
+  font-weight:400 !important;
+}
+.ra-system__head h2{
+  font-family:"Playfair Display",serif !important;
+  font-weight:400 !important;
+  letter-spacing:-.035em !important;
+  color:var(--light) !important;
+}
+.ra-system__label strong{color:#bdb9b4 !important}
+.ra-type__sample,
+.ra-type strong,
+.ra-type div span{
+  font-family:Poppins,Inter,sans-serif !important;
+}
+.ra-type__sample{font-weight:400 !important}
+.ra-type strong{font-weight:500 !important}
+.ra-type div span{font-weight:400 !important;color:#c8c4be !important}
+
+/* Icons: no white tile/background; show the supplied artwork directly on dark mode. */
+.ra-icons span{
+  background:transparent !important;
+  border:1px solid #25262a !important;
+}
+.ra-icons img{
+  width:68% !important;
+  height:68% !important;
+  object-fit:contain !important;
+}
+
+/* Explore typography mirrors the approved project-card system. */
+.cp-more__title{
+  font-size:9px !important;
+  line-height:1 !important;
+  letter-spacing:.27em !important;
+  color:#b8a792 !important;
+}
+.cp-more__meta small{
+  font-family:Inter,Arial,sans-serif !important;
+  font-weight:400 !important;
+  color:#777 !important;
+}
+.cp-more__meta strong{
+  font-family:"Playfair Display",serif !important;
+  font-weight:400 !important;
+  color:var(--light) !important;
+}
+
+/* =========================================================
+   RED ACCESS V4 — TYPOGRAPHY + CURSOR MATCH APPROVED SITE
+   ========================================================= */
+
+:root{
+  --cp-title-size:76px;
+  --cp-subtitle-size:24px;
+  --cp-body-size:14px;
+  --cp-label-size:9px;
+  --cp-card-title-size:22px;
+  --cp-tracking:.25em;
+}
+
+/* Exact approved internal project intro rhythm */
+.ra-intro{
+  min-height:470px !important;
+  display:flex !important;
+  align-items:center !important;
+  padding:112px 0 72px !important;
+}
+.ra-intro__inner{
+  width:100% !important;
+  text-align:center !important;
+}
+.ra-intro h1{
+  margin:0 !important;
+  font-family:"Playfair Display",serif !important;
+  font-size:clamp(62px,5.1vw,var(--cp-title-size)) !important;
+  font-weight:400 !important;
+  line-height:.98 !important;
+  letter-spacing:-.038em !important;
+  color:var(--light) !important;
+}
+.ra-intro h2{
+  margin:17px 0 0 !important;
+  font-family:"Playfair Display",serif !important;
+  font-size:var(--cp-subtitle-size) !important;
+  font-weight:400 !important;
+  line-height:1.22 !important;
+  letter-spacing:-.012em !important;
+  text-transform:none !important;
+  color:var(--light) !important;
+}
+.ra-intro p{
+  max-width:650px !important;
+  margin:25px auto 0 !important;
+  font-family:Inter,Arial,sans-serif !important;
+  font-size:clamp(15px,1.02vw,17px) !important;
+  font-weight:400 !important;
+  line-height:1.72 !important;
+  letter-spacing:-.008em !important;
+  color:var(--body) !important;
+}
+
+/* Exact approved micro-type system */
+.cp-more__title,
+.cp-more__meta small,
+.cp-more__hover{
+  font-family:Inter,Arial,sans-serif !important;
+  font-weight:400 !important;
+  text-transform:uppercase !important;
+}
+.cp-more__title,
+.cp-more__hover{
+  font-size:9px !important;
+  line-height:1.4 !important;
+  letter-spacing:.20em !important;
+}
+.cp-more__meta small{
+  font-size:9px !important;
+  line-height:1.4 !important;
+  letter-spacing:.20em !important;
+  color:rgba(244,241,235,.68) !important;
+}
+.cp-more__meta strong{
+  font-family:"Playfair Display",serif !important;
+  font-size:22px !important;
+  font-weight:400 !important;
+  line-height:1 !important;
+  letter-spacing:-.02em !important;
+  color:var(--light) !important;
+}
+
+/* Visual System typography stays on the approved site language */
+.ra-system__head span,
+.ra-system__label strong{
+  font-family:Inter,Arial,sans-serif !important;
+  font-weight:400 !important;
+}
+.ra-system__head h2{
+  font-family:"Playfair Display",serif !important;
+  font-weight:400 !important;
+  letter-spacing:-.035em !important;
+  color:var(--light) !important;
+}
+.ra-system__head span{
+  font-size:9px !important;
+  line-height:1.4 !important;
+  letter-spacing:.22em !important;
+  color:#8e8b87 !important;
+}
+.ra-system__label strong{
+  font-size:10px !important;
+  line-height:1.4 !important;
+  letter-spacing:.18em !important;
+  color:#bdb9b4 !important;
+}
+
+/* Remove V1/V2 local cursor styling entirely in practice.
+   The approved homepage CSS supplies the exact ring, dot and VIEW states. */
+.custom-cursor{
+  left:auto !important;
+  top:auto !important;
+  inset:auto !important;
+  opacity:0;
+}
+.custom-cursor.is-visible{opacity:1 !important}
+
+/* Prevent our old fixed-position implementation from fighting the approved transform-based cursor. */
+.custom-cursor__ring,
+.custom-cursor__dot{
+  left:0 !important;
+  top:0 !important;
+}
+
+/* Do not restyle approved cursor sizes/colors locally. */
+.custom-cursor.is-project .custom-cursor__ring{
+  width:var(--cursor-project-size,64px);
+  height:var(--cursor-project-size,64px);
+}
+
+@media(max-width:900px){
+  .ra-intro{min-height:430px !important;padding:106px 0 66px !important}
+  .ra-intro h1{font-size:62px !important}
+  .ra-intro h2{font-size:23px !important}
+  .ra-intro p{font-size:15px !important}
+}
+@media(max-width:520px){
+  .ra-intro{padding:112px 0 64px !important}
+  .ra-intro h1{font-size:52px !important}
+  .ra-intro h2{font-size:21px !important}
+  .ra-intro p{font-size:13px !important;line-height:1.68 !important}
+}
+
+/* =========================================================
+   RED ACCESS V5 — EXACT APPROVED HOMEPAGE CURSOR
+   This block intentionally overrides all earlier local cursor CSS.
+   ========================================================= */
+.custom-cursor{
+  --cursor-bronze:var(--ui-accent,#b8a792) !important;
+  position:fixed !important;
+  inset:0 !important;
+  z-index:9999 !important;
+  pointer-events:none !important;
+  opacity:0 !important;
+  transition:opacity 180ms ease !important;
+}
+.custom-cursor.is-visible{opacity:1 !important}
+
+.custom-cursor__ring,
+.custom-cursor__dot{
+  position:fixed !important;
+  top:0 !important;
+  left:0 !important;
+  pointer-events:none !important;
+  will-change:transform !important;
+}
+
+.custom-cursor__ring{
+  display:grid !important;
+  place-items:center !important;
+  width:30px !important;
+  height:30px !important;
+  border:1px solid var(--cursor-bronze) !important;
+  border-radius:50% !important;
+  background:transparent !important;
+  backdrop-filter:none !important;
+  transition:
+    width 340ms cubic-bezier(.22,.61,.36,1),
+    height 340ms cubic-bezier(.22,.61,.36,1),
+    border-color 260ms ease,
+    background-color 260ms ease !important;
+}
+
+.custom-cursor__dot{
+  width:3px !important;
+  height:3px !important;
+  border-radius:50% !important;
+  background:var(--cursor-bronze) !important;
+  opacity:1 !important;
+}
+
+.custom-cursor__label{
+  opacity:0 !important;
+  transform:translateY(2px) !important;
+  font-family:Inter,Arial,sans-serif !important;
+  font-size:7px !important;
+  font-weight:500 !important;
+  line-height:1 !important;
+  letter-spacing:.14em !important;
+  color:var(--cursor-bronze) !important;
+}
+
+.custom-cursor.is-interactive .custom-cursor__ring{
+  width:40px !important;
+  height:40px !important;
+  background:rgba(184,167,146,.08) !important;
+  backdrop-filter:none !important;
+}
+
+.custom-cursor.is-project .custom-cursor__ring{
+  width:64px !important;
+  height:64px !important;
+  border:1px solid var(--cursor-bronze) !important;
+  background:rgba(15,16,18,.74) !important;
+  backdrop-filter:blur(4px) !important;
+}
+
+.custom-cursor.is-project .custom-cursor__dot{opacity:0 !important}
+.custom-cursor.is-project .custom-cursor__label{
+  opacity:1 !important;
+  transform:translateY(0) !important;
+  color:var(--cursor-bronze) !important;
+}
+
+@media (hover:hover) and (pointer:fine){
+  .has-custom-cursor,
+  .has-custom-cursor body,
+  .has-custom-cursor a,
+  .has-custom-cursor button{cursor:none !important}
+}
+
+/* RED ACCESS V6 MOBILE */
+.ra-picture{display:block;width:100%}
+.ra-picture img{display:block;width:100%;height:auto}
+
+@media(max-width:900px){
+  .ra-intro{min-height:auto!important;padding:136px 0 68px!important}
+  .ra-intro__inner{text-align:left!important}
+  .ra-intro h1{font-size:clamp(50px,13vw,68px)!important;line-height:.98!important}
+  .ra-intro h2{margin-top:14px!important;font-size:22px!important;line-height:1.2!important}
+  .ra-intro p{max-width:620px!important;margin:22px 0 0!important;font-size:15px!important;line-height:1.7!important}
+
+  .ra-gallery{display:block!important;padding-bottom:84px!important}
+  .ra-gallery > *{margin:0 0 16px!important}
+  .ra-gallery > *:last-child{margin-bottom:0!important}
+  .ra-pair{display:grid!important;grid-template-columns:1fr!important;gap:16px!important;width:100%!important}
+  .ra-pair > *{margin:0!important}
+
+  .ra-frame,.ra-frame--wide,.ra-frame--hero,.ra-pair .ra-frame{
+    width:100%!important;height:auto!important;min-height:0!important;
+    aspect-ratio:auto!important;overflow:hidden!important
+  }
+  .ra-frame > .ra-picture,
+  .ra-frame--wide > .ra-picture,
+  .ra-pair .ra-frame > .ra-picture{width:100%!important;height:auto!important}
+  .ra-frame > .ra-picture img,
+  .ra-frame--wide > .ra-picture img,
+  .ra-pair .ra-frame > .ra-picture img{
+    position:static!important;display:block!important;width:100%!important;height:auto!important;
+    max-width:100%!important;object-fit:initial!important;object-position:initial!important;
+    transform:none!important;margin:0!important
+  }
+
+  .ra-frame--video{width:100%!important;aspect-ratio:16/9!important;height:auto!important;overflow:hidden!important}
+  .ra-frame--video video{display:block!important;width:100%!important;height:100%!important;object-fit:cover!important}
+
+  .ra-system{margin-top:72px!important;margin-bottom:76px!important}
+  .ra-system__head{text-align:left!important;margin-bottom:46px!important}
+  .ra-system__head span:before,.ra-system__head span:after{display:none!important}
+  .ra-system__head h2{margin-top:10px!important;font-size:clamp(42px,11vw,58px)!important}
+  .ra-system__row{grid-template-columns:1fr!important;gap:26px!important;min-height:0!important;padding:34px 0!important}
+  .ra-colors{grid-template-columns:repeat(2,minmax(0,1fr))!important;width:100%!important}
+  .ra-icons{grid-template-columns:repeat(2,minmax(0,1fr))!important;width:100%!important;max-width:none!important}
+
+  .cp-more__grid{grid-template-columns:1fr!important}
+}
