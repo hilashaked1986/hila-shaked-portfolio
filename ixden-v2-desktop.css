@@ -1,0 +1,1087 @@
+:root{--cp-black:#0f1012;--cp-cream:#f4f0eb;--cp-gap:clamp(22px,2.2vw,36px)}
+html,body,main{background:var(--cp-black)!important}
+.grid-width{width:calc(100% - (2 * var(--pad)));margin-inline:auto}
+
+.cp-intro{min-height:535px;display:flex;align-items:center;padding:118px 0 82px}
+.cp-intro__inner{width:100%;text-align:center}
+.cp-intro h1{margin:0;font:400 clamp(68px,6.5vw,104px)/.96 "Playfair Display",serif;letter-spacing:-.043em;color:#f4f1eb}
+.cp-intro h2{margin:18px 0 0;font:400 clamp(22px,1.9vw,31px)/1.22 "Playfair Display",serif;color:#d1cbc4}
+.cp-intro p{max-width:720px;margin:28px auto 0;font:400 13px/1.72 Inter,Arial,sans-serif;color:#8c8984}
+
+.cp-gallery{padding-bottom:clamp(115px,9vw,155px)}
+.cp-frame{margin:0;overflow:hidden;border-radius:8px;background:var(--cp-cream);line-height:0}
+.cp-frame img,.cp-frame video{display:block;width:100%;height:auto;max-width:100%}
+.cp-gallery>.cp-frame+.cp-frame,.cp-gallery>.cp-frame+.cp-pair,.cp-gallery>.cp-pair+.cp-frame{margin-top:var(--cp-gap)}
+.cp-video video{width:100%;aspect-ratio:1920/950;object-fit:cover}
+.cp-pair{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--cp-gap);align-items:start}
+.cp-pair .cp-frame{width:100%;aspect-ratio:1/1}
+.cp-pair img{width:100%;height:100%;object-fit:contain}
+
+.cp-more{padding:clamp(62px,6vw,92px) 0 clamp(120px,9vw,160px);border-top:1px solid rgba(244,241,235,.12)}
+.cp-more__title{margin:0 0 28px;font:500 9px/1 Inter,Arial,sans-serif;letter-spacing:.27em;color:#b8a792}
+.cp-more__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(18px,1.8vw,28px)}
+.cp-more__card{display:block}
+.cp-more__image{position:relative;display:block;aspect-ratio:4/3;border-radius:7px;overflow:hidden;background:center/cover no-repeat;transition:transform .4s ease}
+.cp-more__image::after{content:"";position:absolute;inset:0;background:rgba(15,16,18,.32);opacity:0;transition:opacity .3s ease}
+.cp-more__hover{position:absolute;z-index:2;left:18px;bottom:16px;font:500 9px/1 Inter,Arial,sans-serif;letter-spacing:.18em;color:#fff;opacity:0;transform:translateY(7px);transition:.3s ease}
+.cp-more__card:hover .cp-more__image{transform:translateY(-3px)}
+.cp-more__card:hover .cp-more__image::after,.cp-more__card:hover .cp-more__hover{opacity:1}
+.cp-more__card:hover .cp-more__hover{transform:none}
+.cp-more__image.skyhawk{background-image:url("https://hilashaked1986.github.io/hila-shaked-portfolio/assets/skyhawk.png")}
+.cp-more__image.red{background-image:url("https://hilashaked1986.github.io/hila-shaked-portfolio/assets/red-access.png")}
+.cp-more__image.dfend{background-image:url("https://hilashaked1986.github.io/hila-shaked-portfolio/assets/dfend.png")}
+.cp-more__meta{display:flex;justify-content:space-between;align-items:baseline;gap:14px;padding-top:13px}
+.cp-more__meta small{font:400 8px/1.4 Inter,Arial,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#777}
+.cp-more__meta strong{font:400 21px/1 "Playfair Display",serif;color:#f4f1eb}
+
+.contact-v22{background:#f4f0eb!important}
+.contact-v22 .contact-final{opacity:1!important;visibility:visible!important}
+
+.custom-cursor__ring,.custom-cursor__dot{border-radius:50%}
+
+@media(max-width:900px){
+ .cp-intro{min-height:470px;padding-top:112px}
+ .cp-pair{grid-template-columns:1fr}
+ .cp-more__grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:520px){
+ .grid-width{width:calc(100% - 40px)}
+ .cp-intro{min-height:auto;padding:120px 0 72px}
+ .cp-intro h1{font-size:58px}
+ .cp-frame{border-radius:6px}
+ .cp-more__grid{grid-template-columns:1fr}
+}
+.cp-more__image{background:none!important}
+.cp-more__image>img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .5s cubic-bezier(.2,.72,.2,1),filter .35s ease}
+.cp-more__card:hover .cp-more__image>img,
+.cp-more__card:focus-visible .cp-more__image>img{transform:scale(1.035);filter:brightness(.82)}
+.cp-more__card:hover .cp-more__image,
+.cp-more__card:focus-visible .cp-more__image{transform:none}
+
+/* ===== V8 FINAL TYPOGRAPHY + GALLERY CLEANUP ===== */
+:root{
+  --cp-title-size:76px;
+  --cp-subtitle-size:24px;
+  --cp-body-size:14px;
+  --cp-label-size:9px;
+  --cp-card-title-size:22px;
+  --cp-tracking:.25em;
+}
+
+.cp-intro{
+  min-height:470px;
+  padding:112px 0 72px;
+}
+.cp-intro h1{
+  margin:0;
+  font-family:"Playfair Display",serif;
+  font-size:clamp(62px,5.1vw,var(--cp-title-size));
+  font-weight:400;
+  line-height:.98;
+  letter-spacing:-.038em;
+}
+.cp-intro h2{
+  margin:17px 0 0;
+  font-family:"Playfair Display",serif;
+  font-size:var(--cp-subtitle-size);
+  font-weight:400;
+  line-height:1.22;
+  letter-spacing:-.012em;
+}
+.cp-intro p{
+  max-width:700px;
+  margin:25px auto 0;
+  font-family:Inter,Arial,sans-serif;
+  font-size:var(--cp-body-size);
+  font-weight:400;
+  line-height:1.7;
+  letter-spacing:0;
+}
+
+/* Use exported compositions as-is */
+.cp-frame img{
+  display:block;
+  width:100%;
+  height:auto!important;
+  max-width:100%;
+  object-fit:initial!important;
+  object-position:initial!important;
+  transform:none!important;
+}
+.cp-frame,
+.cp-pair .cp-frame{
+  min-height:0!important;
+  max-height:none!important;
+  height:auto!important;
+  aspect-ratio:auto!important;
+}
+.cp-pair{
+  align-items:start!important;
+}
+.cp-pair img{
+  display:block;
+  width:100%;
+  height:auto!important;
+  object-fit:initial!important;
+}
+.cp-video video{
+  display:block;
+  width:100%;
+  height:auto;
+  aspect-ratio:1920/950;
+  object-fit:cover;
+}
+
+.cp-more__title{
+  font-family:Inter,Arial,sans-serif;
+  font-size:var(--cp-label-size);
+  font-weight:500;
+  line-height:1;
+  letter-spacing:var(--cp-tracking);
+}
+.cp-more__meta small{
+  font-family:Inter,Arial,sans-serif;
+  font-size:var(--cp-label-size);
+  font-weight:400;
+  line-height:1.45;
+  letter-spacing:.14em;
+}
+.cp-more__meta strong{
+  font-family:"Playfair Display",serif;
+  font-size:var(--cp-card-title-size);
+  font-weight:400;
+  line-height:1;
+  letter-spacing:-.015em;
+}
+.cp-more__hover{
+  font-family:Inter,Arial,sans-serif;
+  font-size:var(--cp-label-size);
+  font-weight:500;
+  line-height:1;
+  letter-spacing:var(--cp-tracking);
+}
+
+@media(max-width:900px){
+  .cp-intro{min-height:430px;padding:106px 0 66px}
+  .cp-intro h1{font-size:62px}
+  .cp-intro h2{font-size:23px}
+  .cp-intro p{font-size:14px}
+}
+@media(max-width:520px){
+  .cp-intro{padding:112px 0 64px}
+  .cp-intro h1{font-size:52px}
+  .cp-intro h2{font-size:21px}
+  .cp-intro p{font-size:13px;line-height:1.68}
+  .cp-more__meta strong{font-size:21px}
+}
+
+/* ===== V9 — TYPOGRAPHY MATCHED TO APPROVED HOMEPAGE ===== */
+
+/* Homepage text system:
+   --light #f4f1eb
+   --body  #c8c4be
+   Inter 400, body 15–17px / 1.72
+*/
+.cp-intro h1{
+  color:var(--light)!important;
+  font-family:"Playfair Display",serif!important;
+  font-weight:400!important;
+}
+.cp-intro h2{
+  color:var(--light)!important;
+  font-family:"Playfair Display",serif!important;
+  font-weight:400!important;
+}
+.cp-intro p{
+  max-width:650px!important;
+  font-family:Inter,Arial,sans-serif!important;
+  font-size:clamp(15px,1.02vw,17px)!important;
+  font-weight:400!important;
+  line-height:1.72!important;
+  letter-spacing:-.008em!important;
+  color:var(--body)!important;
+}
+
+/* Keep all utility labels on the same homepage micro-type system */
+.cp-more__title,
+.cp-more__meta small,
+.cp-more__hover{
+  font-family:Inter,Arial,sans-serif!important;
+  font-weight:400!important;
+  text-transform:uppercase;
+}
+.cp-more__title,
+.cp-more__hover{
+  font-size:9px!important;
+  line-height:1.4!important;
+  letter-spacing:.20em!important;
+}
+.cp-more__meta small{
+  font-size:9px!important;
+  line-height:1.4!important;
+  letter-spacing:.20em!important;
+  color:rgba(244,241,235,.68)!important;
+}
+.cp-more__meta strong{
+  font-family:"Playfair Display",serif!important;
+  font-size:22px!important;
+  font-weight:400!important;
+  line-height:1!important;
+  letter-spacing:-.02em!important;
+  color:var(--light)!important;
+}
+
+/* Perspective visual: intentionally narrower than the main gallery rhythm.
+   This prevents the 2048x1150 export from becoming a giant vertical block. */
+.cp-frame--perspective{
+  width:min(100%,1180px)!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+}
+.cp-gallery > .cp-frame + .cp-frame--perspective{
+  margin-top:var(--cp-gap)!important;
+}
+
+/* Video edge fix: the source itself has no white stripe.
+   Overscan by 2px to eliminate browser sub-pixel seams at the rounded edge. */
+.cp-video{
+  background:var(--cp-black)!important;
+  overflow:hidden!important;
+}
+.cp-video video{
+  width:calc(100% + 2px)!important;
+  max-width:none!important;
+  margin-left:-1px!important;
+  transform:translateZ(0);
+  backface-visibility:hidden;
+}
+
+/* Quality guard: never let the gallery become wider than the largest
+   full-width source exports. */
+.cp-gallery{
+  max-width:2048px;
+}
+
+/* Pair exports are 1200×1200 each; keep each tile below source width. */
+.cp-pair{
+  max-width:2048px;
+  margin-inline:auto;
+}
+
+@media(max-width:900px){
+  .cp-frame--perspective{width:100%!important}
+  .cp-intro p{font-size:15px!important}
+}
+
+/* ===== V10 — FINAL IMAGE EXPORTS ===== */
+
+/* Perspective image returns to the exact same grid width as every large visual. */
+.cp-frame--perspective{
+  width:100%!important;
+  max-width:none!important;
+  margin-left:0!important;
+  margin-right:0!important;
+}
+
+/* Final exports are already composed at their intended aspect ratios.
+   No crop, zoom, repositioning or forced aspect ratio in CSS. */
+.cp-frame--perspective img,
+.cp-gallery > .cp-frame:last-of-type img{
+  display:block!important;
+  width:100%!important;
+  height:auto!important;
+  max-width:none!important;
+  object-fit:initial!important;
+  object-position:initial!important;
+  transform:none!important;
+}
+
+/* =========================================================
+   V11 MOBILE — Check Point internal project page
+   Desktop remains V10. These rules only refine <= 900px.
+   ========================================================= */
+
+@media (max-width:900px){
+  /* Match approved homepage horizontal rhythm */
+  .grid-width{
+    width:calc(100% - (2 * var(--pad)))!important;
+    margin-inline:auto!important;
+  }
+
+  /* Opening fold */
+  .cp-intro{
+    min-height:auto!important;
+    padding:132px 0 72px!important;
+    text-align:left!important;
+  }
+  .cp-intro h1{
+    font-size:clamp(48px,13.2vw,66px)!important;
+    line-height:.96!important;
+    letter-spacing:-.04em!important;
+    text-align:left!important;
+  }
+  .cp-intro h2{
+    max-width:430px;
+    margin-top:16px!important;
+    font-size:clamp(21px,5.6vw,25px)!important;
+    line-height:1.18!important;
+    text-align:left!important;
+  }
+  .cp-intro p{
+    max-width:560px!important;
+    margin:25px 0 0!important;
+    font-size:15px!important;
+    line-height:1.72!important;
+    letter-spacing:-.008em!important;
+    text-align:left!important;
+    color:var(--body)!important;
+  }
+
+  /* Gallery */
+  .cp-gallery{
+    width:calc(100% - (2 * var(--pad)))!important;
+    max-width:none!important;
+    margin-inline:auto!important;
+  }
+  .cp-gallery > .cp-frame + .cp-frame,
+  .cp-gallery > .cp-frame + .cp-pair,
+  .cp-gallery > .cp-pair + .cp-frame,
+  .cp-gallery > .cp-video + .cp-frame,
+  .cp-gallery > .cp-frame + .cp-video{
+    margin-top:22px!important;
+  }
+  .cp-frame,
+  .cp-video{
+    width:100%!important;
+    border-radius:7px!important;
+    overflow:hidden!important;
+  }
+  .cp-frame--perspective{
+    width:100%!important;
+  }
+
+  /* Preserve exports exactly */
+  .cp-frame img,
+  .cp-frame--perspective img{
+    display:block!important;
+    width:100%!important;
+    height:auto!important;
+    object-fit:initial!important;
+    transform:none!important;
+  }
+
+  /* Video: same edge and width as images */
+  .cp-video{
+    background:#0f1012!important;
+  }
+  .cp-video video{
+    display:block!important;
+    width:calc(100% + 2px)!important;
+    max-width:none!important;
+    height:auto!important;
+    margin-left:-1px!important;
+    aspect-ratio:1920/950!important;
+    object-fit:cover!important;
+  }
+
+  /* The two square visuals become a vertical editorial sequence */
+  .cp-pair{
+    display:grid!important;
+    grid-template-columns:1fr!important;
+    gap:22px!important;
+    width:100%!important;
+    max-width:none!important;
+  }
+  .cp-pair .cp-frame{
+    width:100%!important;
+    aspect-ratio:auto!important;
+  }
+  .cp-pair img{
+    width:100%!important;
+    height:auto!important;
+  }
+
+  /* Explore */
+  .cp-more{
+    padding-top:94px!important;
+    padding-bottom:96px!important;
+  }
+  .cp-more__title{
+    margin-bottom:30px!important;
+  }
+  .cp-more__grid{
+    display:grid!important;
+    grid-template-columns:1fr!important;
+    gap:34px!important;
+  }
+  .cp-more__card{
+    width:100%!important;
+  }
+  .cp-more__image{
+    aspect-ratio:4/3!important;
+    border-radius:7px!important;
+    overflow:hidden!important;
+  }
+  .cp-more__image > img{
+    width:100%!important;
+    height:100%!important;
+    object-fit:cover!important;
+  }
+  .cp-more__meta{
+    margin-top:13px!important;
+  }
+  .cp-more__meta strong{
+    font-size:22px!important;
+  }
+
+  /* Contact uses the homepage component; only keep it inside the viewport */
+  .contact-v22{
+    overflow:hidden!important;
+  }
+}
+
+@media (max-width:520px){
+  .cp-intro{
+    padding:122px 0 62px!important;
+  }
+  .cp-intro h1{
+    font-size:clamp(46px,14vw,58px)!important;
+  }
+  .cp-intro h2{
+    font-size:21px!important;
+  }
+  .cp-intro p{
+    font-size:15px!important;
+  }
+
+  .cp-gallery > .cp-frame + .cp-frame,
+  .cp-gallery > .cp-frame + .cp-pair,
+  .cp-gallery > .cp-pair + .cp-frame,
+  .cp-gallery > .cp-video + .cp-frame,
+  .cp-gallery > .cp-frame + .cp-video{
+    margin-top:16px!important;
+  }
+  .cp-pair{
+    gap:16px!important;
+  }
+
+  .cp-more{
+    padding-top:82px!important;
+    padding-bottom:84px!important;
+  }
+  .cp-more__grid{
+    gap:30px!important;
+  }
+}
+
+.cp-frame picture{display:block;width:100%}
+@media(max-width:900px){
+ .cp-frame picture{display:block!important;width:100%!important;aspect-ratio:1/1!important;overflow:hidden!important}
+ .cp-frame picture img{display:block!important;width:100%!important;height:100%!important;max-width:none!important;object-fit:contain!important;object-position:center!important;transform:none!important}
+ .cp-pair{grid-template-columns:1fr!important;gap:16px!important}
+ .cp-pair .cp-frame,.cp-frame--perspective{width:100%!important;aspect-ratio:1/1!important}
+ .cp-video{aspect-ratio:1920/950!important}
+ .cp-video video{height:100%!important;object-fit:cover!important}
+}
+
+.cp-video--opening{order:1!important}
+  .cp-frame--hero{order:2!important}
+  .cp-frame--perspective{order:3!important}
+  .cp-pair{order:4!important}
+  .cp-gallery > .cp-frame:not(.cp-frame--hero):not(.cp-frame--perspective){order:5!important}
+
+  /* Flex layout owns the vertical rhythm on mobile */
+  .cp-gallery > *{
+    margin-top:0!important;
+    margin-bottom:16px!important;
+  }
+  .cp-gallery > *:last-child{
+    margin-bottom:0!important;
+  }
+}
+
+.cp-frame--hero{order:2!important}
+  .cp-frame--perspective{order:3!important}
+  .cp-pair{order:4!important}
+  .cp-frame--closing{order:5!important}
+}
+
+/* V16 — mobile order is physical HTML order, not CSS order */
+@media(max-width:900px){
+  .cp-gallery{
+    display:block!important;
+  }
+  .cp-gallery > *{
+    margin-top:0!important;
+    margin-bottom:16px!important;
+  }
+  .cp-gallery > *:last-child{
+    margin-bottom:0!important;
+  }
+  .cp-pair{
+    display:grid!important;
+    grid-template-columns:1fr!important;
+    gap:16px!important;
+  }
+}
+
+/* SKYHAWK V1 */
+.sky-gallery .cp-frame img{width:100%;height:auto;display:block}
+.sky-frame--portrait{background:#dfe5ea;overflow:hidden}
+.sky-frame--portrait img{width:100%;height:100%;object-fit:cover}
+.sky-system{
+  margin-top:clamp(100px,10vw,170px);
+  margin-bottom:clamp(110px,10vw,180px);
+  color:var(--light);
+}
+.sky-system__head{text-align:center;margin-bottom:clamp(65px,6vw,100px)}
+.sky-system__head span{
+  display:inline-flex;align-items:center;gap:16px;
+  font:400 9px/1.4 Inter,sans-serif;letter-spacing:.22em;color:#8e8b87;
+}
+.sky-system__head span:before,.sky-system__head span:after{
+  content:"";display:block;width:42px;height:1px;background:#4a4a4b
+}
+.sky-system__head h2{
+  margin:14px 0 0;font:400 clamp(42px,4.2vw,68px)/1 Playfair Display,serif;
+  letter-spacing:-.035em;color:var(--light)
+}
+.sky-system__row{
+  display:grid;grid-template-columns:minmax(150px,22%) 1fr;
+  gap:clamp(30px,5vw,90px);align-items:center;
+  padding:clamp(34px,3.5vw,58px) 0;border-top:1px solid #27282c
+}
+.sky-system__row:last-child{border-bottom:1px solid #27282c}
+.sky-system__label{display:flex;flex-direction:column;gap:9px}
+.sky-system__label span{font:400 9px/1 Inter,sans-serif;letter-spacing:.2em;color:#666}
+.sky-system__label strong{font:400 10px/1.4 Inter,sans-serif;letter-spacing:.18em;color:#bdb9b4}
+.sky-type{display:flex;align-items:center;gap:42px}
+.sky-type__sample{font:400 clamp(70px,7vw,118px)/.8 Poppins,Inter,sans-serif;color:#f4f1eb}
+.sky-type div{display:flex;gap:34px;align-items:center}
+.sky-type strong{font:500 16px Inter,sans-serif;color:#f4f1eb}
+.sky-type div span{font:400 clamp(18px,1.8vw,28px)/1.35 Inter,sans-serif;color:#c8c4be}
+.sky-colors{display:grid;grid-template-columns:repeat(4,minmax(90px,1fr));gap:16px;max-width:780px}
+.sky-colors span{display:block}
+.sky-colors i{display:block;aspect-ratio:1.5;border-radius:10px;background:var(--sw)}
+.sky-colors small{display:block;margin-top:12px;font:400 9px Inter,sans-serif;letter-spacing:.08em;color:#777}
+.sky-colors .sky-gradient i{background:linear-gradient(90deg,#4f196d,#6d00dd)}
+.sky-icons{display:flex;gap:clamp(14px,2vw,28px);flex-wrap:wrap}
+.sky-icons span{
+  width:54px;height:54px;border-radius:50%;display:grid;place-items:center;
+  background:radial-gradient(circle at 70% 35%,#d8b7ff 0 12%,#8738ee 45%,#5a00d6 75%);
+  color:#f6efff;font:400 22px Inter,sans-serif;box-shadow:0 0 28px rgba(125,50,230,.18)
+}
+@media(max-width:900px){
+  .sky-pair{grid-template-columns:1fr!important}
+  .sky-frame--portrait img{height:auto;object-fit:initial}
+  .sky-system{margin-top:82px;margin-bottom:90px}
+  .sky-system__head{text-align:left;margin-bottom:48px}
+  .sky-system__head span:before,.sky-system__head span:after{display:none}
+  .sky-system__row{grid-template-columns:1fr;gap:26px;padding:32px 0}
+  .sky-type{gap:24px}
+  .sky-type div{gap:16px;flex-direction:column;align-items:flex-start}
+  .sky-colors{grid-template-columns:1fr 1fr;gap:14px}
+  .sky-icons span{width:46px;height:46px}
+}
+
+/* =========================================================
+   SKYHAWK V2 — Check Point sizing + refined Visual System
+   ========================================================= */
+
+/* Major visuals follow the approved Check Point grid and frame rhythm. */
+.sky-gallery{width:calc(100% - (2 * var(--pad)))!important;margin-inline:auto!important}
+.sky-gallery > .cp-frame,
+.sky-gallery > .cp-pair{width:100%!important;max-width:none!important}
+.sky-gallery > .cp-frame{overflow:hidden!important}
+.sky-gallery > .cp-frame:not(.cp-video) img{
+  width:100%!important;height:100%!important;display:block!important;
+  object-fit:cover!important;object-position:center!important;transform:none!important;
+}
+
+/* Same controlled proportions as the approved Check Point case study. */
+.sky-gallery > .cp-frame:nth-child(1){aspect-ratio:2.30/1!important}
+.sky-gallery > .cp-frame:nth-child(3){aspect-ratio:2/1!important}
+.sky-gallery > .cp-frame:nth-child(5){aspect-ratio:2.30/1!important}
+
+/* Video keeps its native wide ratio and black edge treatment. */
+.sky-gallery .cp-video{
+  aspect-ratio:1920/950!important;background:#0f1012!important;overflow:hidden!important
+}
+.sky-gallery .cp-video video{
+  display:block!important;width:calc(100% + 2px)!important;height:100%!important;
+  max-width:none!important;margin-left:-1px!important;object-fit:cover!important;
+  transform:translateZ(0);backface-visibility:hidden
+}
+
+/* Exactly equal two-up frames, independent of source-image proportions. */
+.sky-pair{
+  display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+  gap:var(--cp-gap)!important;align-items:stretch!important
+}
+.sky-pair .cp-frame{aspect-ratio:1/1!important;overflow:hidden!important}
+.sky-pair .cp-frame img{
+  width:100%!important;height:100%!important;object-fit:cover!important;
+  object-position:center!important;display:block!important
+}
+
+/* Visual System: only three intentional dividers. */
+.sky-system__row{border:0!important}
+.sky-system__row--type,
+.sky-system__row--color{border-bottom:1px solid #27282c!important}
+.sky-system__row--icons{border-bottom:1px solid #27282c!important}
+.sky-system__label span{display:none!important}
+
+/* Exact palette from the supplied Skyhawk visual-system artwork. */
+.sky-colors .sky-gradient i{background:linear-gradient(90deg,#4f196d,#6b00dd)!important}
+
+/* Real supplied icon artwork — no generated/recreated symbols. */
+.sky-icons{display:none!important}
+.sky-icons-art{width:min(100%,980px)}
+.sky-icons-art img{
+  display:block;width:100%!important;height:auto!important;object-fit:contain!important;
+  image-rendering:auto;
+}
+
+@media(max-width:900px){
+  .sky-gallery > .cp-frame:nth-child(1),
+  .sky-gallery > .cp-frame:nth-child(3),
+  .sky-gallery > .cp-frame:nth-child(5){aspect-ratio:auto!important}
+  .sky-gallery > .cp-frame:not(.cp-video) img{height:auto!important;object-fit:initial!important}
+  .sky-pair{grid-template-columns:1fr!important}
+  .sky-pair .cp-frame{aspect-ratio:1/1!important}
+  .sky-pair .cp-frame img{height:100%!important;object-fit:cover!important}
+}
+
+
+/* Skyhawk V3 — exact palette and Visual System refinements */
+
+/* Exact supplied palette */
+.sky-colors > span:nth-child(1) i { background:#0f172a !important; }
+.sky-colors > span:nth-child(2) i { background:#6b00dd !important; }
+.sky-colors > span:nth-child(3) i { background:#eaecfb !important; }
+.sky-colors .sky-gradient i {
+  background:linear-gradient(90deg,#0f1960 0%,#6b00dd 100%) !important;
+}
+
+/* Align the real icon strip with the left edge of the swatches above. */
+.sky-system__row--icons .sky-icons-art {
+  margin-left:-40px !important;
+  width:min(calc(100% + 40px),1020px) !important;
+}
+
+/* Keep the intended divider directly under the icon set. */
+.sky-system__row--icons {
+  border-bottom:1px solid #27282c !important;
+}
+
+/* Remove the second divider before Explore and bring that fold upward. */
+.cp-more {
+  border-top:0 !important;
+  margin-top:0 !important;
+  padding-top:clamp(24px,2.2vw,36px) !important;
+}
+.cp-more::before,
+.cp-more::after {
+  display:none !important;
+}
+.sky-system {
+  margin-bottom:0 !important;
+  padding-bottom:clamp(22px,2vw,32px) !important;
+}
+
+@media (max-width:900px) {
+  .sky-system__row--icons .sky-icons-art {
+    margin-left:0 !important;
+    width:100% !important;
+  }
+}
+
+
+/* SKYHAWK V4 — dedicated mobile compositions */
+@media(max-width:900px){
+  .sky-gallery{display:block!important}
+  .sky-gallery > *{margin-top:0!important;margin-bottom:16px!important}
+  .sky-gallery > *:last-child{margin-bottom:0!important}
+  .sky-gallery .cp-pair{
+    display:grid!important;
+    grid-template-columns:1fr!important;
+    gap:16px!important;
+  }
+  .sky-gallery .cp-frame,
+  .sky-gallery .cp-pair .cp-frame{
+    width:100%!important;
+    aspect-ratio:auto!important;
+    overflow:hidden!important;
+  }
+  .sky-gallery .cp-frame:not(.cp-video) img,
+  .sky-gallery .cp-pair .cp-frame img{
+    width:100%!important;
+    height:auto!important;
+    display:block!important;
+    object-fit:initial!important;
+    object-position:initial!important;
+    transform:none!important;
+  }
+  .sky-gallery .cp-video{
+    width:100%!important;
+    aspect-ratio:1920/950!important;
+    background:#0f1012!important;
+    overflow:hidden!important;
+  }
+  .sky-gallery .cp-video video{
+    width:calc(100% + 2px)!important;
+    height:100%!important;
+    max-width:none!important;
+    margin-left:-1px!important;
+    object-fit:cover!important;
+    display:block!important;
+  }
+
+  .sky-system__row{grid-template-columns:1fr!important}
+  .sky-colors{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .sky-icons-art{margin-left:0!important;width:100%!important;max-width:none!important}
+  .sky-icons-art img{width:100%!important;height:auto!important}
+}
+
+/* V5 — mobile icon system: 4 + 3, larger and centered */
+.sky-icons-mobile{display:none}
+@media(max-width:900px){
+  .sky-icons-art--desktop{display:none!important}
+  .sky-icons-mobile{
+    display:grid!important;
+    grid-template-columns:repeat(8,minmax(0,1fr));
+    column-gap:10px;
+    row-gap:20px;
+    align-items:center;
+    width:100%;
+  }
+  .sky-icons-mobile img{
+    width:100%;
+    height:auto;
+    display:block;
+    object-fit:contain;
+  }
+  .sky-icons-mobile img:nth-child(1){grid-column:1 / span 2}
+  .sky-icons-mobile img:nth-child(2){grid-column:3 / span 2}
+  .sky-icons-mobile img:nth-child(3){grid-column:5 / span 2}
+  .sky-icons-mobile img:nth-child(4){grid-column:7 / span 2}
+  .sky-icons-mobile img:nth-child(5){grid-column:2 / span 2}
+  .sky-icons-mobile img:nth-child(6){grid-column:4 / span 2}
+  .sky-icons-mobile img:nth-child(7){grid-column:6 / span 2}
+}
+
+
+/* =========================================================
+   D-FEND V9 — clean project overrides only.
+   All typography / headings / Explore / Contact remain
+   EXACTLY the approved Skyhawk V5 component system.
+   ========================================================= */
+
+/* Gallery: 2 equal 3:2 tiles → wide → 2 equal 3:2 tiles. */
+.df-gallery{
+  display:block!important;
+  width:calc(100% - (2 * var(--pad)))!important;
+  margin-inline:auto!important;
+}
+.df-gallery > * + *{margin-top:var(--cp-gap)!important}
+.df-pair{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+  gap:var(--cp-gap)!important;
+  align-items:stretch!important;
+}
+.df-pair .cp-frame{
+  aspect-ratio:1600/1067!important;
+  width:100%!important;
+  height:auto!important;
+  overflow:hidden!important;
+  background:#dfe7ee!important;
+}
+.df-pair .cp-frame > img{
+  width:100%!important;
+  height:100%!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  display:block!important;
+  transform:none!important;
+  margin:0!important;
+}
+.df-wide{
+  width:100%!important;
+  aspect-ratio:auto!important;
+  height:auto!important;
+  overflow:hidden!important;
+}
+.df-wide > img{
+  width:100%!important;
+  height:auto!important;
+  object-fit:initial!important;
+  display:block!important;
+  transform:none!important;
+  margin:0!important;
+}
+
+/* Exact D-FEND palette from the supplied reference. */
+.sky-colors > span:nth-child(1) i{background:#063a48!important}
+.sky-colors > span:nth-child(2) i{background:#03afe7!important}
+.sky-colors > span:nth-child(3) i{background:#0cf7f5!important}
+.sky-colors > span:nth-child(4) i{background:#efefef!important}
+
+/* D-FEND typography sample only; layout/sizes stay Skyhawk V5. */
+.sky-type__sample{font-family:KoHo,Inter,sans-serif!important}
+.sky-type strong{font-family:KoHo,Inter,sans-serif!important}
+
+/* Four clean supplied icons: same content grid width as the color swatches. */
+.sky-system__row--icons .df-icons-v8{
+  display:grid!important;
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  align-items:center!important;
+  width:min(100%,780px)!important;
+  max-width:780px!important;
+  gap:clamp(22px,2.2vw,34px)!important;
+  margin:0!important;
+}
+.df-icons-v8 span{
+  height:86px!important;
+  min-width:0!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+}
+.df-icons-v8 img{
+  display:block!important;
+  width:auto!important;
+  height:auto!important;
+  max-width:112px!important;
+  max-height:72px!important;
+  object-fit:contain!important;
+  transform:none!important;
+}
+
+/* Do not inherit Skyhawk's icon-art margin correction. */
+.sky-system__row--icons .sky-icons-art{margin-left:0!important}
+
+@media(max-width:900px){
+  .df-pair{
+    grid-template-columns:1fr!important;
+    gap:16px!important;
+  }
+  .df-pair .cp-frame{
+    aspect-ratio:auto!important;
+    height:auto!important;
+  }
+  .df-pair .cp-frame > img{
+    width:100%!important;
+    height:auto!important;
+    object-fit:initial!important;
+  }
+  .sky-system__row--icons .df-icons-v8{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    width:100%!important;
+    max-width:none!important;
+    gap:18px 24px!important;
+  }
+  .df-icons-v8 span{height:78px!important}
+  .df-icons-v8 img{max-width:105px!important;max-height:66px!important}
+}
+
+/* V12 — requested final refinements only */
+
+/* Middle visual: full approved project grid. */
+.df-wide{
+  width:100% !important;
+  margin-left:0 !important;
+  margin-right:0 !important;
+}
+.df-wide > img{
+  width:100% !important;
+  height:auto !important;
+  display:block !important;
+  object-fit:initial !important;
+}
+
+/* Visual System: equal vertical rhythm across rows, matching the approved system. */
+.sky-system__row{
+  min-height:250px !important;
+  padding-top:48px !important;
+  padding-bottom:48px !important;
+  box-sizing:border-box !important;
+  align-items:center !important;
+}
+.sky-system__row--icons{
+  min-height:250px !important;
+}
+
+/* Slightly more separation between Visual System and Explore More Projects. */
+.sky-system{
+  margin-bottom:clamp(110px,8vw,150px) !important;
+}
+
+@media(max-width:900px){
+  .sky-system__row,
+  .sky-system__row--icons{
+    min-height:0 !important;
+    padding-top:34px !important;
+    padding-bottom:34px !important;
+  }
+  .sky-system{
+    margin-bottom:72px !important;
+  }
+}
+
+
+/* IXDEN V1 DESKTOP */
+.ix-gallery{
+  display:grid;
+  gap:16px;
+}
+.ix-gallery .cp-frame{
+  margin:0;
+  width:100%;
+  overflow:hidden;
+  border-radius:18px;
+  background:#17181b;
+}
+.ix-gallery .cp-frame img{
+  display:block;
+  width:100%;
+  height:auto;
+  object-fit:initial;
+  object-position:initial;
+  transform:none;
+}
+.ix-pair{
+  display:grid;
+  grid-template-columns:minmax(0,.72fr) minmax(0,1.28fr);
+  gap:16px;
+  align-items:stretch;
+}
+.ix-pair .cp-frame{
+  height:clamp(430px,42vw,700px);
+}
+.ix-pair .cp-frame img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+.ix-mobile img{object-position:center}
+.ix-collage img{object-position:center}
+
+.ix-colors{
+  grid-template-columns:repeat(3,minmax(110px,1fr)) !important;
+  max-width:610px !important;
+}
+.ix-icons{
+  width:min(100%,860px);
+  overflow:hidden;
+}
+.ix-icons img{
+  display:block;
+  width:100%;
+  height:auto;
+}
+
+/* Keep the approved internal-project type system */
+.cp-intro h2{
+  font-family:"Playfair Display",serif !important;
+  font-size:24px !important;
+  font-weight:400 !important;
+  line-height:1.22 !important;
+  letter-spacing:-.012em !important;
+  text-transform:none !important;
+}
+.cp-intro p{
+  max-width:650px !important;
+  margin:25px auto 0 !important;
+  font-family:Inter,Arial,sans-serif !important;
+  font-size:clamp(15px,1.02vw,17px) !important;
+  font-weight:400 !important;
+  line-height:1.72 !important;
+  letter-spacing:-.008em !important;
+  color:var(--body) !important;
+}
+
+/* Exact homepage cursor behavior */
+.custom-cursor{
+  --cursor-bronze:var(--ui-accent,#b8a792);
+}
+.custom-cursor.is-project .custom-cursor__ring{
+  width:64px !important;
+  height:64px !important;
+  border:1px solid var(--cursor-bronze) !important;
+  background:rgba(15,16,18,.74) !important;
+  backdrop-filter:blur(4px) !important;
+}
+.custom-cursor.is-project .custom-cursor__dot{opacity:0 !important}
+.custom-cursor.is-project .custom-cursor__label{
+  opacity:1 !important;
+  transform:translateY(0) !important;
+  color:var(--cursor-bronze) !important;
+}
+
+@media(max-width:900px){
+  .ix-pair{grid-template-columns:1fr}
+  .ix-pair .cp-frame{height:auto}
+  .ix-pair .cp-frame img{height:auto;object-fit:initial}
+}
+
+/* IXDEN V2 — exact template proportions and palette */
+@media(min-width:901px){
+  .ix-gallery{
+    display:grid !important;
+    grid-template-columns:1fr !important;
+    gap:16px !important;
+  }
+
+  .ix-gallery .cp-frame{
+    width:100% !important;
+    height:auto !important;
+    margin:0 !important;
+    overflow:hidden !important;
+    border-radius:18px !important;
+  }
+
+  .ix-gallery .cp-frame > img{
+    display:block !important;
+    width:100% !important;
+    height:auto !important;
+    object-fit:initial !important;
+    object-position:initial !important;
+    transform:none !important;
+  }
+
+  .ix-pair{
+    display:grid !important;
+    grid-template-columns:1200fr 1800fr !important;
+    gap:16px !important;
+    width:100% !important;
+    align-items:stretch !important;
+  }
+
+  /* Both dedicated bottom exports are 1600px high, so their natural ratios
+     produce one perfectly aligned row without cropping. */
+  .ix-pair .cp-frame{
+    width:100% !important;
+    height:auto !important;
+    aspect-ratio:auto !important;
+  }
+  .ix-pair .cp-frame > img{
+    display:block !important;
+    width:100% !important;
+    height:auto !important;
+    object-fit:initial !important;
+    object-position:initial !important;
+    transform:none !important;
+  }
+
+  .ix-colors{
+    grid-template-columns:repeat(3,minmax(110px,1fr)) !important;
+    max-width:610px !important;
+  }
+  .ix-colors span:nth-child(1) i{background:#FC4D27 !important}
+  .ix-colors span:nth-child(2) i{background:#0D0D1B !important}
+  .ix-colors span:nth-child(3) i{
+    background:#FCFCFC !important;
+    border:1px solid rgba(255,255,255,.12) !important;
+  }
+}
