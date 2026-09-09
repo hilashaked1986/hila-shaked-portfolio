@@ -1,0 +1,70 @@
+
+/* FINAL QA V2 — shared system, intentionally non-destructive to approved artwork */
+:root{
+ --qa-dark:#0f1012;--qa-light:#f4f1eb;--qa-body:#c8c4be;--qa-line:#27282c;
+ --qa-accent:#b8a792;--qa-pad:clamp(22px,3.2vw,58px);--qa-radius:14px;
+ --qa-img-gap:18px;--qa-divider-space:96px;
+}
+.grid-width{width:calc(100% - (2 * var(--qa-pad)))!important;margin-inline:auto!important}
+
+/* Internal intro typography */
+.cp-intro h1{font-family:"Playfair Display",serif!important;font-size:clamp(62px,5.1vw,76px)!important;font-weight:400!important;line-height:.98!important;letter-spacing:-.038em!important;color:var(--qa-light)!important}
+.cp-intro h2{font-family:"Playfair Display",serif!important;font-size:24px!important;font-weight:400!important;line-height:1.22!important;letter-spacing:-.012em!important;color:var(--qa-light)!important}
+.cp-intro p{font-family:Inter,Arial,sans-serif!important;font-size:clamp(15px,1.02vw,17px)!important;font-weight:400!important;line-height:1.72!important;letter-spacing:-.008em!important;color:var(--qa-body)!important}
+
+/* Shared Visual System hierarchy */
+#visual-system-title{font-family:"Playfair Display",serif!important;font-size:clamp(48px,4vw,64px)!important;font-weight:400!important;line-height:1!important;letter-spacing:-.035em!important;color:var(--qa-light)!important}
+.sky-system__eyebrow,.ra-system__eyebrow,.cm-system__head>span,.sky-system__label,.ra-system__label,.cm-system__label,
+.cp-more__title{font-family:Inter,Arial,sans-serif!important;font-size:9px!important;font-weight:400!important;line-height:1.4!important;letter-spacing:.20em!important;text-transform:uppercase!important}
+.sky-system__eyebrow,.ra-system__eyebrow,.cm-system__head>span,.cp-more__title{color:var(--qa-accent)!important}
+.sky-system__label,.ra-system__label,.cm-system__label{color:var(--qa-body)!important}
+
+/* Approved artwork: never crop */
+figure{overflow:hidden}
+figure img,picture img{max-width:100%;height:auto}
+.cp-frame,.sky-frame,.df-frame,.ra-frame,.harmony-frame,.ix-frame,.cm-frame,.t4-frame{border-radius:var(--qa-radius)!important;overflow:hidden!important}
+.cp-frame img,.sky-frame img,.df-frame img,.ra-frame img,.harmony-frame img,.ix-frame img,.cm-frame img,.t4-frame img{
+ width:100%!important;height:auto!important;object-fit:contain!important;object-position:center!important
+}
+/* subtle edge for Skyhawk dark-blue artwork */
+.sky-system img[src*="icon"],.sky-system img[src*="blue"],.sky-system__dark{
+ outline:1px solid rgba(244,241,235,.16);outline-offset:-1px
+}
+
+/* One Explore component everywhere */
+.final-explore{position:relative!important;padding-top:var(--qa-divider-space)!important;margin-top:var(--qa-divider-space)!important;margin-bottom:clamp(100px,8vw,145px)!important}
+.final-explore:before{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:var(--qa-line)}
+.final-explore .cp-more__title{margin:0 0 34px!important}
+.final-explore .cp-more__grid{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:18px!important}
+.final-explore .cp-more__card{display:block!important;text-decoration:none!important;color:var(--qa-light)!important}
+.final-explore .cp-more__image{position:relative!important;display:block!important;aspect-ratio:4/3!important;border-radius:var(--qa-radius)!important;overflow:hidden!important;background:#17181b}
+.final-explore .cp-more__image img{display:block!important;width:100%!important;height:100%!important;object-fit:cover!important;transition:transform .42s ease,filter .42s ease!important}
+.final-explore .cp-more__hover{position:absolute!important;inset:0!important;display:grid!important;place-items:center!important;opacity:0!important;background:rgba(15,16,18,.44)!important;color:var(--qa-light)!important;font:400 9px/1.4 Inter,Arial,sans-serif!important;letter-spacing:.20em!important;transition:opacity .25s ease!important}
+.final-explore .cp-more__card:hover .cp-more__image img{transform:scale(1.025)!important;filter:brightness(.72)!important}
+.final-explore .cp-more__card:hover .cp-more__hover{opacity:1!important}
+.final-explore .cp-more__meta{display:flex!important;flex-direction:column!important;gap:7px!important;padding-top:14px!important}
+.final-explore .cp-more__meta small{font:400 9px/1.4 Inter,Arial,sans-serif!important;letter-spacing:.20em!important;text-transform:uppercase!important;color:rgba(244,241,235,.76)!important}
+.final-explore .cp-more__meta strong{font:400 22px/1 "Playfair Display",serif!important;letter-spacing:-.02em!important;color:var(--qa-light)!important}
+
+/* All interactive controls */
+.site-header a,.contact-v22 a,.contact-final a,.contact-v22__footer a,button{transition:opacity .2s ease,color .2s ease,transform .2s ease!important}
+.site-header a:hover,.contact-v22 a:hover,.contact-final a:hover,.contact-v22__footer a:hover{opacity:.62!important}
+button:hover{opacity:.72!important}
+
+/* one cursor */
+.custom-cursor{--cursor-bronze:var(--qa-accent);position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:0;transition:opacity 180ms ease}
+.custom-cursor.is-visible{opacity:1}
+.custom-cursor__ring,.custom-cursor__dot{position:fixed;top:0;left:0;pointer-events:none;will-change:transform}
+.custom-cursor__ring{display:grid;place-items:center;width:30px;height:30px;border:1px solid var(--cursor-bronze);border-radius:50%;transition:width .34s ease,height .34s ease,background-color .26s ease}
+.custom-cursor__dot{width:3px;height:3px;border-radius:50%;background:var(--cursor-bronze)}
+.custom-cursor__label{opacity:0;font:500 7px/1 Inter,Arial,sans-serif;letter-spacing:.14em;color:var(--cursor-bronze)}
+.custom-cursor.is-interactive .custom-cursor__ring{width:40px;height:40px;background:rgba(184,167,146,.08)}
+.custom-cursor.is-project .custom-cursor__ring{width:64px;height:64px;background:rgba(15,16,18,.74);backdrop-filter:blur(4px)}
+.custom-cursor.is-project .custom-cursor__dot{opacity:0}.custom-cursor.is-project .custom-cursor__label{opacity:1}
+@media(hover:hover) and (pointer:fine){.has-custom-cursor,.has-custom-cursor body,.has-custom-cursor a,.has-custom-cursor button{cursor:none!important}}
+@media(max-width:900px){
+ :root{--qa-divider-space:72px}
+ .cp-intro h1{font-size:54px!important}.cp-intro h2{font-size:21px!important}
+ .final-explore .cp-more__grid{grid-template-columns:1fr!important;gap:32px!important}
+ .final-explore .cp-more__title{margin-bottom:24px!important}
+}
