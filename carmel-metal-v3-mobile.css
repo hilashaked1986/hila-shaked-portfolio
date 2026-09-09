@@ -1,0 +1,257 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Playfair+Display:wght@400&display=swap");
+:root{--dark:#0f1012;--light:#f4f1eb;--body:#c8c4be;--line:#27282c;--accent:#b8a792;--pad:clamp(22px,3.2vw,58px)}
+*{box-sizing:border-box}html{background:var(--dark)}body{margin:0;background:var(--dark);color:var(--light);font-family:Inter,Arial,sans-serif}
+.grid-width{width:calc(100% - (2 * var(--pad)));margin-inline:auto}
+.cp-intro{min-height:470px;padding:112px 0 72px;display:grid;place-items:center;text-align:center}
+.cp-intro__inner{max-width:760px}
+.cp-intro h1{margin:0;font-family:"Playfair Display",serif;font-size:clamp(62px,5.1vw,76px);font-weight:400;line-height:.98;letter-spacing:-.038em}
+.cp-intro h2{margin:17px 0 0;font-family:"Playfair Display",serif;font-size:24px;font-weight:400;line-height:1.22;letter-spacing:-.012em}
+.cp-intro p{max-width:650px;margin:25px auto 0;font-size:clamp(15px,1.02vw,17px);font-weight:400;line-height:1.72;letter-spacing:-.008em;color:var(--body)}
+
+.cm-gallery{display:flex;flex-direction:column;gap:18px}
+.cm-frame{margin:0;overflow:hidden;border-radius:14px;background:#c8ccd0}
+.cm-frame img{display:block;width:100%;height:auto}
+.cm-pair{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.cm-gallery{margin-bottom:clamp(110px,8vw,150px)}
+
+.cm-system{margin-bottom:clamp(110px,8vw,150px)}
+.cm-system__head{text-align:center;margin-bottom:44px}
+.cm-system__head span{display:flex;align-items:center;justify-content:center;gap:16px;font-size:9px;letter-spacing:.25em;color:var(--accent)}
+.cm-system__head span:before,.cm-system__head span:after{content:"";width:42px;height:1px;background:rgba(184,167,146,.45)}
+.cm-system__head h2{margin:8px 0 0;font-family:"Playfair Display",serif;font-size:42px;font-weight:400;letter-spacing:-.03em}
+.cm-system__row{min-height:250px;padding:48px clamp(20px,6vw,110px);display:grid;grid-template-columns:220px 1fr;align-items:center;border-bottom:1px solid var(--line)}
+.cm-system__row:first-of-type{border-top:1px solid var(--line)}
+.cm-system__label{font-size:9px;letter-spacing:.2em;color:rgba(244,241,235,.75)}
+.cm-type{display:flex;align-items:center;gap:34px}.cm-type__aa{font-size:86px;line-height:1}.cm-type div{display:flex;gap:35px;align-items:center}.cm-type strong{font-size:14px;font-weight:400}.cm-type div span{font-size:24px;line-height:1.2}
+.cm-colors{display:flex;gap:28px}.cm-colors span{width:150px;text-align:center}.cm-colors i{display:block;width:150px;height:92px;border-radius:14px;background:var(--sw)}.cm-colors span:first-child i{box-shadow:inset 0 0 0 1px rgba(244,241,235,.16)}.cm-colors small{display:block;margin-top:14px;font-size:9px;letter-spacing:.08em;color:rgba(244,241,235,.55)}
+.cm-icons{display:flex;gap:18px;align-items:center}.cm-icons span{width:94px;height:94px;border:1px solid var(--line);border-radius:14px;display:grid;place-items:center}.cm-icons img{width:62px;height:62px;display:block}
+
+.cp-more{margin-bottom:clamp(110px,8vw,150px)}
+.cp-more__title{font-size:9px!important;letter-spacing:.2em!important}
+.cp-more__meta small{font-size:9px!important;letter-spacing:.2em!important}.cp-more__meta strong{font-family:"Playfair Display",serif!important;font-size:22px!important;font-weight:400!important}
+.cp-more__image img{aspect-ratio:4/3;object-fit:cover}
+
+@media(max-width:900px){
+ .cp-intro{min-height:auto;padding:112px 0 62px}.cp-intro h1{font-size:54px}.cp-intro h2{font-size:21px}
+ .cm-gallery{gap:16px}.cm-pair{grid-template-columns:1fr;gap:16px}
+ .cm-system__row{min-height:0;padding:34px 0;grid-template-columns:1fr;gap:26px}
+ .cm-type__aa{font-size:70px}.cm-type div span{font-size:20px}
+ .cm-colors{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}.cm-colors span,.cm-colors i{width:100%}
+ .cm-icons{display:grid;grid-template-columns:repeat(3,1fr);width:100%}.cm-icons span{width:100%;height:auto;aspect-ratio:1}
+}
+
+
+/* ===== CARMEL METAL V2 — CONSISTENCY RESET ===== */
+:root{
+  --cm-dark:#21202E;
+  --cm-red:#F82541;
+  --cm-gray:#E1E1E1;
+  --ui-accent:#b8a792;
+}
+
+/* BRAND IDENTITY + EXPLORE titles use the same shared bronze everywhere */
+.cm-system__head span,
+.cp-more__title{
+  color:var(--ui-accent) !important;
+  font-family:Inter,Arial,sans-serif !important;
+  font-size:9px !important;
+  font-weight:400 !important;
+  line-height:1.4 !important;
+  letter-spacing:.20em !important;
+  text-transform:uppercase !important;
+}
+.cm-system__head span:before,
+.cm-system__head span:after{
+  background:rgba(184,167,146,.45) !important;
+}
+
+/* Exact Carmel Metal palette from supplied design */
+.cm-colors span:nth-child(1) i{background:#21202E !important}
+.cm-colors span:nth-child(2) i{background:#F82541 !important}
+.cm-colors span:nth-child(3) i{background:#E1E1E1 !important}
+
+/* Exact icon cards extracted from supplied reference — no redrawing */
+.cm-icons{
+  display:flex !important;
+  gap:24px !important;
+  align-items:center !important;
+  flex-wrap:nowrap !important;
+}
+.cm-icons span{
+  width:132px !important;
+  height:132px !important;
+  border:0 !important;
+  border-radius:0 !important;
+  background:none !important;
+  overflow:hidden !important;
+  display:block !important;
+}
+.cm-icons img{
+  display:block !important;
+  width:100% !important;
+  height:100% !important;
+  object-fit:contain !important;
+}
+
+/* Approved Explore More Projects template */
+.cp-more{
+  margin-top:0 !important;
+  margin-bottom:clamp(110px,8vw,150px) !important;
+}
+.cp-more__title{
+  margin:0 0 28px !important;
+}
+.cp-more__grid{
+  display:grid !important;
+  grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+  gap:18px !important;
+}
+.cp-more__card{
+  display:block !important;
+  text-decoration:none !important;
+  color:var(--light) !important;
+}
+.cp-more__image{
+  position:relative !important;
+  display:block !important;
+  overflow:hidden !important;
+  width:100% !important;
+  aspect-ratio:4 / 3 !important;
+  border-radius:0 !important;
+  background:#151619 !important;
+}
+.cp-more__image img{
+  display:block !important;
+  width:100% !important;
+  height:100% !important;
+  object-fit:cover !important;
+  transform:scale(1) !important;
+  transition:transform 420ms ease,filter 420ms ease !important;
+}
+.cp-more__hover{
+  position:absolute !important;
+  inset:0 !important;
+  display:grid !important;
+  place-items:center !important;
+  opacity:0 !important;
+  background:rgba(15,16,18,.45) !important;
+  color:var(--light) !important;
+  font-family:Inter,Arial,sans-serif !important;
+  font-size:9px !important;
+  font-weight:400 !important;
+  letter-spacing:.20em !important;
+  transition:opacity 260ms ease !important;
+}
+.cp-more__card:hover .cp-more__image img{
+  transform:scale(1.025) !important;
+  filter:brightness(.72) !important;
+}
+.cp-more__card:hover .cp-more__hover{opacity:1 !important}
+.cp-more__meta{
+  display:flex !important;
+  flex-direction:column !important;
+  gap:7px !important;
+  padding-top:14px !important;
+}
+.cp-more__meta small{
+  color:rgba(244,241,235,.68) !important;
+  font-family:Inter,Arial,sans-serif !important;
+  font-size:9px !important;
+  font-weight:400 !important;
+  line-height:1.4 !important;
+  letter-spacing:.20em !important;
+  text-transform:uppercase !important;
+}
+.cp-more__meta strong{
+  color:var(--light) !important;
+  font-family:"Playfair Display",serif !important;
+  font-size:22px !important;
+  font-weight:400 !important;
+  line-height:1 !important;
+  letter-spacing:-.02em !important;
+}
+
+@media(max-width:900px){
+  .cm-icons{
+    display:grid !important;
+    grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+    gap:14px !important;
+  }
+  .cm-icons span{
+    width:100% !important;
+    height:auto !important;
+    aspect-ratio:1 / 1 !important;
+  }
+  .cp-more__grid{
+    grid-template-columns:1fr !important;
+    gap:32px !important;
+  }
+}
+
+
+/* ===== CARMEL METAL V3 MOBILE ===== */
+.cm-mobile-gallery{display:none}
+
+@media(max-width:900px){
+  .cm-gallery{display:none !important}
+
+  .cm-mobile-gallery{
+    display:flex !important;
+    flex-direction:column !important;
+    gap:16px !important;
+    width:calc(100% - (2 * var(--pad))) !important;
+    margin:0 auto 72px !important;
+    padding:0 !important;
+  }
+  .cm-mobile-gallery figure{
+    display:block !important;
+    position:static !important;
+    width:100% !important;
+    height:auto !important;
+    min-height:0 !important;
+    aspect-ratio:auto !important;
+    margin:0 !important;
+    padding:0 !important;
+    overflow:hidden !important;
+    border-radius:14px !important;
+    transform:none !important;
+  }
+  .cm-mobile-gallery img{
+    display:block !important;
+    position:static !important;
+    width:100% !important;
+    max-width:100% !important;
+    height:auto !important;
+    min-height:0 !important;
+    aspect-ratio:auto !important;
+    margin:0 !important;
+    padding:0 !important;
+    object-fit:initial !important;
+    object-position:initial !important;
+    transform:none !important;
+  }
+
+  /* Latest global rhythm: imagery -> clean gap -> Visual System, no divider */
+  .cm-system{
+    margin-top:0 !important;
+    padding-top:0 !important;
+    border-top:0 !important;
+  }
+
+  /* Preserve exact approved Carmel palette */
+  .cm-colors span:nth-child(1) i{background:#21202E !important}
+  .cm-colors span:nth-child(2) i{background:#F82541 !important}
+  .cm-colors span:nth-child(3) i{background:#E1E1E1 !important}
+
+  /* Exact supplied icon cards */
+  .cm-icons{
+    display:grid !important;
+    grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+    gap:14px !important;
+  }
+  .cm-icons span{
+    width:100% !important;
+    height:auto !important;
+    aspect-ratio:1 / 1 !important;
+  }
+}
