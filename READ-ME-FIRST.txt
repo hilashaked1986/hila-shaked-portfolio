@@ -1,0 +1,21 @@
+FINAL QA V2
+This package is rebuilt from the last APPROVED version of every project page, not from QA V1.
+
+Fixed:
+• Exactly 3 Explore More Projects cards on every internal page.
+• One identical Explore layout everywhere, with different projects per page.
+• One divider only before Explore on standard internal pages. Tami4 keeps its approved special rhythm.
+• Check Point favicon.
+• Artwork is never cropped by the global QA layer; project-specific approved layouts remain intact.
+• Rounded artwork frames.
+• Skyhawk dark visual-system artwork gets a subtle light edge.
+• D-FEND brand font sample uses KoHo.
+• One shared internal typography/color hierarchy.
+• One shared cursor and VIEW state.
+• Hover states on navigation/contact/buttons and Explore cards.
+• Improved text contrast.
+• Global QA no longer forces gallery grids/aspect ratios, which caused the Red Access/Skyhawk/Harmony cropping and duplicated-looking layouts in QA V1.
+
+UPLOAD:
+Upload all files in this ZIP to the repository ROOT and replace files with the same names.
+Do NOT delete the existing assets folder or project image files.
