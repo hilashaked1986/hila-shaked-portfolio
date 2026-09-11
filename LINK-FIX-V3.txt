@@ -1,0 +1,14 @@
+FINAL QA V3 — homepage link correction
+
+Fixed the homepage project-card destinations explicitly:
+Check Point → checkpoint-v16-mobile.html
+Skyhawk → skyhawk-v5-mobile.html
+D-FEND → dfend-v13-mobile.html
+Carmel Metal → carmel-metal-v3-mobile.html
+Red Access → red-access-v6-mobile.html
+Harmony → harmony-v5-mobile.html
+IXDen → ixden-v8-mobile.html
+Tami4 → tami4-v6-mobile.html
+
+All eight destination HTML files are included in this package.
+Upload all files to repository ROOT and replace same-name files.
