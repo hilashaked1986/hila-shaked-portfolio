@@ -1,0 +1,41 @@
+
+@media(min-width:901px){
+/* artwork: preserve grid width and intrinsic height */
+.cp-frame,.sky-frame,.df-frame,.ra-frame,.harmony-frame,.ix-frame,.cm-frame,.t4-frame,
+.ra-case figure,.harmony-case figure,.sky-case figure,.t4-case figure,.t4-campaign figure{
+height:auto!important;min-height:0!important;max-height:none!important;border-radius:14px!important;overflow:hidden!important}
+.cp-frame img,.sky-frame img,.df-frame img,.ra-frame img,.harmony-frame img,.ix-frame img,.cm-frame img,.t4-frame img,
+.ra-case img,.harmony-case img,.sky-case img,.t4-case img,.t4-campaign img{
+display:block!important;width:100%!important;height:auto!important;max-height:none!important;object-fit:contain!important;object-position:center!important;border-radius:14px!important}
+
+/* Red Access */
+.ra-case,.ra-case__grid,.ra-grid,.ra-work-grid{width:calc(100% - (2 * clamp(22px,3.2vw,58px)))!important;max-width:none!important;margin-inline:auto!important}
+.ra-case .wide,.ra-case__wide,.ra-frame--wide{grid-column:1/-1!important;width:100%!important}
+
+/* no divider before Visual System */
+.sky-system,.ra-system,.df-system,.ix-system,.cm-system,.visual-system,.visual-system-section{border-top:0!important}
+.sky-system:before,.ra-system:before,.df-system:before,.ix-system:before,.cm-system:before,.visual-system:before,.visual-system-section:before{display:none!important}
+
+/* icon frames removed */
+.sky-system__icons,.sky-system__icon-row,.sky-system__icons-wrap,.sky-system__icons-box,.sky-system__iconset,
+.df-system__icons,.ix-system__icons,.cm-system__icons{border:0!important;outline:0!important;box-shadow:none!important}
+.sky-system__icons img,.sky-system__icon-row img,.df-system__icons img,.ix-system__icons img,.cm-system__icons img,
+.df-system__icon,.ix-system__icon,.cm-system__icon,.sky-system__icon{
+border:0!important;outline:0!important;box-shadow:none!important;background:transparent!important;border-radius:0!important;height:auto!important;object-fit:contain!important}
+
+/* Skyhawk: no icon outline; subtle edge only for dark first swatch */
+.sky-system img[src*="icon"],.sky-system img[src*="blue"],.sky-system__dark{outline:0!important}
+.sky-system__swatch:first-of-type,.sky-system__color:first-of-type,.sky-system__colors>*:first-child{box-shadow:inset 0 0 0 1px rgba(244,241,235,.20)!important}
+
+/* BRAND IDENTITY */
+.sky-system__eyebrow,.ra-system__eyebrow,.df-system__eyebrow,.ix-system__eyebrow,.cm-system__eyebrow,.visual-system__eyebrow,.brand-identity{color:#b8a792!important}
+.sky-system__eyebrow:before,.sky-system__eyebrow:after,.ra-system__eyebrow:before,.ra-system__eyebrow:after,
+.df-system__eyebrow:before,.df-system__eyebrow:after,.ix-system__eyebrow:before,.ix-system__eyebrow:after,
+.cm-system__eyebrow:before,.cm-system__eyebrow:after,.visual-system__eyebrow:before,.visual-system__eyebrow:after,
+.brand-identity:before,.brand-identity:after{display:none!important}
+
+/* one centered divider before Explore */
+.final-explore{margin-top:80px!important;padding-top:80px!important;border-top:0!important;position:relative!important}
+.final-explore:before{content:""!important;display:block!important;position:absolute!important;top:0!important;left:0!important;right:0!important;height:1px!important;background:#27282c!important}
+.final-explore .cp-more__title{margin-top:0!important}
+}

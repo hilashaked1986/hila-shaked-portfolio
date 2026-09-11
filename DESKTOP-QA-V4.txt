@@ -1,0 +1,2 @@
+Desktop-only correction pass. Upload all files to repository root, replace same-name files, keep assets.
+Mobile is not targeted by desktop-qa-v4.css (min-width 901px).

@@ -13,6 +13,14 @@
 <link rel="stylesheet" href="ixden-v8-mobile.css">
 <link href="https://fonts.googleapis.com/css2?family=KoHo:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="final-qa-v2.css">
+<link rel="stylesheet" href="desktop-qa-v4.css">
+<style>
+@media(min-width:901px){
+  .ix-system__icons > *:not(:first-child),
+  .ix-system__icon-rows > *:not(:first-child){display:none!important}
+  .ix-system__icons,.ix-system__icon-rows{border:0!important;outline:0!important;box-shadow:none!important}
+}
+</style>
 </head>
 <body>
 <header class="site-header" data-header>
@@ -135,5 +143,6 @@
 <div class="custom-cursor" aria-hidden="true"><span class="custom-cursor__ring"><span class="custom-cursor__label">VIEW</span></span><span class="custom-cursor__dot"></span></div>
 <script src="ixden-v8-mobile.js"></script>
 <script src="final-qa-v2.js"></script>
+<script src="desktop-cursor-fix-v4.js"></script>
 </body>
 </html>
