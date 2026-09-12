@@ -2213,3 +2213,25 @@ main{
     z-index:1!important;
   }
 }
+
+
+/* =========================================================
+   MOBILE RAIL FINAL FIX — remove backing completely
+   The marker stays visible, but cannot cover SELECTED WORK.
+   ========================================================= */
+@media (max-width:900px){
+  .page-rail__marker,
+  .page-rail.is-light .page-rail__marker{
+    width:auto!important;
+    min-width:0!important;
+    max-width:none!important;
+    padding:0!important;
+    background:transparent!important;
+    box-shadow:none!important;
+  }
+
+  .page-rail__index,
+  .page-rail__label{
+    text-shadow:0 1px 2px rgba(15,16,18,.45);
+  }
+}
