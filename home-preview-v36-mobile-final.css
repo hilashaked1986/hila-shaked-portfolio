@@ -2126,3 +2126,39 @@ main{
     text-align:center !important;
   }
 }
+
+/* FINAL APPROVED CTA */
+.site-cta,
+.site-cta .cta-label,
+.site-cta .arrow-mark{
+  color:#d8be9d!important;
+}
+.site-cta .cta-label{
+  font-weight:600!important;
+  letter-spacing:.26em!important;
+}
+.site-cta .arrow-mark{
+  fill:currentColor!important;
+}
+.site-cta:hover,
+.site-cta:focus-visible,
+.site-cta:hover .cta-label,
+.site-cta:focus-visible .cta-label,
+.site-cta:hover .arrow-mark,
+.site-cta:focus-visible .arrow-mark{
+  color:var(--ui-ivory,#f4f1eb)!important;
+}
+
+
+/* FINAL MOBILE-ONLY HERO LIGHT */
+@media (max-width:520px){
+  .hero-image{
+    background-position:62% center!important;
+    filter:brightness(1.08) contrast(.98)!important;
+  }
+  .hero-vignette{
+    background:
+      linear-gradient(90deg,rgba(15,16,18,.24),rgba(15,16,18,.01) 76%),
+      linear-gradient(180deg,rgba(15,16,18,.06),transparent 55%,rgba(15,16,18,.17))!important;
+  }
+}

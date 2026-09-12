@@ -206,6 +206,7 @@
   </div>
 
   <script src="script.js"></script>
+  <script src="cursor-final-v5.js"></script>
 
   <script>
     (() => {
@@ -226,7 +227,13 @@
         const railRect = rail.getBoundingClientRect();
         const anchorRect = anchor.getBoundingClientRect();
         const labelCenter = label.offsetTop + (label.offsetHeight / 2);
-        const desiredTop = anchorRect.top + (anchorRect.height / 2) - railRect.top - labelCenter;
+        const isSmallMobileHero =
+          window.matchMedia('(max-width:520px)').matches &&
+          section.classList.contains('hero');
+
+        const desiredTop = isSmallMobileHero
+          ? anchorRect.top - railRect.top
+          : anchorRect.top + (anchorRect.height / 2) - railRect.top - labelCenter;
         const minimumTop = 10;
         const maximumTop = Math.max(minimumTop, rail.clientHeight - marker.offsetHeight - 10);
         const clampedTop = Math.min(Math.max(desiredTop, minimumTop), maximumTop);
