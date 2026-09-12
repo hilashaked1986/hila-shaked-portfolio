@@ -738,3 +738,104 @@
     padding-top:0!important;
   }
 }
+
+
+/* =========================================================
+   MOBILE FINAL SPACING SYSTEM
+   One spacing source only. Carmel Metal rhythm is the reference.
+   ========================================================= */
+@media (max-width:900px){
+
+  :root{
+    --mobile-gap-to-brand:72px;
+    --mobile-gap-to-explore:72px;
+  }
+
+  /* ---------- 1) END OF PROJECT IMAGERY -> BRAND IDENTITY ---------- */
+  /* Remove old accumulated spacing from image galleries */
+  .ra-gallery,
+  .sky-gallery,
+  .df-gallery,
+  .ix-gallery,
+  .ix-mobile-gallery,
+  .cm-gallery,
+  .cm-mobile-gallery{
+    padding-bottom:0!important;
+    margin-bottom:0!important;
+  }
+
+  /* One and only one gap before Brand Identity */
+  .ra-gallery + .ra-system,
+  .sky-gallery + .sky-system,
+  .df-gallery + .sky-system,
+  .ix-gallery + .sky-system,
+  .ix-mobile-gallery + .sky-system,
+  .cm-gallery + .cm-system,
+  .cm-mobile-gallery + .cm-system{
+    margin-top:var(--mobile-gap-to-brand)!important;
+    padding-top:0!important;
+  }
+
+  /* ---------- 2) BRAND IDENTITY -> EXPLORE MORE ---------- */
+  /* Remove accumulated bottom spacing on visual-system sections */
+  .ra-system,
+  .sky-system,
+  .cm-system{
+    margin-bottom:0!important;
+    padding-bottom:0!important;
+    border-bottom:0!important;
+  }
+
+  /* One and only one divider + one consistent rhythm before Explore */
+  .ra-system + .final-explore,
+  .sky-system + .final-explore,
+  .cm-system + .final-explore{
+    margin-top:var(--mobile-gap-to-explore)!important;
+    padding-top:var(--mobile-gap-to-explore)!important;
+  }
+
+  /* ---------- 3) PAGES WITHOUT BRAND IDENTITY ---------- */
+  .cp-gallery.grid-width:not(.sky-gallery):not(.df-gallery):not(.ix-gallery),
+  .gallery.grid,
+  .t4-case{
+    padding-bottom:0!important;
+    margin-bottom:0!important;
+    border-bottom:0!important;
+  }
+
+  .cp-gallery.grid-width:not(.sky-gallery):not(.df-gallery):not(.ix-gallery) + .final-explore,
+  .gallery.grid + .final-explore,
+  .t4-case + .final-explore{
+    margin-top:var(--mobile-gap-to-explore)!important;
+    padding-top:var(--mobile-gap-to-explore)!important;
+  }
+
+  /* ---------- 4) TAMI4: exactly one divider before Explore ---------- */
+  .t4-case::before,
+  .t4-case::after{
+    display:none!important;
+    content:none!important;
+  }
+
+  /* Explore owns the divider everywhere */
+  .final-explore{
+    position:relative!important;
+    border:0!important;
+  }
+
+  .final-explore::before{
+    content:""!important;
+    display:block!important;
+    position:absolute!important;
+    left:0!important;
+    right:0!important;
+    top:0!important;
+    height:1px!important;
+    background:var(--mobile-line,#27282c)!important;
+  }
+
+  .final-explore::after{
+    display:none!important;
+    content:none!important;
+  }
+}
