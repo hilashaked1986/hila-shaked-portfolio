@@ -8,9 +8,10 @@
   <link rel="icon" href="assets/favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
-  <link rel="stylesheet" href="home-preview-v36-mobile-final.css?v=cta-final-approved" />
+  <link rel="stylesheet" href="home-preview-v36-mobile-final.css" />
+<link rel="stylesheet" href="desktop-final-v5.css">
 </head>
 <body>
   <header class="site-header" data-header>
@@ -206,7 +207,6 @@
   </div>
 
   <script src="script.js"></script>
-  <script src="cursor-final-v5.js"></script>
 
   <script>
     (() => {
@@ -227,13 +227,7 @@
         const railRect = rail.getBoundingClientRect();
         const anchorRect = anchor.getBoundingClientRect();
         const labelCenter = label.offsetTop + (label.offsetHeight / 2);
-        const isSmallMobileHero =
-          window.matchMedia('(max-width:520px)').matches &&
-          section.classList.contains('hero');
-
-        const desiredTop = isSmallMobileHero
-          ? anchorRect.top - railRect.top
-          : anchorRect.top + (anchorRect.height / 2) - railRect.top - labelCenter;
+        const desiredTop = anchorRect.top + (anchorRect.height / 2) - railRect.top - labelCenter;
         const minimumTop = 10;
         const maximumTop = Math.max(minimumTop, rail.clientHeight - marker.offsetHeight - 10);
         const clampedTop = Math.min(Math.max(desiredTop, minimumTop), maximumTop);
@@ -273,60 +267,7 @@
     })();
   </script>
 
-  <script>
-    (() => {
-      const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
-      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-      const cursor = document.querySelector('.custom-cursor');
-      if (!cursor || !finePointer.matches) return;
-
-      const ring = cursor.querySelector('.custom-cursor__ring');
-      const dot = cursor.querySelector('.custom-cursor__dot');
-      let mouseX = window.innerWidth / 2;
-      let mouseY = window.innerHeight / 2;
-      let ringX = mouseX;
-      let ringY = mouseY;
-      let visible = false;
-      let frame;
-
-      document.documentElement.classList.add('has-custom-cursor');
-
-      const render = () => {
-        const ease = reducedMotion.matches ? 1 : 0.18;
-        ringX += (mouseX - ringX) * ease;
-        ringY += (mouseY - ringY) * ease;
-        ring.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%)`;
-        dot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
-        frame = requestAnimationFrame(render);
-      };
-
-      const setInteractiveState = (target) => {
-        const project = target.closest('.work-card-v5');
-        const interactive = target.closest('a, button, [role="button"]');
-        cursor.classList.toggle('is-project', Boolean(project));
-        cursor.classList.toggle('is-interactive', Boolean(interactive) && !project);
-      };
-
-      window.addEventListener('mousemove', (event) => {
-        mouseX = event.clientX;
-        mouseY = event.clientY;
-        if (!visible) {
-          visible = true;
-          cursor.classList.add('is-visible');
-        }
-        setInteractiveState(event.target);
-      }, { passive: true });
-
-      document.addEventListener('mouseleave', () => cursor.classList.remove('is-visible'));
-      document.addEventListener('mouseenter', () => {
-        if (visible) cursor.classList.add('is-visible');
-      });
-      window.addEventListener('blur', () => cursor.classList.remove('is-visible'));
-
-      frame = requestAnimationFrame(render);
-      window.addEventListener('pagehide', () => cancelAnimationFrame(frame), { once: true });
-    })();
-  </script>
+  
 
   <script>
     (() => {
@@ -435,6 +376,6 @@
       });
     })();
   </script>
-
+<script src="cursor-final-v5.js"></script>
 </body>
 </html>
