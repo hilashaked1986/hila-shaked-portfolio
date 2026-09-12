@@ -7,6 +7,10 @@
 
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  const fade = document.createElement('div');
+  fade.className = 'project-page-fade';
+  document.body.appendChild(fade);
+
   cards.forEach(card => {
     card.addEventListener('click', (event) => {
       if (reduced) return;
@@ -15,37 +19,16 @@
       if (event.button !== 0) return;
 
       const href = card.getAttribute('href');
-      const img = card.querySelector('figure img');
-      if (!href || !img) return;
+      if (!href || href === '#') return;
 
       event.preventDefault();
 
-      const rect = card.getBoundingClientRect();
-      const overlay = document.createElement('div');
-      overlay.className = 'project-transition-overlay';
-
-      const clone = img.cloneNode(true);
-      clone.removeAttribute('loading');
-      clone.removeAttribute('decoding');
-      overlay.appendChild(clone);
-
-      Object.assign(overlay.style, {
-        left: rect.left + 'px',
-        top: rect.top + 'px',
-        width: rect.width + 'px',
-        height: rect.height + 'px'
-      });
-
-      document.body.appendChild(overlay);
-      document.body.classList.add('project-transitioning');
-
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => overlay.classList.add('is-expanding'));
-      });
+      card.classList.add('is-leaving');
+      document.body.classList.add('project-fade-leaving');
 
       window.setTimeout(() => {
-        window.location.href = href;
-      }, 520);
+        window.location.assign(href);
+      }, 310);
     });
   });
 })();
