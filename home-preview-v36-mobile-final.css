@@ -2126,36 +2126,3 @@ main{
     text-align:center !important;
   }
 }
-
-
-/* =========================================================
-   OPTIONAL DESKTOP PROJECT TRANSITION V2
-   subtle card response + short fade to dark
-   Remove this block + project-transition.js to disable.
-   ========================================================= */
-@media (min-width:901px){
-  .work-card-v5{
-    transition:transform .22s cubic-bezier(.22,.8,.2,1),
-               opacity .22s ease!important;
-    transform-origin:center center;
-  }
-
-  .work-card-v5.is-leaving{
-    transform:scale(.992)!important;
-    opacity:.94!important;
-  }
-
-  .project-page-fade{
-    position:fixed;
-    inset:0;
-    z-index:9999;
-    background:#0f1012;
-    opacity:0;
-    pointer-events:none;
-    transition:opacity .30s cubic-bezier(.4,0,.2,1);
-  }
-
-  body.project-fade-leaving .project-page-fade{
-    opacity:1;
-  }
-}
