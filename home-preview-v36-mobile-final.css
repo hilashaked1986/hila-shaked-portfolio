@@ -2126,3 +2126,34 @@ main{
     text-align:center !important;
   }
 }
+
+
+/* =========================================================
+   FINAL CTA EMPHASIS — DESKTOP + MOBILE
+   SELECTED WORK + VIEW RESUME
+   ========================================================= */
+.site-cta .cta-label{
+  font-weight:500!important;
+  color:#c5b39d!important;
+}
+
+.site-cta{
+  color:#c5b39d!important;
+}
+
+.site-cta:hover,
+.site-cta:focus-visible{
+  color:var(--ui-ivory,#f4f1eb)!important;
+}
+
+
+/* =========================================================
+   MOBILE RAIL — tighter marker background
+   Prevent the initial 01 marker background from covering the S in SELECTED WORK.
+   ========================================================= */
+@media (max-width:900px){
+  .page-rail__marker{
+    padding-left:3px!important;
+    padding-right:3px!important;
+  }
+}
