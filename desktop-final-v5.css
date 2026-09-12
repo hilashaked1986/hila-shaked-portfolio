@@ -647,3 +647,77 @@
     color:var(--mobile-contact-ink)!important;
   }
 }
+
+
+/* =========================================================
+   MOBILE FINAL LAST PATCH
+   Harmony underline/contact gap + IXDen 3x2 icons + Tami4 divider/gap
+   ========================================================= */
+@media (max-width:900px){
+
+  /* HARMONY / EXPLORE: never inherit browser link underline/visited purple */
+  .final-explore .cp-more__card,
+  .final-explore .cp-more__card:link,
+  .final-explore .cp-more__card:visited,
+  .final-explore .cp-more__card:hover,
+  .final-explore .cp-more__card:active,
+  .final-explore .cp-more__meta,
+  .final-explore .cp-more__meta strong,
+  .final-explore .cp-more__meta small{
+    text-decoration:none!important;
+    border-bottom:0!important;
+    box-shadow:none!important;
+    background-image:none!important;
+  }
+
+  .final-explore .cp-more__card,
+  .final-explore .cp-more__card:visited{
+    color:var(--mobile-light)!important;
+  }
+
+  /* Keep a real, consistent gap between last Explore card and Contact */
+  .final-explore{
+    margin-bottom:72px!important;
+  }
+
+  /* IXDEN: use a dedicated 3x2 crop of the SAME approved icon artwork on mobile */
+  .ix-icons.ix-icons--single{
+    width:100%!important;
+    max-width:520px!important;
+    margin:0!important;
+  }
+
+  .ix-icons.ix-icons--single img{
+    content:url("ixden-icons-mobile.png")!important;
+    display:block!important;
+    width:100%!important;
+    height:auto!important;
+    max-width:520px!important;
+    margin:0!important;
+    object-fit:contain!important;
+  }
+
+  .sky-system__row--icons{
+    padding-bottom:38px!important;
+    overflow:visible!important;
+  }
+
+  /* TAMI4: remove its old built-in divider and all accumulated bottom spacing.
+     The shared Explore divider is the ONLY divider. */
+  .t4-case{
+    padding-bottom:0!important;
+    margin-bottom:0!important;
+    border-bottom:0!important;
+  }
+
+  .t4-case::after,
+  .t4-case::before{
+    display:none!important;
+    content:none!important;
+  }
+
+  .t4-case + .final-explore{
+    margin-top:72px!important;
+    padding-top:72px!important;
+  }
+}
