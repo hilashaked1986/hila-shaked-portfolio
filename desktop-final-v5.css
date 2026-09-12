@@ -238,3 +238,412 @@
     padding-top:var(--qa-no-system-gap)!important;
   }
 }
+
+
+/* =========================================================
+   FINAL MOBILE QA — shared system
+   Applies only <= 900px. Desktop remains unchanged.
+   ========================================================= */
+@media (max-width:900px){
+
+  :root{
+    --mobile-bronze:#b8a792;
+    --mobile-light:#f4f1eb;
+    --mobile-body:#c8c4be;
+    --mobile-line:#27282c;
+    --mobile-contact-bg:#f4f0eb;
+    --mobile-contact-ink:#171719;
+    --mobile-section-gap:72px;
+  }
+
+  /* ---------- MICRO TITLES ---------- */
+  .cp-more__title,
+  .ra-system__head > span,
+  .sky-system__head > span,
+  .cm-system__head > span,
+  .t4-index{
+    color:var(--mobile-bronze)!important;
+    font-family:Inter,Arial,sans-serif!important;
+    font-size:9px!important;
+    font-weight:400!important;
+    line-height:1.4!important;
+    letter-spacing:.20em!important;
+    text-transform:uppercase!important;
+  }
+
+  /* ---------- BRAND IDENTITY ---------- */
+  .ra-system__head,
+  .sky-system__head,
+  .cm-system__head{
+    text-align:left!important;
+    justify-items:start!important;
+    margin-bottom:44px!important;
+  }
+
+  .ra-system__head > span,
+  .sky-system__head > span,
+  .cm-system__head > span{
+    display:block!important;
+    width:100%!important;
+    text-align:left!important;
+    justify-content:flex-start!important;
+  }
+
+  .ra-system__head > span::before,
+  .ra-system__head > span::after,
+  .sky-system__head > span::before,
+  .sky-system__head > span::after,
+  .cm-system__head > span::before,
+  .cm-system__head > span::after{
+    display:none!important;
+    content:none!important;
+  }
+
+  .ra-system__head h2,
+  .sky-system__head h2,
+  .cm-system__head h2{
+    text-align:left!important;
+  }
+
+  /* Visual System always starts cleanly — no divider above it */
+  .ra-system,
+  .sky-system,
+  .cm-system{
+    border-top:0!important;
+  }
+
+  .ra-system::before,
+  .sky-system::before,
+  .cm-system::before{
+    display:none!important;
+    content:none!important;
+  }
+
+  /* Keep a clean mobile gap from project imagery to Visual System */
+  .ra-gallery + .ra-system,
+  .sky-gallery + .sky-system,
+  .df-gallery + .sky-system,
+  .ix-mobile-gallery + .sky-system,
+  .cm-mobile-gallery + .cm-system,
+  .cm-gallery + .cm-system{
+    margin-top:var(--mobile-section-gap)!important;
+    padding-top:0!important;
+  }
+
+  /* ---------- EXPLORE MORE PROJECTS ---------- */
+  .final-explore{
+    width:calc(100% - (2 * var(--pad,22px)))!important;
+    margin-left:auto!important;
+    margin-right:auto!important;
+    position:relative!important;
+    border:0!important;
+    padding-left:0!important;
+    padding-right:0!important;
+  }
+
+  .final-explore::before{
+    content:""!important;
+    display:block!important;
+    position:absolute!important;
+    left:0!important;
+    right:0!important;
+    top:0!important;
+    height:1px!important;
+    background:var(--mobile-line)!important;
+  }
+
+  .final-explore::after{
+    display:none!important;
+    content:none!important;
+  }
+
+  /* same distance before and after the divider */
+  .ra-system + .final-explore,
+  .sky-system + .final-explore,
+  .cm-system + .final-explore,
+  .cp-gallery + .final-explore,
+  .gallery.grid + .final-explore,
+  .t4-case + .final-explore{
+    margin-top:var(--mobile-section-gap)!important;
+    padding-top:var(--mobile-section-gap)!important;
+  }
+
+  /* remove inherited extra bottom lines that can create a double divider */
+  .ra-system__row:last-child,
+  .sky-system__row:last-child,
+  .cm-system__row:last-child,
+  .gallery.grid,
+  .cp-gallery,
+  .t4-case{
+    border-bottom:0!important;
+  }
+
+  .final-explore .cp-more__title{
+    margin:0 0 24px!important;
+    color:var(--mobile-bronze)!important;
+  }
+
+  /* Harmony + every other page: one consistent mobile Explore stack */
+  .final-explore .cp-more__grid{
+    display:grid!important;
+    grid-template-columns:1fr!important;
+    gap:34px!important;
+    width:100%!important;
+  }
+
+  .final-explore .cp-more__card{
+    display:block!important;
+    width:100%!important;
+    min-width:0!important;
+  }
+
+  .final-explore .cp-more__image{
+    display:block!important;
+    width:100%!important;
+    aspect-ratio:4/3!important;
+    overflow:hidden!important;
+    border-radius:14px!important;
+  }
+
+  .final-explore .cp-more__image > img{
+    display:block!important;
+    width:100%!important;
+    height:100%!important;
+    object-fit:cover!important;
+  }
+
+  .final-explore .cp-more__meta{
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:flex-start!important;
+    gap:7px!important;
+    padding-top:14px!important;
+  }
+
+  .final-explore .cp-more__meta small{
+    margin:0!important;
+    font-family:Inter,Arial,sans-serif!important;
+    font-size:9px!important;
+    font-weight:400!important;
+    line-height:1.4!important;
+    letter-spacing:.20em!important;
+    text-transform:uppercase!important;
+    color:rgba(244,241,235,.68)!important;
+  }
+
+  .final-explore .cp-more__meta strong{
+    margin:0!important;
+    font-family:"Playfair Display",serif!important;
+    font-size:22px!important;
+    font-weight:400!important;
+    line-height:1!important;
+    letter-spacing:-.02em!important;
+    color:var(--mobile-light)!important;
+  }
+
+  /* ---------- IXDEN ICON SET ---------- */
+  /* The final IXDen HTML contains one original icon strip only.
+     Keep it in normal document flow so the Explore divider can never overlap it. */
+  .ix-icons.ix-icons--single{
+    display:block!important;
+    position:static!important;
+    width:100%!important;
+    max-width:100%!important;
+    height:auto!important;
+    min-height:0!important;
+    aspect-ratio:auto!important;
+    margin:0!important;
+    overflow:visible!important;
+    transform:none!important;
+    border:0!important;
+    background:transparent!important;
+  }
+
+  .ix-icons.ix-icons--single::before,
+  .ix-icons.ix-icons--single::after{
+    display:none!important;
+    content:none!important;
+  }
+
+  .ix-icons.ix-icons--single img{
+    display:block!important;
+    position:static!important;
+    width:100%!important;
+    max-width:100%!important;
+    height:auto!important;
+    object-fit:contain!important;
+    transform:none!important;
+  }
+
+  .sky-system__row--icons{
+    height:auto!important;
+    min-height:0!important;
+    overflow:visible!important;
+    padding-bottom:34px!important;
+  }
+
+  /* IXDen: guarantee clean space below icon artwork before the divider */
+  .ix-icons.ix-icons--single{
+    margin-bottom:0!important;
+  }
+
+  /* ---------- CONTACT — IDENTICAL ON EVERY INTERNAL PAGE ---------- */
+  .contact-v22{
+    background:var(--mobile-contact-bg)!important;
+    color:var(--mobile-contact-ink)!important;
+    min-height:0!important;
+  }
+
+  .contact-v22__inner{
+    width:100%!important;
+    min-height:0!important;
+    padding:68px 24px 62px!important;
+    display:flex!important;
+    justify-content:center!important;
+    align-items:flex-start!important;
+  }
+
+  .contact-final{
+    position:static!important;
+    display:grid!important;
+    grid-template-columns:1fr!important;
+    justify-items:center!important;
+    align-items:start!important;
+    gap:30px!important;
+    width:min(100%,430px)!important;
+    height:auto!important;
+    margin:0 auto!important;
+    padding:0!important;
+    transform:none!important;
+    text-align:center!important;
+    opacity:1!important;
+    visibility:visible!important;
+  }
+
+  .contact-final__left,
+  .contact-final__right{
+    position:static!important;
+    width:100%!important;
+    height:auto!important;
+    display:grid!important;
+    justify-items:center!important;
+    align-items:start!important;
+    text-align:center!important;
+  }
+
+  .contact-final__left{
+    grid-template-rows:auto!important;
+    gap:14px!important;
+  }
+
+  .contact-final__label{
+    position:static!important;
+    width:100%!important;
+    margin:0!important;
+    padding:0!important;
+    font-family:Inter,Arial,sans-serif!important;
+    font-size:8px!important;
+    font-weight:500!important;
+    line-height:18px!important;
+    letter-spacing:.25em!important;
+    text-transform:uppercase!important;
+    color:#7a766f!important;
+    text-align:center!important;
+  }
+
+  .contact-final__word{
+    position:static!important;
+    display:block!important;
+    width:100%!important;
+    margin:0!important;
+    padding:0!important;
+    font-family:"Playfair Display",serif!important;
+    font-size:clamp(58px,15vw,72px)!important;
+    font-weight:400!important;
+    line-height:.86!important;
+    letter-spacing:-.046em!important;
+    color:var(--mobile-contact-ink)!important;
+    white-space:nowrap!important;
+    text-align:center!important;
+  }
+
+  .contact-final__word--lets,
+  .contact-final__word--talk{
+    grid-row:auto!important;
+  }
+
+  .contact-final__separator{
+    display:block!important;
+    width:86px!important;
+    height:1px!important;
+    margin:2px auto 0!important;
+    background:var(--mobile-contact-ink)!important;
+    opacity:.5!important;
+  }
+
+  .contact-final__right{
+    grid-template-rows:auto!important;
+    gap:13px!important;
+  }
+
+  .contact-final__email-label,
+  .contact-final__email,
+  .contact-final__phone-label,
+  .contact-final__phone,
+  .contact-final__small-divider{
+    position:static!important;
+    grid-row:auto!important;
+    left:auto!important;
+    top:auto!important;
+    align-self:auto!important;
+    justify-self:center!important;
+    margin-left:auto!important;
+    margin-right:auto!important;
+    text-align:center!important;
+  }
+
+  .contact-final__right a{
+    display:inline-block!important;
+    max-width:100%!important;
+    margin:0!important;
+    font-family:Inter,Arial,sans-serif!important;
+    font-size:15px!important;
+    font-weight:400!important;
+    line-height:1.2!important;
+    letter-spacing:-.015em!important;
+    color:var(--mobile-contact-ink)!important;
+    overflow-wrap:anywhere!important;
+    text-align:center!important;
+  }
+
+  .contact-final__small-divider{
+    display:block!important;
+    width:38px!important;
+    height:1px!important;
+    margin-top:8px!important;
+    margin-bottom:8px!important;
+    background:var(--mobile-bronze)!important;
+    opacity:.68!important;
+  }
+
+  .contact-v22__footer{
+    width:100%!important;
+    padding:22px 24px 30px!important;
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:center!important;
+    justify-content:center!important;
+    gap:28px!important;
+    text-align:center!important;
+    font-family:Inter,Arial,sans-serif!important;
+    font-size:8px!important;
+    letter-spacing:.14em!important;
+    color:var(--mobile-contact-ink)!important;
+  }
+
+  .contact-v22__footer > *{
+    margin:0 auto!important;
+    text-align:center!important;
+    color:var(--mobile-contact-ink)!important;
+  }
+}
