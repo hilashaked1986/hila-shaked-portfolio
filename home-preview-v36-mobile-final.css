@@ -2166,3 +2166,50 @@ main{
 .site-cta:focus-visible .arrow-mark{
   color:var(--ui-ivory,#f4f1eb)!important;
 }
+
+
+/* =========================================================
+   FINAL CTA + MOBILE RAIL FIX
+   ========================================================= */
+
+/* Stronger champagne-bronze CTA — desktop + mobile */
+.site-cta,
+.site-cta .cta-label,
+.site-cta .arrow-mark{
+  color:#d8be9d!important;
+}
+.site-cta .cta-label{
+  font-weight:600!important;
+  letter-spacing:.26em!important;
+}
+.site-cta .arrow-mark{
+  fill:currentColor!important;
+}
+.site-cta:hover,
+.site-cta:focus-visible,
+.site-cta:hover .cta-label,
+.site-cta:focus-visible .cta-label,
+.site-cta:hover .arrow-mark,
+.site-cta:focus-visible .arrow-mark{
+  color:var(--ui-ivory,#f4f1eb)!important;
+}
+
+/* Mobile only: make the rail marker's black backing hug 01/WORK,
+   so it cannot cover the first letter of SELECTED WORK. */
+@media (max-width:900px){
+  .page-rail__marker{
+    width:44px!important;
+    min-width:44px!important;
+    max-width:44px!important;
+    box-sizing:border-box!important;
+    padding:8px 2px!important;
+    overflow:visible!important;
+    background:rgba(15,16,18,.96)!important;
+  }
+
+  .page-rail__index,
+  .page-rail__label{
+    position:relative!important;
+    z-index:1!important;
+  }
+}
