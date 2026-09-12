@@ -2127,7 +2127,52 @@ main{
   }
 }
 
-/* FINAL APPROVED CTA */
+
+/* =========================================================
+   MOBILE RAIL — tighter marker background
+   ========================================================= */
+@media (max-width:900px){
+  .page-rail__marker{
+    padding-left:3px!important;
+    padding-right:3px!important;
+  }
+}
+
+
+/* =========================================================
+   FINAL CTA EMPHASIS V2 — clearly more visible
+   SELECTED WORK + VIEW RESUME / desktop + mobile
+   ========================================================= */
+.site-cta{
+  color:#d2b99b!important;
+}
+
+.site-cta .cta-label{
+  font-weight:600!important;
+  color:#d2b99b!important;
+  letter-spacing:.26em!important;
+}
+
+.site-cta .arrow-mark{
+  color:#d2b99b!important;
+  fill:currentColor!important;
+}
+
+.site-cta:hover,
+.site-cta:focus-visible,
+.site-cta:hover .cta-label,
+.site-cta:focus-visible .cta-label,
+.site-cta:hover .arrow-mark,
+.site-cta:focus-visible .arrow-mark{
+  color:var(--ui-ivory,#f4f1eb)!important;
+}
+
+
+/* =========================================================
+   FINAL CTA + MOBILE RAIL FIX
+   ========================================================= */
+
+/* Stronger champagne-bronze CTA — desktop + mobile */
 .site-cta,
 .site-cta .cta-label,
 .site-cta .arrow-mark{
@@ -2149,16 +2194,66 @@ main{
   color:var(--ui-ivory,#f4f1eb)!important;
 }
 
-
-/* FINAL MOBILE-ONLY HERO LIGHT */
-@media (max-width:520px){
-  .hero-image{
-    background-position:62% center!important;
-    filter:brightness(1.08) contrast(.98)!important;
+/* Mobile only: make the rail marker's black backing hug 01/WORK,
+   so it cannot cover the first letter of SELECTED WORK. */
+@media (max-width:900px){
+  .page-rail__marker{
+    width:44px!important;
+    min-width:44px!important;
+    max-width:44px!important;
+    box-sizing:border-box!important;
+    padding:8px 2px!important;
+    overflow:visible!important;
+    background:rgba(15,16,18,.96)!important;
   }
+
+  .page-rail__index,
+  .page-rail__label{
+    position:relative!important;
+    z-index:1!important;
+  }
+}
+
+/* =========================================================
+   MOBILE HERO FINAL — rail clearance + slightly clearer light
+   ========================================================= */
+@media (max-width:520px){
+
+  /* Keep only the compact 01 marker footprint on mobile. */
+  .page-rail{
+    width:24px!important;
+  }
+
+  .page-rail__marker,
+  .page-rail.is-light .page-rail__marker{
+    left:-1px!important;
+    width:22px!important;
+    min-width:22px!important;
+    max-width:22px!important;
+    padding:0!important;
+    background:transparent!important;
+    overflow:visible!important;
+    box-shadow:none!important;
+  }
+
+  .page-rail__label{
+    display:none!important;
+  }
+
+  .page-rail__index{
+    display:block!important;
+    width:auto!important;
+    white-space:nowrap!important;
+  }
+
+  /* Let a little more of the approved window-light image come through. */
+  .hero-image{
+    filter:brightness(1.04) contrast(.98)!important;
+  }
+
   .hero-vignette{
     background:
-      linear-gradient(90deg,rgba(15,16,18,.24),rgba(15,16,18,.01) 76%),
-      linear-gradient(180deg,rgba(15,16,18,.06),transparent 55%,rgba(15,16,18,.17))!important;
+      linear-gradient(90deg,rgba(15,16,18,.32),rgba(15,16,18,.015) 75%),
+      linear-gradient(180deg,rgba(15,16,18,.08),transparent 55%,rgba(15,16,18,.20))!important;
   }
 }
