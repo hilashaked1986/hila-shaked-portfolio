@@ -13,6 +13,12 @@
 <link rel="stylesheet" href="ixden-v8-mobile.css">
 <link href="https://fonts.googleapis.com/css2?family=KoHo:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="desktop-final-v5.css">
+
+<style>
+/* IXDen final: original icon artwork once, in one row, no slicing/duplication. */
+.ix-icons.ix-icons--single{display:block!important;width:min(100%,860px)!important;max-width:860px!important;margin:0!important;overflow:visible!important;border:0!important;background:transparent!important;transform:none!important}
+.ix-icons.ix-icons--single img{display:block!important;width:100%!important;height:auto!important;max-height:none!important;object-fit:contain!important;border:0!important;outline:0!important;box-shadow:none!important;background:transparent!important}
+</style>
 </head>
 <body>
 <header class="site-header" data-header>
@@ -81,13 +87,8 @@
   </div>
   <div class="sky-system__row sky-system__row--icons">
     <div class="sky-system__label"><strong>ICON SET</strong></div>
-    <div class="ix-icons" aria-label="IXDen icon set">
-      <span class="ix-icon ix-icon--1"><img src="ixden-icons.png" alt=""></span>
-      <span class="ix-icon ix-icon--2"><img src="ixden-icons.png" alt=""></span>
-      <span class="ix-icon ix-icon--3"><img src="ixden-icons.png" alt=""></span>
-      <span class="ix-icon ix-icon--4"><img src="ixden-icons.png" alt=""></span>
-      <span class="ix-icon ix-icon--5"><img src="ixden-icons.png" alt=""></span>
-      <span class="ix-icon ix-icon--6"><img src="ixden-icons.png" alt=""></span>
+    <div class="ix-icons ix-icons--single" aria-label="IXDen icon set">
+      <img src="ixden-icons.png" alt="IXDen icon set">
     </div>
   </div>
 </section>
