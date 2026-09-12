@@ -72,7 +72,7 @@
     <section class="work-v5" id="work" data-rail-index="01" data-rail-label="WORK" aria-label="Selected Work">
       <div class="work-v5__grid">
         <div class="work-v5__column">
-          <a class="work-card-v5 card-checkpoint reveal" href="tami4-v6-mobile.html" aria-label="View Check Point project">
+          <a class="work-card-v5 card-checkpoint reveal" href="checkpoint-v16-mobile.html" aria-label="View Check Point project">
             <figure><img src="assets/checkpoint.png" alt="Check Point cyber security report project"></figure>
             <div class="work-card-v5__overlay"><div><p>Interactive Report Design</p><h3>Check Point</h3></div><span>View Project →</span></div>
           </a>
@@ -267,60 +267,7 @@
     })();
   </script>
 
-  <script>
-    (() => {
-      const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
-      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-      const cursor = document.querySelector('.custom-cursor');
-      if (!cursor || !finePointer.matches) return;
-
-      const ring = cursor.querySelector('.custom-cursor__ring');
-      const dot = cursor.querySelector('.custom-cursor__dot');
-      let mouseX = window.innerWidth / 2;
-      let mouseY = window.innerHeight / 2;
-      let ringX = mouseX;
-      let ringY = mouseY;
-      let visible = false;
-      let frame;
-
-      document.documentElement.classList.add('has-custom-cursor');
-
-      const render = () => {
-        const ease = reducedMotion.matches ? 1 : 0.18;
-        ringX += (mouseX - ringX) * ease;
-        ringY += (mouseY - ringY) * ease;
-        ring.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%)`;
-        dot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
-        frame = requestAnimationFrame(render);
-      };
-
-      const setInteractiveState = (target) => {
-        const project = target.closest('.work-card-v5');
-        const interactive = target.closest('a, button, [role="button"]');
-        cursor.classList.toggle('is-project', Boolean(project));
-        cursor.classList.toggle('is-interactive', Boolean(interactive) && !project);
-      };
-
-      window.addEventListener('mousemove', (event) => {
-        mouseX = event.clientX;
-        mouseY = event.clientY;
-        if (!visible) {
-          visible = true;
-          cursor.classList.add('is-visible');
-        }
-        setInteractiveState(event.target);
-      }, { passive: true });
-
-      document.addEventListener('mouseleave', () => cursor.classList.remove('is-visible'));
-      document.addEventListener('mouseenter', () => {
-        if (visible) cursor.classList.add('is-visible');
-      });
-      window.addEventListener('blur', () => cursor.classList.remove('is-visible'));
-
-      frame = requestAnimationFrame(render);
-      window.addEventListener('pagehide', () => cancelAnimationFrame(frame), { once: true });
-    })();
-  </script>
+  
 
   <script>
     (() => {
