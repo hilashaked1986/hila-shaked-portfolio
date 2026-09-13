@@ -1,370 +1,70 @@
-/* =========================================================
-   HILA SHAKED — FINAL PROJECT PAGES QA
-   Shared by all 8 project pages.
-   Replaces final-qa-v2.css.
-   ========================================================= */
 
+/* FINAL QA V2 — shared system, intentionally non-destructive to approved artwork */
 :root{
-  --qa-dark:#0f1012;
-  --qa-light:#f4f1eb;
-  --qa-body:#c8c4be;
-  --qa-line:#27282c;
-  --qa-accent:#b8a792;
-  --qa-pad:clamp(22px,3.2vw,58px);
-  --qa-radius:14px;
-  --qa-divider-space:96px;
+ --qa-dark:#0f1012;--qa-light:#f4f1eb;--qa-body:#c8c4be;--qa-line:#27282c;
+ --qa-accent:#b8a792;--qa-pad:clamp(22px,3.2vw,58px);--qa-radius:14px;
+ --qa-img-gap:18px;--qa-divider-space:96px;
 }
+.grid-width{width:calc(100% - (2 * var(--qa-pad)))!important;margin-inline:auto!important}
 
-.grid-width{
-  width:calc(100% - (2 * var(--qa-pad)))!important;
-  margin-inline:auto!important;
-}
+/* Internal intro typography */
+.cp-intro h1{font-family:"Playfair Display",serif!important;font-size:clamp(62px,5.1vw,76px)!important;font-weight:400!important;line-height:.98!important;letter-spacing:-.038em!important;color:var(--qa-light)!important}
+.cp-intro h2{font-family:"Playfair Display",serif!important;font-size:24px!important;font-weight:400!important;line-height:1.22!important;letter-spacing:-.012em!important;color:var(--qa-light)!important}
+.cp-intro p{font-family:Inter,Arial,sans-serif!important;font-size:clamp(15px,1.02vw,17px)!important;font-weight:400!important;line-height:1.72!important;letter-spacing:-.008em!important;color:var(--qa-body)!important}
 
-/* ---------- INTRO TYPOGRAPHY ---------- */
-.cp-intro{
-  min-height:470px!important;
-  padding:112px 0 72px!important;
-}
-.cp-intro h1{
-  margin:0!important;
-  font-family:"Playfair Display",serif!important;
-  font-size:clamp(62px,5.1vw,76px)!important;
-  font-weight:400!important;
-  line-height:.98!important;
-  letter-spacing:-.038em!important;
-  color:var(--qa-light)!important;
-}
-.cp-intro h2{
-  margin:17px 0 0!important;
-  font-family:"Playfair Display",serif!important;
-  font-size:24px!important;
-  font-weight:400!important;
-  line-height:1.22!important;
-  letter-spacing:-.012em!important;
-  color:var(--qa-light)!important;
-}
-.cp-intro p{
-  max-width:650px!important;
-  margin:25px auto 0!important;
-  font-family:Inter,Arial,sans-serif!important;
-  font-size:clamp(15px,1.02vw,17px)!important;
-  font-weight:400!important;
-  line-height:1.72!important;
-  letter-spacing:-.008em!important;
-  color:var(--qa-body)!important;
-}
+/* Shared Visual System hierarchy */
+#visual-system-title{font-family:"Playfair Display",serif!important;font-size:clamp(48px,4vw,64px)!important;font-weight:400!important;line-height:1!important;letter-spacing:-.035em!important;color:var(--qa-light)!important}
+.sky-system__eyebrow,.ra-system__eyebrow,.cm-system__head>span,.sky-system__label,.ra-system__label,.cm-system__label,
+.cp-more__title{font-family:Inter,Arial,sans-serif!important;font-size:9px!important;font-weight:400!important;line-height:1.4!important;letter-spacing:.20em!important;text-transform:uppercase!important}
+.sky-system__eyebrow,.ra-system__eyebrow,.cm-system__head>span,.cp-more__title{color:var(--qa-accent)!important}
+.sky-system__label,.ra-system__label,.cm-system__label{color:var(--qa-body)!important}
 
-/* ---------- APPROVED ARTWORK: NEVER CROP ---------- */
+/* Approved artwork: never crop */
 figure{overflow:hidden}
 figure img,picture img{max-width:100%;height:auto}
-.cp-frame,.sky-frame,.df-frame,.ra-frame,.harmony-frame,.ix-frame,.cm-frame,.t4-frame{
-  border-radius:var(--qa-radius)!important;
-  overflow:hidden!important;
-}
+.cp-frame,.sky-frame,.df-frame,.ra-frame,.harmony-frame,.ix-frame,.cm-frame,.t4-frame{border-radius:var(--qa-radius)!important;overflow:hidden!important}
 .cp-frame img,.sky-frame img,.df-frame img,.ra-frame img,.harmony-frame img,.ix-frame img,.cm-frame img,.t4-frame img{
-  width:100%!important;
-  height:auto!important;
-  object-fit:contain!important;
-  object-position:center!important;
+ width:100%!important;height:auto!important;object-fit:contain!important;object-position:center!important
+}
+/* subtle edge for Skyhawk dark-blue artwork */
+.sky-system img[src*="icon"],.sky-system img[src*="blue"],.sky-system__dark{
+ outline:1px solid rgba(244,241,235,.16);outline-offset:-1px
 }
 
-/* ---------- VISUAL SYSTEM: ONE SHARED RHYTHM ---------- */
-.sky-system,
-.ra-system,
-.ix-system,
-.cm-system,
-.df-system{
-  border-top:0!important;
-  border-bottom:0!important;
-}
-
-/* remove old decorative lines around BRAND IDENTITY */
-.sky-system__head::before,.sky-system__head::after,
-.ra-system__head::before,.ra-system__head::after,
-.ix-system__head::before,.ix-system__head::after,
-.cm-system__head::before,.cm-system__head::after,
-.df-system__head::before,.df-system__head::after,
-.sky-system__head>span::before,.sky-system__head>span::after,
-.ra-system__head>span::before,.ra-system__head>span::after,
-.ix-system__head>span::before,.ix-system__head>span::after,
-.cm-system__head>span::before,.cm-system__head>span::after,
-.df-system__head>span::before,.df-system__head>span::after{
-  display:none!important;
-  content:none!important;
-}
-
-/* BRAND IDENTITY */
-.sky-system__head>span,
-.ra-system__head>span,
-.ix-system__head>span,
-.cm-system__head>span,
-.df-system__head>span,
-.sky-system__eyebrow,
-.ra-system__eyebrow{
-  display:block!important;
-  width:auto!important;
-  margin:0 0 16px!important;
-  padding:0!important;
-  border:0!important;
-  text-align:left!important;
-  font-family:Inter,Arial,sans-serif!important;
-  font-size:9px!important;
-  font-weight:400!important;
-  line-height:1.4!important;
-  letter-spacing:.20em!important;
-  text-transform:uppercase!important;
-  color:var(--qa-accent)!important;
-}
-
-/* VISUAL SYSTEM title */
-#visual-system-title{
-  margin:0!important;
-  font-family:"Playfair Display",serif!important;
-  font-size:clamp(48px,4vw,64px)!important;
-  font-weight:400!important;
-  line-height:1!important;
-  letter-spacing:-.035em!important;
-  color:var(--qa-light)!important;
-}
-
-/* Internal system labels */
-.sky-system__label,.ra-system__label,.ix-system__label,.cm-system__label,.df-system__label{
-  font-family:Inter,Arial,sans-serif!important;
-  font-size:9px!important;
-  font-weight:400!important;
-  line-height:1.4!important;
-  letter-spacing:.20em!important;
-  text-transform:uppercase!important;
-  color:var(--qa-body)!important;
-}
-
-/* Keep row dividers internal only; never leave an extra full-width line after the last row */
-.sky-system__row:last-child,
-.ra-system__row:last-child,
-.ix-system__row:last-child,
-.cm-system__row:last-child,
-.df-system__row:last-child{
-  border-bottom:0!important;
-}
-
-/* Any legacy after/before divider on the whole system is removed */
-.sky-system::before,.sky-system::after,
-.ra-system::before,.ra-system::after,
-.ix-system::before,.ix-system::after,
-.cm-system::before,.cm-system::after,
-.df-system::before,.df-system::after{
-  border:0!important;
-}
-
-/* Skyhawk dark blue specimen: subtle edge only */
-.sky-system img[src*="icon"],
-.sky-system img[src*="blue"],
-.sky-system__dark{
-  outline:1px solid rgba(244,241,235,.16);
-  outline-offset:-1px;
-}
-
-/* ---------- EXPLORE: EXACTLY ONE DIVIDER ---------- */
-.final-explore{
-  position:relative!important;
-  border-top:0!important;
-  border-bottom:0!important;
-  padding-top:var(--qa-divider-space)!important;
-  margin-top:var(--qa-divider-space)!important;
-  margin-bottom:clamp(100px,8vw,145px)!important;
-}
-.final-explore::before{
-  content:""!important;
-  display:block!important;
-  position:absolute!important;
-  left:0!important;
-  right:0!important;
-  top:0!important;
-  width:100%!important;
-  height:1px!important;
-  border:0!important;
-  background:var(--qa-line)!important;
-}
-.final-explore::after{display:none!important;content:none!important}
-
-.final-explore .cp-more__title{
-  margin:0 0 34px!important;
-  padding:0!important;
-  border:0!important;
-  font-family:Inter,Arial,sans-serif!important;
-  font-size:9px!important;
-  font-weight:400!important;
-  line-height:1.4!important;
-  letter-spacing:.20em!important;
-  text-transform:uppercase!important;
-  color:var(--qa-accent)!important;
-}
-.final-explore .cp-more__grid{
-  display:grid!important;
-  grid-template-columns:repeat(3,minmax(0,1fr))!important;
-  gap:18px!important;
-}
-.final-explore .cp-more__card{
-  display:block!important;
-  text-decoration:none!important;
-  color:var(--qa-light)!important;
-}
-.final-explore .cp-more__image{
-  position:relative!important;
-  display:block!important;
-  aspect-ratio:4/3!important;
-  border-radius:var(--qa-radius)!important;
-  overflow:hidden!important;
-  background:#17181b!important;
-}
-.final-explore .cp-more__image img{
-  display:block!important;
-  width:100%!important;
-  height:100%!important;
-  object-fit:cover!important;
-  transition:transform .42s ease,filter .42s ease!important;
-}
-.final-explore .cp-more__hover{
-  position:absolute!important;
-  inset:0!important;
-  display:grid!important;
-  place-items:center!important;
-  opacity:0!important;
-  background:rgba(15,16,18,.44)!important;
-  color:var(--qa-light)!important;
-  font:400 9px/1.4 Inter,Arial,sans-serif!important;
-  letter-spacing:.20em!important;
-  transition:opacity .25s ease!important;
-}
-.final-explore .cp-more__card:hover .cp-more__image img{
-  transform:scale(1.025)!important;
-  filter:brightness(.72)!important;
-}
+/* One Explore component everywhere */
+.final-explore{position:relative!important;padding-top:var(--qa-divider-space)!important;margin-top:var(--qa-divider-space)!important;margin-bottom:clamp(100px,8vw,145px)!important}
+.final-explore:before{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:var(--qa-line)}
+.final-explore .cp-more__title{margin:0 0 34px!important}
+.final-explore .cp-more__grid{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:18px!important}
+.final-explore .cp-more__card{display:block!important;text-decoration:none!important;color:var(--qa-light)!important}
+.final-explore .cp-more__image{position:relative!important;display:block!important;aspect-ratio:4/3!important;border-radius:var(--qa-radius)!important;overflow:hidden!important;background:#17181b}
+.final-explore .cp-more__image img{display:block!important;width:100%!important;height:100%!important;object-fit:cover!important;transition:transform .42s ease,filter .42s ease!important}
+.final-explore .cp-more__hover{position:absolute!important;inset:0!important;display:grid!important;place-items:center!important;opacity:0!important;background:rgba(15,16,18,.44)!important;color:var(--qa-light)!important;font:400 9px/1.4 Inter,Arial,sans-serif!important;letter-spacing:.20em!important;transition:opacity .25s ease!important}
+.final-explore .cp-more__card:hover .cp-more__image img{transform:scale(1.025)!important;filter:brightness(.72)!important}
 .final-explore .cp-more__card:hover .cp-more__hover{opacity:1!important}
-.final-explore .cp-more__meta{
-  display:flex!important;
-  flex-direction:column!important;
-  gap:7px!important;
-  padding-top:14px!important;
-}
-.final-explore .cp-more__meta small{
-  font:400 9px/1.4 Inter,Arial,sans-serif!important;
-  letter-spacing:.20em!important;
-  text-transform:uppercase!important;
-  color:rgba(244,241,235,.76)!important;
-}
-.final-explore .cp-more__meta strong{
-  font:400 22px/1 "Playfair Display",serif!important;
-  letter-spacing:-.02em!important;
-  color:var(--qa-light)!important;
-}
+.final-explore .cp-more__meta{display:flex!important;flex-direction:column!important;gap:7px!important;padding-top:14px!important}
+.final-explore .cp-more__meta small{font:400 9px/1.4 Inter,Arial,sans-serif!important;letter-spacing:.20em!important;text-transform:uppercase!important;color:rgba(244,241,235,.76)!important}
+.final-explore .cp-more__meta strong{font:400 22px/1 "Playfair Display",serif!important;letter-spacing:-.02em!important;color:var(--qa-light)!important}
 
-/* Pages without a Visual System: only Explore's divider remains */
-body:has(.final-explore) .gallery + .final-explore,
-body:has(.final-explore) .cp-gallery + .final-explore{
-  border-top:0!important;
-}
-
-/* ---------- CONTACT / CONTROLS ---------- */
-.site-header a,.contact-v22 a,.contact-final a,.contact-v22__footer a,button{
-  transition:opacity .2s ease,color .2s ease,transform .2s ease!important;
-}
+/* All interactive controls */
+.site-header a,.contact-v22 a,.contact-final a,.contact-v22__footer a,button{transition:opacity .2s ease,color .2s ease,transform .2s ease!important}
 .site-header a:hover,.contact-v22 a:hover,.contact-final a:hover,.contact-v22__footer a:hover{opacity:.62!important}
 button:hover{opacity:.72!important}
 
-/* ---------- CURSOR ---------- */
-.custom-cursor{
-  --cursor-bronze:var(--qa-accent);
-  position:fixed;
-  inset:0;
-  z-index:9999;
-  pointer-events:none;
-  opacity:0;
-  transition:opacity 180ms ease;
-}
+/* one cursor */
+.custom-cursor{--cursor-bronze:var(--qa-accent);position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:0;transition:opacity 180ms ease}
 .custom-cursor.is-visible{opacity:1}
-.custom-cursor__ring,.custom-cursor__dot{
-  position:fixed;
-  top:0;
-  left:0;
-  pointer-events:none;
-  will-change:transform;
-}
-.custom-cursor__ring{
-  display:grid;
-  place-items:center;
-  width:30px;
-  height:30px;
-  border:1px solid var(--cursor-bronze);
-  border-radius:50%;
-  transition:width .34s ease,height .34s ease,background-color .26s ease;
-}
-.custom-cursor__dot{
-  width:3px;
-  height:3px;
-  border-radius:50%;
-  background:var(--cursor-bronze);
-}
-.custom-cursor__label{
-  opacity:0;
-  font:500 7px/1 Inter,Arial,sans-serif;
-  letter-spacing:.14em;
-  color:var(--cursor-bronze);
-}
-.custom-cursor.is-interactive .custom-cursor__ring{
-  width:40px;
-  height:40px;
-  background:rgba(184,167,146,.08);
-}
-.custom-cursor.is-project .custom-cursor__ring{
-  width:64px;
-  height:64px;
-  background:rgba(15,16,18,.74);
-  backdrop-filter:blur(4px);
-}
-.custom-cursor.is-project .custom-cursor__dot{opacity:0}
-.custom-cursor.is-project .custom-cursor__label{opacity:1}
-
-@media(hover:hover) and (pointer:fine){
-  .has-custom-cursor,.has-custom-cursor body,.has-custom-cursor a,.has-custom-cursor button{cursor:none!important}
-}
-
-/* ---------- MOBILE ---------- */
+.custom-cursor__ring,.custom-cursor__dot{position:fixed;top:0;left:0;pointer-events:none;will-change:transform}
+.custom-cursor__ring{display:grid;place-items:center;width:30px;height:30px;border:1px solid var(--cursor-bronze);border-radius:50%;transition:width .34s ease,height .34s ease,background-color .26s ease}
+.custom-cursor__dot{width:3px;height:3px;border-radius:50%;background:var(--cursor-bronze)}
+.custom-cursor__label{opacity:0;font:500 7px/1 Inter,Arial,sans-serif;letter-spacing:.14em;color:var(--cursor-bronze)}
+.custom-cursor.is-interactive .custom-cursor__ring{width:40px;height:40px;background:rgba(184,167,146,.08)}
+.custom-cursor.is-project .custom-cursor__ring{width:64px;height:64px;background:rgba(15,16,18,.74);backdrop-filter:blur(4px)}
+.custom-cursor.is-project .custom-cursor__dot{opacity:0}.custom-cursor.is-project .custom-cursor__label{opacity:1}
+@media(hover:hover) and (pointer:fine){.has-custom-cursor,.has-custom-cursor body,.has-custom-cursor a,.has-custom-cursor button{cursor:none!important}}
 @media(max-width:900px){
-  :root{--qa-divider-space:72px}
-
-  .cp-intro{min-height:0!important;padding:98px 0 56px!important}
-  .cp-intro h1{font-size:54px!important}
-  .cp-intro h2{font-size:21px!important}
-
-  /* last image -> Brand Identity */
-  .cp-gallery + .sky-system,
-  .cp-gallery + .df-system,
-  .cp-gallery + .ix-system,
-  .cp-gallery + .cm-system,
-  .ra-gallery + .ra-system{
-    margin-top:72px!important;
-  }
-
-  .final-explore{
-    margin-top:72px!important;
-    padding-top:72px!important;
-  }
-  .final-explore .cp-more__grid{
-    grid-template-columns:1fr!important;
-    gap:32px!important;
-  }
-  .final-explore .cp-more__title{margin-bottom:24px!important}
-
-  /* IXDen exact icon art stays uncropped */
-  .ix-icons.ix-icons--single img{
-    width:100%!important;
-    height:auto!important;
-    object-fit:contain!important;
-  }
-}
-
-/* Tami4 already owns the single divider in its approved structure */
-body:has(.t4-gallery) .final-explore{
-  border-top:0!important;
+ :root{--qa-divider-space:72px}
+ .cp-intro h1{font-size:54px!important}.cp-intro h2{font-size:21px!important}
+ .final-explore .cp-more__grid{grid-template-columns:1fr!important;gap:32px!important}
+ .final-explore .cp-more__title{margin-bottom:24px!important}
 }
