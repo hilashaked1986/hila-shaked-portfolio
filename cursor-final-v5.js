@@ -147,142 +147,163 @@
   window.addEventListener('pointerup',updateState,{passive:true});
 })();
 
-/* ===== MOBILE-ONLY FINAL PATCH ===== */
+/* ===== MOBILE-ONLY QA PATCH V2 ===== */
 (()=>{
-  if(!window.matchMedia('(max-width:900px)').matches) return;
-
-  /* Slightly reduce the visual density of the ambient particles on mobile only.
-     Desktop is untouched. */
-  document.querySelectorAll('.hero [data-ambient-air], .about-v14 [data-ambient-air]').forEach((canvas)=>{
-    canvas.style.opacity='0.84';
-  });
-
-  /* The homepage already has its own menu controller in script.js.
-     Do NOT bind a second click handler there, otherwise one handler opens
-     while the other immediately closes the menu. */
+  const mq=window.matchMedia('(max-width:900px)');
   const isHome=Boolean(document.querySelector('.hero[data-hero]'));
-  if(isHome) return;
 
-  let header=document.querySelector('.site-header');
-  if(!header) return;
-
-  let button=header.querySelector('[data-menu-button], .menu-button');
-  if(!button){
-    button=document.createElement('button');
-    button.className='menu-button';
-    button.setAttribute('data-menu-button','');
-    button.setAttribute('aria-label','Open menu');
-    button.setAttribute('aria-expanded','false');
-    button.innerHTML='<span></span><span></span>';
-    header.appendChild(button);
-  }else if(!button.hasAttribute('data-menu-button')){
-    button.setAttribute('data-menu-button','');
-  }
-
-  let menu=document.querySelector('[data-mobile-menu]');
-  if(!menu){
-    menu=document.createElement('div');
-    menu.className='mobile-menu';
-    menu.setAttribute('data-mobile-menu','');
-    menu.innerHTML=
-      '<a href="home-preview-v36-mobile-final.html#work">WORK</a>'+
-      '<a href="home-preview-v36-mobile-final.html#about">ABOUT</a>'+
-      '<a href="assets/Hila-Shaked-Resume.pdf" target="_blank" rel="noopener">RESUME</a>'+
-      '<a href="#contact">CONTACT</a>';
-    document.body.appendChild(menu);
-  }
-
-  /* Self-contained mobile menu styling so it works consistently on every
-     internal project page, including Harmony where the hamburger was missing. */
-  if(!document.getElementById('mobile-menu-final-fix-style')){
-    const style=document.createElement('style');
-    style.id='mobile-menu-final-fix-style';
-    style.textContent=`
-      @media (max-width:900px){
-        .site-header .menu-button{
-          display:flex!important;
-          position:relative!important;
-          z-index:10002!important;
-          width:34px!important;
-          height:34px!important;
-          padding:0!important;
-          margin:0!important;
-          border:0!important;
-          background:transparent!important;
-          align-items:center!important;
-          justify-content:center!important;
-          flex-direction:column!important;
-          gap:6px!important;
-          cursor:pointer!important;
-        }
-        .site-header .menu-button span{
-          display:block!important;
-          width:22px!important;
-          height:1px!important;
-          background:#f4f1eb!important;
-          transform-origin:center!important;
-          transition:transform .25s ease,opacity .2s ease!important;
-        }
-        .site-header .menu-button[aria-expanded="true"] span:first-child{
-          transform:translateY(3.5px) rotate(45deg)!important;
-        }
-        .site-header .menu-button[aria-expanded="true"] span:last-child{
-          transform:translateY(-3.5px) rotate(-45deg)!important;
-        }
-        .mobile-menu{
-          display:flex!important;
-          position:fixed!important;
-          inset:0!important;
-          z-index:10000!important;
-          padding:110px 24px 42px!important;
-          background:#0f1012!important;
-          flex-direction:column!important;
-          align-items:center!important;
-          justify-content:center!important;
-          gap:30px!important;
-          opacity:0!important;
-          visibility:hidden!important;
-          pointer-events:none!important;
-          transform:translateY(-8px)!important;
-          transition:opacity .25s ease,transform .25s ease,visibility .25s ease!important;
-        }
-        .mobile-menu.open{
-          opacity:1!important;
-          visibility:visible!important;
-          pointer-events:auto!important;
-          transform:none!important;
-        }
-        .mobile-menu a{
-          color:#f4f1eb!important;
-          text-decoration:none!important;
-          font-family:Inter,Arial,sans-serif!important;
-          font-size:13px!important;
-          font-weight:400!important;
-          letter-spacing:.24em!important;
-        }
+  /* INTERNAL PROJECT PAGES — hamburger exists and opens on mobile. */
+  if(!isHome){
+    const header=document.querySelector('.site-header');
+    if(header){
+      let button=header.querySelector('[data-menu-button], .menu-button');
+      if(!button){
+        button=document.createElement('button');
+        button.className='menu-button';
+        button.setAttribute('data-menu-button','');
+        button.setAttribute('aria-label','Open menu');
+        button.setAttribute('aria-expanded','false');
+        button.innerHTML='<span></span><span></span>';
+        header.appendChild(button);
+      }else{
+        button.classList.add('menu-button');
+        button.setAttribute('data-menu-button','');
+        button.setAttribute('aria-expanded','false');
       }
-    `;
-    document.head.appendChild(style);
+
+      let menu=document.querySelector('[data-mobile-menu]');
+      if(!menu){
+        menu=document.createElement('div');
+        menu.className='mobile-menu';
+        menu.setAttribute('data-mobile-menu','');
+        menu.innerHTML=
+          '<a href="home-preview-v36-mobile-final.html#work">WORK</a>'+
+          '<a href="home-preview-v36-mobile-final.html#about">ABOUT</a>'+
+          '<a href="assets/Hila-Shaked-Resume.pdf" target="_blank" rel="noopener">RESUME</a>'+
+          '<a href="#contact">CONTACT</a>';
+        document.body.appendChild(menu);
+      }else{
+        menu.classList.add('mobile-menu');
+      }
+
+      const style=document.createElement('style');
+      style.id='internal-mobile-menu-v2-style';
+      style.textContent=`
+        .site-header .menu-button{display:none}
+        @media(max-width:900px){
+          .site-header{position:fixed!important;z-index:10020!important}
+          .site-header .desktop-nav,.site-header>nav{display:none!important}
+          .site-header .menu-button{
+            display:flex!important;position:relative!important;z-index:10022!important;
+            flex:0 0 36px!important;width:36px!important;height:36px!important;
+            min-width:36px!important;min-height:36px!important;padding:0!important;margin:0!important;
+            border:0!important;outline:0!important;background:transparent!important;
+            align-items:center!important;justify-content:center!important;flex-direction:column!important;
+            gap:6px!important;opacity:1!important;visibility:visible!important;pointer-events:auto!important
+          }
+          .site-header .menu-button span{
+            display:block!important;width:22px!important;height:1px!important;min-height:1px!important;
+            background:#f4f1eb!important;opacity:1!important;visibility:visible!important;
+            transform-origin:center!important;transition:transform .24s ease!important
+          }
+          .site-header .menu-button[aria-expanded="true"] span:first-child{
+            transform:translateY(3.5px) rotate(45deg)!important
+          }
+          .site-header .menu-button[aria-expanded="true"] span:last-child{
+            transform:translateY(-3.5px) rotate(-45deg)!important
+          }
+          body>.mobile-menu[data-mobile-menu]{
+            display:flex!important;position:fixed!important;inset:0!important;z-index:10018!important;
+            box-sizing:border-box!important;padding:96px 24px 44px!important;background:#0f1012!important;
+            flex-direction:column!important;align-items:center!important;justify-content:center!important;
+            gap:30px!important;opacity:0!important;visibility:hidden!important;pointer-events:none!important;
+            transform:translateY(-6px)!important;
+            transition:opacity .22s ease,transform .22s ease,visibility .22s ease!important
+          }
+          body>.mobile-menu[data-mobile-menu].open{
+            opacity:1!important;visibility:visible!important;pointer-events:auto!important;transform:none!important
+          }
+          body>.mobile-menu[data-mobile-menu] a{
+            display:block!important;color:#f4f1eb!important;text-decoration:none!important;
+            font:400 13px/1.2 Inter,Arial,sans-serif!important;letter-spacing:.24em!important
+          }
+        }
+      `;
+      document.head.appendChild(style);
+
+      const cleanButton=button.cloneNode(true);
+      button.replaceWith(cleanButton);
+      button=cleanButton;
+
+      const setOpen=(open)=>{
+        menu.classList.toggle('open',open);
+        button.setAttribute('aria-expanded',String(open));
+        document.body.style.overflow=(open&&mq.matches)?'hidden':'';
+      };
+      button.addEventListener('click',e=>{
+        if(!mq.matches) return;
+        e.preventDefault();
+        e.stopPropagation();
+        setOpen(!menu.classList.contains('open'));
+      });
+      menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>setOpen(false)));
+    }
   }
 
-  const setOpen=(open)=>{
-    menu.classList.toggle('open',open);
-    button.setAttribute('aria-expanded',String(open));
-    document.body.style.overflow=open?'hidden':'';
-  };
+  /* HOME MOBILE — normal load starts at the Hero, not restored Work scroll. */
+  if(isHome && mq.matches && !location.hash){
+    try{history.scrollRestoration='manual'}catch(e){}
+    const top=()=>window.scrollTo(0,0);
+    top();
+    requestAnimationFrame(top);
+    window.addEventListener('pageshow',()=>requestAnimationFrame(top),{once:true});
+  }
 
-  /* Clone the button to remove any stale listeners from earlier page-specific code. */
-  const cleanButton=button.cloneNode(true);
-  button.replaceWith(cleanButton);
-  button=cleanButton;
+  /* HOME MOBILE — slightly fewer-looking particles, desktop untouched. */
+  if(isHome && mq.matches){
+    document.querySelectorAll('.hero [data-ambient-air],.about-v14 [data-ambient-air]')
+      .forEach(c=>c.style.opacity='0.84');
+  }
 
-  button.addEventListener('click',(e)=>{
-    e.preventDefault();
-    e.stopPropagation();
-    setOpen(!menu.classList.contains('open'));
-  });
+  /* IXDEN MOBILE — six equal grid cells, all perfectly aligned and slightly smaller. */
+  if(mq.matches){
+    const ix=document.querySelector('.ix-icons--single');
+    const original=ix?.querySelector('img');
+    if(ix && original && !ix.dataset.mobileGridFixed){
+      ix.dataset.mobileGridFixed='1';
+      original.style.display='none';
 
-  menu.querySelectorAll('a').forEach(a=>{
-    a.addEventListener('click',()=>setOpen(false));
-  });
+      const grid=document.createElement('div');
+      grid.className='ix-mobile-icons-grid-final';
+      for(let i=0;i<6;i++){
+        const cell=document.createElement('span');
+        cell.className='ix-mobile-icon-cell-final';
+        cell.style.backgroundPosition=`${i*20}% 50%`;
+        grid.appendChild(cell);
+      }
+      ix.appendChild(grid);
+
+      const s=document.createElement('style');
+      s.id='ix-mobile-icons-grid-final-style';
+      s.textContent=`
+        @media(max-width:900px){
+          .ix-icons--single{
+            display:flex!important;width:100%!important;max-width:none!important;
+            justify-content:center!important;align-items:center!important;overflow:visible!important
+          }
+          .ix-mobile-icons-grid-final{
+            display:grid!important;width:86%!important;max-width:560px!important;margin:0 auto!important;
+            grid-template-columns:repeat(6,minmax(0,1fr))!important;gap:8px!important;align-items:center!important
+          }
+          .ix-mobile-icon-cell-final{
+            display:block!important;width:100%!important;aspect-ratio:1/1!important;
+            background-image:url("ixden-icons.png")!important;background-repeat:no-repeat!important;
+            background-size:600% 100%!important;background-position-y:50%!important;
+            border:0!important;outline:0!important;box-shadow:none!important
+          }
+        }
+      `;
+      document.head.appendChild(s);
+    }
+  }
 })();
