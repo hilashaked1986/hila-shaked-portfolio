@@ -1145,3 +1145,20 @@
     border-radius:10px!important;
   }
 }
+
+/* ===== MOBILE IXDEN ICON SIZE — mobile only ===== */
+@media (max-width:900px){
+  .ix-icons--single{
+    display:flex!important;
+    justify-content:center!important;
+    align-items:center!important;
+    width:100%!important;
+  }
+  .ix-icons--single > img{
+    display:block!important;
+    width:88%!important;
+    max-width:88%!important;
+    height:auto!important;
+    margin:0 auto!important;
+  }
+}
