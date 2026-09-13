@@ -1030,3 +1030,39 @@
   .site-header .menu-button{position:relative!important;z-index:1001!important}
   .contact-final__email,.contact-final__phone{text-decoration:none!important;border-bottom:0!important;box-shadow:none!important}
 }
+
+
+/* ===== FINAL QA HOTFIX — scoped + minimal — 2026-09-13 ===== */
+@media (min-width:901px){
+  /* Harmony only: keep the existing custom cursor above Explore More Projects. */
+  .page-harmony .custom-cursor{z-index:99999!important;pointer-events:none!important;}
+  .page-harmony .custom-cursor__ring,
+  .page-harmony .custom-cursor__dot{z-index:99999!important;pointer-events:none!important;}
+
+  /* Check Point only: equal vertical/horizontal gaps inside its gallery. */
+  .cp-gallery.grid-width:not(.sky-gallery):not(.df-gallery):not(.ix-gallery){
+    --final-project-gap:18px!important;
+    gap:var(--final-project-gap)!important;
+    row-gap:var(--final-project-gap)!important;
+    column-gap:var(--final-project-gap)!important;
+  }
+  .cp-gallery.grid-width:not(.sky-gallery):not(.df-gallery):not(.ix-gallery) .cp-pair{
+    gap:var(--final-project-gap)!important;
+    margin-top:0!important;
+    margin-bottom:0!important;
+  }
+  .cp-gallery.grid-width:not(.sky-gallery):not(.df-gallery):not(.ix-gallery) > *{
+    margin-top:0!important;
+    margin-bottom:0!important;
+  }
+
+  /* Skyhawk only: use one identical gap everywhere in the artwork grid. */
+  .sky-gallery{
+    --sky-grid-gap:18px!important;
+    gap:var(--sky-grid-gap)!important;
+    row-gap:var(--sky-grid-gap)!important;
+    column-gap:var(--sky-grid-gap)!important;
+  }
+  .sky-gallery .sky-pair{gap:var(--sky-grid-gap)!important;margin-top:0!important;margin-bottom:0!important;}
+  .sky-gallery > .cp-frame + .sky-pair{margin-top:var(--sky-grid-gap)!important;}
+}
