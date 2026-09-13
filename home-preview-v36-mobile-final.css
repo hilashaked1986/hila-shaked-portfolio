@@ -2128,46 +2128,14 @@ main{
 }
 
 
-/* =========================================================
-   MOBILE HERO FINAL — rail clearance + slightly clearer light
-   ========================================================= */
-@media (max-width:520px){
-
-  /* Keep only the compact 01 marker footprint on mobile. */
-  .page-rail{
-    width:24px!important;
-  }
-
-  .page-rail__marker,
-  .page-rail.is-light .page-rail__marker{
-    left:-1px!important;
-    width:22px!important;
-    min-width:22px!important;
-    max-width:22px!important;
-    padding:0!important;
-    background:transparent!important;
-    overflow:visible!important;
-    box-shadow:none!important;
-  }
-
-  .page-rail__label{
-    display:none!important;
-  }
-
-  .page-rail__index{
-    display:block!important;
-    width:auto!important;
-    white-space:nowrap!important;
-  }
-
-  /* Let a little more of the approved window-light image come through. */
-  .hero-image{
-    filter:brightness(1.04) contrast(.98)!important;
-  }
-
-  .hero-vignette{
-    background:
-      linear-gradient(90deg,rgba(15,16,18,.32),rgba(15,16,18,.015) 75%),
-      linear-gradient(180deg,rgba(15,16,18,.08),transparent 55%,rgba(15,16,18,.20))!important;
-  }
+/* FINAL APPROVED CTA EMPHASIS — DESKTOP ONLY */
+@media (min-width:901px){
+  .site-cta,
+  .site-cta .cta-label,
+  .site-cta .arrow-mark{color:#d8be9d!important;}
+  .site-cta .cta-label{font-weight:600!important;letter-spacing:.26em!important;}
+  .site-cta .arrow-mark{fill:currentColor!important;}
+  .site-cta:hover,.site-cta:focus-visible,
+  .site-cta:hover .cta-label,.site-cta:focus-visible .cta-label,
+  .site-cta:hover .arrow-mark,.site-cta:focus-visible .arrow-mark{color:var(--ui-ivory,#f4f1eb)!important;}
 }
