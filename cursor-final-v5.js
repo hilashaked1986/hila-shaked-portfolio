@@ -59,3 +59,27 @@
   window.addEventListener('pointerdown',updateState,{passive:true});
   window.addEventListener('pointerup',updateState,{passive:true});
 })();
+
+/* FINAL MOBILE MENU — shared across internal project pages */
+(()=>{
+  const button=document.querySelector('[data-menu-button], .menu-button');
+  if(!button) return;
+  if(!button.hasAttribute('data-menu-button')) button.setAttribute('data-menu-button','');
+
+  let menu=document.querySelector('[data-mobile-menu]');
+  if(!menu){
+    menu=document.createElement('div');
+    menu.className='mobile-menu';
+    menu.setAttribute('data-mobile-menu','');
+    menu.innerHTML='<a href="home-preview-v36-mobile-final.html#work">WORK</a><a href="home-preview-v36-mobile-final.html#about">ABOUT</a><a href="assets/Hila-Shaked-Resume.pdf" target="_blank" rel="noopener">RESUME</a><a href="#contact">CONTACT</a>';
+    document.body.appendChild(menu);
+  }
+
+  const setOpen=(open)=>{
+    menu.classList.toggle('open',open);
+    button.setAttribute('aria-expanded',String(open));
+    document.body.style.overflow=open?'hidden':'';
+  };
+  button.addEventListener('click',()=>setOpen(!menu.classList.contains('open')));
+  menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>setOpen(false)));
+})();
