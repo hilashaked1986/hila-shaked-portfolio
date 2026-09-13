@@ -2139,3 +2139,39 @@ main{
   .site-cta:hover .cta-label,.site-cta:focus-visible .cta-label,
   .site-cta:hover .arrow-mark,.site-cta:focus-visible .arrow-mark{color:var(--ui-ivory,#f4f1eb)!important;}
 }
+
+/* FINAL QA PATCH 2026-09-13 — SELECTED WORK and VIEW RESUME must match exactly */
+@media (min-width:901px){
+  .hero-content .site-cta,
+  .about-v14__resume{
+    color:#d8be9d!important;
+    font-family:Inter,Arial,sans-serif!important;
+    font-size:10px!important;
+    font-weight:500!important;
+    letter-spacing:.26em!important;
+  }
+  .hero-content .site-cta .cta-label,
+  .about-v14__resume .cta-label{
+    color:#d8be9d!important;
+    font-family:Inter,Arial,sans-serif!important;
+    font-size:10px!important;
+    font-weight:500!important;
+    line-height:1!important;
+    letter-spacing:.26em!important;
+    opacity:1!important;
+  }
+  .hero-content .site-cta .arrow-mark,
+  .about-v14__resume .arrow-mark{
+    color:#d8be9d!important;
+    fill:#d8be9d!important;
+  }
+  .hero-content .site-cta:hover,
+  .hero-content .site-cta:focus-visible,
+  .about-v14__resume:hover,
+  .about-v14__resume:focus-visible,
+  .hero-content .site-cta:hover .cta-label,
+  .about-v14__resume:hover .cta-label{
+    color:var(--ui-ivory,#f4f1eb)!important;
+  }
+}
+

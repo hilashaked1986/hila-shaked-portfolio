@@ -1031,38 +1031,106 @@
   .contact-final__email,.contact-final__phone{text-decoration:none!important;border-bottom:0!important;box-shadow:none!important}
 }
 
-
-/* ===== FINAL QA HOTFIX — scoped + minimal — 2026-09-13 ===== */
+/* =========================================================
+   FINAL QA PATCH 2026-09-13 — exact requested fixes only
+   1) Check Point + Skyhawk: equal 18px gallery gaps on desktop
+   2) Harmony: restore visible custom cursor without touching other pages
+   ========================================================= */
 @media (min-width:901px){
-  /* Harmony only: keep the existing custom cursor above Explore More Projects. */
-  .page-harmony .custom-cursor{z-index:99999!important;pointer-events:none!important;}
-  .page-harmony .custom-cursor__ring,
-  .page-harmony .custom-cursor__dot{z-index:99999!important;pointer-events:none!important;}
-
-  /* Check Point only: equal vertical/horizontal gaps inside its gallery. */
+  /* Check Point only: one consistent vertical gap + same gap inside the pair. */
   .cp-gallery.grid-width:not(.sky-gallery):not(.df-gallery):not(.ix-gallery){
-    --final-project-gap:18px!important;
-    gap:var(--final-project-gap)!important;
-    row-gap:var(--final-project-gap)!important;
-    column-gap:var(--final-project-gap)!important;
-  }
-  .cp-gallery.grid-width:not(.sky-gallery):not(.df-gallery):not(.ix-gallery) .cp-pair{
-    gap:var(--final-project-gap)!important;
-    margin-top:0!important;
-    margin-bottom:0!important;
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr)!important;
+    gap:18px!important;
   }
   .cp-gallery.grid-width:not(.sky-gallery):not(.df-gallery):not(.ix-gallery) > *{
     margin-top:0!important;
     margin-bottom:0!important;
   }
-
-  /* Skyhawk only: use one identical gap everywhere in the artwork grid. */
-  .sky-gallery{
-    --sky-grid-gap:18px!important;
-    gap:var(--sky-grid-gap)!important;
-    row-gap:var(--sky-grid-gap)!important;
-    column-gap:var(--sky-grid-gap)!important;
+  .cp-gallery.grid-width:not(.sky-gallery):not(.df-gallery):not(.ix-gallery) > .cp-pair{
+    display:grid!important;
+    gap:18px!important;
+    margin:0!important;
   }
-  .sky-gallery .sky-pair{gap:var(--sky-grid-gap)!important;margin-top:0!important;margin-bottom:0!important;}
-  .sky-gallery > .cp-frame + .sky-pair{margin-top:var(--sky-grid-gap)!important;}
+
+  /* Skyhawk only: exactly the same 18px rhythm vertically and in its two-image row. */
+  .sky-gallery{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr)!important;
+    gap:18px!important;
+  }
+  .sky-gallery > *{
+    margin-top:0!important;
+    margin-bottom:0!important;
+  }
+  .sky-gallery > .sky-pair{
+    gap:18px!important;
+    margin:0!important;
+  }
+
+  /* Harmony only: its page did not load the shared cursor styling, so the JS hid
+     the native pointer while the custom cursor itself had no visible geometry. */
+  body.harmony-page .custom-cursor{
+    --cursor-bronze:#b8a792;
+    position:fixed!important;
+    inset:0!important;
+    z-index:9999!important;
+    pointer-events:none!important;
+    opacity:0;
+    transition:opacity 180ms ease;
+  }
+  body.harmony-page .custom-cursor.is-visible{opacity:1!important;}
+  body.harmony-page .custom-cursor__ring,
+  body.harmony-page .custom-cursor__dot{
+    position:fixed!important;
+    top:0!important;
+    left:0!important;
+    pointer-events:none!important;
+    will-change:transform;
+  }
+  body.harmony-page .custom-cursor__ring{
+    display:grid!important;
+    place-items:center!important;
+    width:30px!important;
+    height:30px!important;
+    border:1px solid var(--cursor-bronze)!important;
+    border-radius:50%!important;
+    background:transparent;
+    box-sizing:border-box!important;
+    transition:width 260ms ease,height 260ms ease,background-color 220ms ease!important;
+  }
+  body.harmony-page .custom-cursor__dot{
+    width:3px!important;
+    height:3px!important;
+    border-radius:50%!important;
+    background:var(--cursor-bronze)!important;
+  }
+  body.harmony-page .custom-cursor__label{
+    opacity:0;
+    font-family:Inter,Arial,sans-serif!important;
+    font-size:7px!important;
+    font-weight:500!important;
+    line-height:1!important;
+    letter-spacing:.14em!important;
+    color:var(--cursor-bronze)!important;
+  }
+  body.harmony-page .custom-cursor.is-interactive .custom-cursor__ring{
+    width:40px!important;
+    height:40px!important;
+    background:rgba(184,167,146,.08)!important;
+  }
+  body.harmony-page .custom-cursor.is-project .custom-cursor__ring{
+    width:64px!important;
+    height:64px!important;
+    background:rgba(15,16,18,.74)!important;
+    backdrop-filter:blur(4px);
+  }
+  body.harmony-page .custom-cursor.is-project .custom-cursor__dot{opacity:0!important;}
+  body.harmony-page .custom-cursor.is-project .custom-cursor__label{opacity:1!important;}
 }
+@media (hover:hover) and (pointer:fine){
+  html.has-custom-cursor body.harmony-page,
+  html.has-custom-cursor body.harmony-page a,
+  html.has-custom-cursor body.harmony-page button{cursor:none!important;}
+}
+
