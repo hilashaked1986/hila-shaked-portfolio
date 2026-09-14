@@ -258,7 +258,10 @@
            03: only when CONTACT itself reaches the top content line.
            The CTA elements are visual reference points only; they do not trigger number changes. */
         const aboutStart = docTop(aboutTitle) - (window.innerHeight * 0.92);
-        const contactStart = docTop(contact) - headerHeight;
+        /* CONTACT becomes active when its top reaches a little below mid-screen.
+           This avoids switching while the ABOUT portrait still dominates the view,
+           but still guarantees 03 appears as soon as the user is clearly inside CONTACT. */
+        const contactStart = docTop(contact) - (window.innerHeight * 0.55);
 
         let nextIndex = '01';
         let nextLabel = 'WORK';
