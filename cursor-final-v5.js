@@ -257,64 +257,69 @@
 
     let raf=0;
 
-    /* The homepage contains an older inline rail controller that writes marker.style.top
-       on every scroll. On mobile we own that inline property, so its writes cannot win. */
-    const nativeTopDescriptor=Object.getOwnPropertyDescriptor(CSSStyleDeclaration.prototype,'top');
-    if(nativeTopDescriptor?.set && nativeTopDescriptor?.get){
-      try{
-        Object.defineProperty(marker.style,'top',{
-          configurable:true,
-          get(){ return nativeTopDescriptor.get.call(marker.style); },
-          set(){ /* ignore the old inline homepage controller on mobile */ }
-        });
-      }catch(e){}
-    }
-
+    /* One mobile rail controller only. The old homepage controller may still
+       update labels, but this controller owns the final position + number. */
     const anchors=[
       {n:'01', el:document.querySelector('.hero .site-cta')},
       {n:'02', el:document.querySelector('.about-v14__resume')},
       {n:'03', el:document.querySelector('#contact .contact-final__label')}
     ].filter(a=>a.el);
 
-    const anchorTop=(a)=>{
+    const clamp=(v,min,max)=>Math.max(min,Math.min(max,v));
+
+    const markerTopFor=(el)=>{
       const rr=rail.getBoundingClientRect();
-      const ar=a.el.getBoundingClientRect();
+      const ar=el.getBoundingClientRect();
       const numberCenter=index.offsetTop+(index.offsetHeight/2);
-      return Math.max(0,Math.min(
-        Math.max(0,rail.clientHeight-marker.offsetHeight),
-        ar.top+(ar.height/2)-rr.top-numberCenter
-      ));
+      return clamp(
+        ar.top+(ar.height/2)-rr.top-numberCenter,
+        0,
+        Math.max(0,rail.clientHeight-marker.offsetHeight)
+      );
     };
 
     const moveRail=()=>{
       raf=0;
       if(!rail||!marker||!index||anchors.length!==3) return;
 
-      const rr=rail.getBoundingClientRect();
-      const numberCenter=index.offsetTop+(index.offsetHeight/2);
-      const viewportTarget=window.innerHeight*.60;
+      const focus=window.innerHeight*.60;
 
-      /* Calculate the three exact scroll positions at which each heading crosses
-         the homepage focus line. These are the rail's true reference points. */
-      const points=anchors.map(a=>{
-        const docCenter=a.el.getBoundingClientRect().top+window.scrollY+(a.el.offsetHeight/2);
-        return docCenter-viewportTarget;
-      });
+      /* SECTION CHANGE:
+         02 changes as ABOUT itself reaches the focus line — not when the
+         View Resume button near the bottom of About reaches it.
+         03 changes when Contact reaches the same focus line. */
+      const about=document.querySelector('#about');
+      const contact=document.querySelector('#contact');
 
-      const tops=anchors.map(anchorTop);
-      const y=window.scrollY;
+      const aboutStart=about
+        ? about.getBoundingClientRect().top+window.scrollY-focus
+        : Infinity;
+      const contactStart=contact
+        ? contact.getBoundingClientRect().top+window.scrollY-focus
+        : Infinity;
 
-      let top,active;
-      if(y<=points[0]){
-        top=tops[0]; active=0;
-      }else if(y<points[1]){
-        const t=Math.max(0,Math.min(1,(y-points[0])/Math.max(1,points[1]-points[0])));
-        top=tops[0]+(tops[1]-tops[0])*t; active=0;
-      }else if(y<points[2]){
-        const t=Math.max(0,Math.min(1,(y-points[1])/Math.max(1,points[2]-points[1])));
-        top=tops[1]+(tops[2]-tops[1])*t; active=1;
+      let active=0;
+      if(window.scrollY>=aboutStart) active=1;
+      if(window.scrollY>=contactStart) active=2;
+
+      /* POSITION:
+         keep the smooth continuous travel, with the approved visual anchors
+         as the three destination points. */
+      const destination=anchors.map(a=>markerTopFor(a.el));
+
+      const heroPoint=0;
+      const aboutPoint=aboutStart;
+      const contactPoint=contactStart;
+
+      let top=destination[0];
+      if(window.scrollY<aboutPoint){
+        const t=clamp((window.scrollY-heroPoint)/Math.max(1,aboutPoint-heroPoint),0,1);
+        top=destination[0]+(destination[1]-destination[0])*t;
+      }else if(window.scrollY<contactPoint){
+        const t=clamp((window.scrollY-aboutPoint)/Math.max(1,contactPoint-aboutPoint),0,1);
+        top=destination[1]+(destination[2]-destination[1])*t;
       }else{
-        top=tops[2]; active=2;
+        top=destination[2];
       }
 
       marker.style.setProperty('top',`${top}px`,'important');
@@ -327,7 +332,8 @@
       if(!raf) raf=requestAnimationFrame(moveRail);
     };
 
-    /* Run after the old homepage scroll listener so our mobile rail is the final writer. */
+    /* Registered after the homepage's native controller; the nested RAF makes
+       this the final writer for the frame without monkey-patching style APIs. */
     addEventListener('scroll',()=>requestAnimationFrame(scheduleRail),{passive:true});
     addEventListener('resize',()=>requestAnimationFrame(scheduleRail),{passive:true});
     addEventListener('load',()=>requestAnimationFrame(scheduleRail),{once:true});
@@ -438,6 +444,8 @@
           body>.mobile-menu[data-mobile-menu] a{
             display:flex!important;
             align-items:center!important;
+            justify-content:center!important;
+            text-align:center!important;
             width:100%!important;
             min-height:82px!important;
             margin:0!important;
@@ -460,7 +468,7 @@
           body>.mobile-menu[data-mobile-menu] a:focus-visible{
             color:#f4f1eb!important;
             border-color:rgba(184,167,146,.48)!important;
-            padding-left:4px!important;
+            padding-left:0!important;
           }
 
           .mobile-menu__close-final{
