@@ -202,6 +202,54 @@
       .forEach(c=>c.style.opacity='0.84');
   }
 
+
+  /* =========================
+     HOME MENU — same geometry as internal pages
+     ========================= */
+  if(isHome){
+    const homeMenuStyle=document.createElement('style');
+    homeMenuStyle.id='home-menu-unified-final';
+    homeMenuStyle.textContent=`
+      @media(max-width:900px){
+        body>.mobile-menu[data-mobile-menu]{
+          justify-content:flex-start!important;
+          padding:clamp(118px,17vh,154px) 38px 50px!important;
+          gap:0!important;
+          background:rgba(15,16,18,.985)!important;
+        }
+        body>.mobile-menu[data-mobile-menu] a{
+          display:flex!important;
+          align-items:center!important;
+          justify-content:center!important;
+          width:100%!important;
+          min-height:82px!important;
+          margin:0!important;
+          padding:0!important;
+          border:0!important;
+          border-bottom:1px solid rgba(244,241,235,.14)!important;
+          box-sizing:border-box!important;
+          text-align:center!important;
+          font-family:Inter,Arial,sans-serif!important;
+          font-size:clamp(15px,4.4vw,18px)!important;
+          font-weight:400!important;
+          line-height:1.2!important;
+          letter-spacing:.24em!important;
+          color:rgba(244,241,235,.86)!important;
+        }
+        body>.mobile-menu[data-mobile-menu] a:first-child{
+          border-top:1px solid rgba(244,241,235,.14)!important;
+        }
+        body>.mobile-menu[data-mobile-menu] a:hover,
+        body>.mobile-menu[data-mobile-menu] a:focus-visible{
+          color:#f4f1eb!important;
+          border-color:rgba(184,167,146,.48)!important;
+          padding-left:0!important;
+        }
+      }
+    `;
+    document.head.appendChild(homeMenuStyle);
+  }
+
   /* =========================
      HOME RAIL — continuous movement on the line
      ========================= */
@@ -282,21 +330,20 @@
       raf=0;
       if(!rail||!marker||!index||anchors.length!==3) return;
 
-      const focus=window.innerHeight*.60;
-
-      /* SECTION CHANGE:
-         02 changes as ABOUT itself reaches the focus line — not when the
-         View Resume button near the bottom of About reaches it.
-         03 changes when Contact reaches the same focus line. */
+      /* SECTION CHANGE happens exactly when the new section begins
+         at the bottom edge of the viewport. No delayed focus-line threshold. */
       const about=document.querySelector('#about');
       const contact=document.querySelector('#contact');
 
-      const aboutStart=about
-        ? about.getBoundingClientRect().top+window.scrollY-focus
+      const aboutDocTop=about
+        ? about.getBoundingClientRect().top+window.scrollY
         : Infinity;
-      const contactStart=contact
-        ? contact.getBoundingClientRect().top+window.scrollY-focus
+      const contactDocTop=contact
+        ? contact.getBoundingClientRect().top+window.scrollY
         : Infinity;
+
+      const aboutStart=aboutDocTop-window.innerHeight;
+      const contactStart=contactDocTop-window.innerHeight;
 
       let active=0;
       if(window.scrollY>=aboutStart) active=1;
