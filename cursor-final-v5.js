@@ -251,15 +251,24 @@
   }
 
   /* =========================
-     HOME RAIL — continuous movement on the line
+     HOME RAIL — SINGLE FINAL MOBILE STATE
+     Section number changes the instant the next section enters the viewport.
+     Position still travels continuously through the three visual anchors.
      ========================= */
   if(isHome){
     const rail=document.querySelector('.page-rail');
     const marker=rail?.querySelector('.page-rail__marker');
     const index=rail?.querySelector('.page-rail__index');
+    const label=rail?.querySelector('.page-rail__label');
+    const work=document.querySelector('#work');
+    const about=document.querySelector('#about');
+    const contact=document.querySelector('#contact');
+    const a01=document.querySelector('.hero .site-cta');
+    const a02=document.querySelector('.about-v14__resume');
+    const a03=document.querySelector('#contact .contact-final__label');
 
     const s=document.createElement('style');
-    s.id='mobile-rail-v6-style';
+    s.id='mobile-rail-final-style';
     s.textContent=`
       @media(max-width:900px){
         .page-rail__marker{
@@ -269,141 +278,90 @@
           will-change:top!important;
         }
         .page-rail.is-changing .page-rail__marker{
-          opacity:1!important;
-          transform:none!important;
+          opacity:1!important;transform:none!important;
         }
         .page-rail__index{
-          position:relative!important;
-          z-index:2!important;
-          transition:color .2s ease!important;
+          position:relative!important;z-index:2!important;
+          transition:color .15s ease!important;
         }
         .page-rail__index::before{
-          content:""!important;
-          position:absolute!important;
-          z-index:-1!important;
-          left:-8px!important;
-          top:-10px!important;
-          width:calc(100% + 13px)!important;
-          height:calc(100% + 18px)!important;
-          background:#0f1012!important;
-          transition:background .2s ease!important;
+          content:""!important;position:absolute!important;z-index:-1!important;
+          left:-8px!important;top:-10px!important;
+          width:calc(100% + 13px)!important;height:calc(100% + 18px)!important;
+          background:#0f1012!important;transition:background .15s ease!important;
         }
         .page-rail__label{
-          position:relative!important;
-          z-index:3!important;
-          background:transparent!important;
+          position:relative!important;z-index:3!important;background:transparent!important;
         }
-        .page-rail.is-contact .page-rail__index{
-          color:#171719!important;
-        }
-        .page-rail.is-contact .page-rail__index::before{
-          background:#f4f0eb!important;
-        }
+        .page-rail.is-contact .page-rail__index{color:#171719!important}
+        .page-rail.is-contact .page-rail__index::before{background:#f4f0eb!important}
       }
     `;
     document.head.appendChild(s);
 
-    let raf=0;
+    if(rail&&marker&&index&&label&&work&&about&&contact&&a01&&a02&&a03){
+      const clamp=(v,min,max)=>Math.max(min,Math.min(max,v));
+      let raf=0;
 
-    /* One mobile rail controller only. The old homepage controller may still
-       update labels, but this controller owns the final position + number. */
-    const anchors=[
-      {n:'01', el:document.querySelector('.hero .site-cta')},
-      {n:'02', el:document.querySelector('.about-v14__resume')},
-      {n:'03', el:document.querySelector('#contact .contact-final__label')}
-    ].filter(a=>a.el);
+      const docTop=(el)=>el.getBoundingClientRect().top+window.scrollY;
 
-    const clamp=(v,min,max)=>Math.max(min,Math.min(max,v));
+      const apply=()=>{
+        raf=0;
+        const y=window.scrollY;
+        const vh=window.innerHeight;
 
-    const markerTopFor=(el)=>{
-      const rr=rail.getBoundingClientRect();
-      const ar=el.getBoundingClientRect();
-      const numberCenter=index.offsetTop+(index.offsetHeight/2);
-      return clamp(
-        ar.top+(ar.height/2)-rr.top-numberCenter,
-        0,
-        Math.max(0,rail.clientHeight-marker.offsetHeight)
-      );
-    };
+        /* Exact section-entry thresholds:
+           as soon as the first pixel of ABOUT/CONTACT enters the viewport. */
+        const aboutStart=docTop(about)-vh;
+        const contactStart=docTop(contact)-vh;
 
-    const moveRail=()=>{
-      raf=0;
-      if(!rail||!marker||!index||anchors.length!==3) return;
+        let n='01', txt='WORK', light=false;
+        if(y>=aboutStart){n='02';txt='ABOUT'}
+        if(y>=contactStart){n='03';txt='CONTACT';light=true}
 
-      const about=document.querySelector('#about');
-      const contact=document.querySelector('#contact');
-      if(!about||!contact) return;
+        /* Continuous marker travel with exact reference destinations. */
+        const rr=rail.getBoundingClientRect();
+        const maxTop=Math.max(10,rail.clientHeight-marker.offsetHeight-10);
+        const labelCenter=label.offsetTop+(label.offsetHeight/2);
 
-      const y=window.scrollY;
-      const vh=window.innerHeight;
+        const topFor=(el)=>{
+          const r=el.getBoundingClientRect();
+          return clamp(r.top+(r.height/2)-rr.top-labelCenter,10,maxTop);
+        };
 
-      /* NUMBER SWITCH POINTS — immediately when a section starts entering. */
-      const aboutStart=about.getBoundingClientRect().top+y-vh;
-      const contactStart=contact.getBoundingClientRect().top+y-vh;
+        const t1=topFor(a01), t2=topFor(a02), t3=topFor(a03);
 
-      let active=0;
-      if(y>=aboutStart) active=1;
-      if(y>=contactStart) active=2;
+        /* The marker reaches 02's VIEW RESUME reference before Contact starts,
+           and reaches 03's GET IN TOUCH reference through Contact. */
+        const resumeY=docTop(a02)-(rr.top+labelCenter);
+        const contactAnchorY=docTop(a03)-(rr.top+labelCenter);
 
-      /* REFERENCE POINTS — separate from the switch points.
-         01 aligns with SELECTED WORK.
-         02 must pass exactly through VIEW RESUME.
-         03 must pass exactly through GET IN TOUCH. */
-      const railRect=rail.getBoundingClientRect();
-      const maxTop=Math.max(0,rail.clientHeight-marker.offsetHeight);
-      const numberCenter=index.offsetTop+(index.offsetHeight/2);
+        let top=t1;
+        if(y<resumeY){
+          const p=clamp(y/Math.max(1,resumeY),0,1);
+          top=t1+(t2-t1)*p;
+        }else if(y<contactAnchorY){
+          const p=clamp((y-resumeY)/Math.max(1,contactAnchorY-resumeY),0,1);
+          top=t2+(t3-t2)*p;
+        }else top=t3;
 
-      const desiredTop=(el)=>{
-        const r=el.getBoundingClientRect();
-        return clamp(
-          r.top+(r.height/2)-railRect.top-numberCenter,
-          0,maxTop
-        );
+        /* Final state write. The homepage's older inline listener runs first;
+           this RAF is deliberately the final mobile write for each frame. */
+        index.textContent=n;
+        label.textContent=txt;
+        rail.classList.toggle('is-light',light);
+        rail.classList.toggle('is-contact',light);
+        marker.style.setProperty('top',`${Math.round(top)}px`,'important');
       };
 
-      const t01=desiredTop(anchors[0].el);
-      const t02=desiredTop(anchors[1].el);
-      const t03=desiredTop(anchors[2].el);
-
-      /* Scroll checkpoints where each reference element itself reaches
-         the rail's visual alignment zone. */
-      const alignY=(el)=>{
-        const r=el.getBoundingClientRect();
-        const docCenter=r.top+y+(r.height/2);
-        return docCenter-(railRect.top+numberCenter);
+      const schedule=()=>{
+        if(!raf) raf=requestAnimationFrame(apply);
       };
-
-      const p01=Math.min(0,alignY(anchors[0].el));
-      const p02=alignY(anchors[1].el);
-      const p03=alignY(anchors[2].el);
-
-      let top=t01;
-      if(y<p02){
-        const t=clamp((y-p01)/Math.max(1,p02-p01),0,1);
-        top=t01+(t02-t01)*t;
-      }else if(y<p03){
-        const t=clamp((y-p02)/Math.max(1,p03-p02),0,1);
-        top=t02+(t03-t02)*t;
-      }else{
-        top=t03;
-      }
-
-      marker.style.setProperty('top',`${top}px`,'important');
-      index.textContent=anchors[active].n;
-      rail.classList.toggle('is-contact',active===2);
-      rail.classList.toggle('is-light',active===2);
-    };
-
-    const scheduleRail=()=>{
-      if(!raf) raf=requestAnimationFrame(moveRail);
-    };
-
-    /* Registered after the homepage's native controller; the nested RAF makes
-       this the final writer for the frame without monkey-patching style APIs. */
-    addEventListener('scroll',()=>requestAnimationFrame(scheduleRail),{passive:true});
-    addEventListener('resize',()=>requestAnimationFrame(scheduleRail),{passive:true});
-    addEventListener('load',()=>requestAnimationFrame(scheduleRail),{once:true});
-    requestAnimationFrame(scheduleRail);
+      addEventListener('scroll',()=>requestAnimationFrame(schedule),{passive:true});
+      addEventListener('resize',()=>requestAnimationFrame(schedule),{passive:true});
+      addEventListener('load',()=>requestAnimationFrame(schedule),{once:true});
+      requestAnimationFrame(schedule);
+    }
   }
 
   /* =========================
