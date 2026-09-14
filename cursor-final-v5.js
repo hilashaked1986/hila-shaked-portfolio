@@ -64,9 +64,7 @@
       fill:currentColor!important;
     }
 
-    /* ABOUT: top line strengthened slightly.
-       Vertical dividers stop at the bottom of the two-line words,
-       instead of stretching through the full cell height. */
+    /* ABOUT: exact two-line divider height */
     .about-v14__expertise{
       border-top:1px solid rgba(184,167,146,.58)!important;
     }
@@ -79,8 +77,9 @@
       position:absolute!important;
       left:0!important;
       top:0!important;
+      bottom:auto!important;
       width:1px!important;
-      height:2.15em!important;
+      height:2.76em!important; /* exactly 2 lines at line-height 1.38 */
       background:rgba(184,167,146,.58)!important;
       pointer-events:none!important;
     }
@@ -90,6 +89,7 @@
         border-top-color:rgba(184,167,146,.64)!important;
       }
       .about-v14__expertise span + span::before{
+        height:2.70em!important; /* exactly 2 lines at mobile line-height 1.35 */
         background:rgba(184,167,146,.64)!important;
       }
     }
@@ -256,23 +256,59 @@
     document.head.appendChild(s);
 
     let raf=0;
+
+    const railSections=[
+      document.querySelector('#work'),
+      document.querySelector('#about'),
+      document.querySelector('#contact')
+    ].filter(Boolean);
+
+    const setRailText=(section)=>{
+      if(!section||!index) return;
+      const value=section.dataset.railIndex || (
+        section.id==='work'?'01':section.id==='about'?'02':'03'
+      );
+      index.textContent=value;
+      rail.classList.toggle('is-contact',value==='03');
+    };
+
     const moveRail=()=>{
       raf=0;
-      if(!rail||!marker||!index) return;
+      if(!rail||!marker||!index||railSections.length<3) return;
 
-      const maxScroll=Math.max(
-        1,
-        document.documentElement.scrollHeight-window.innerHeight
-      );
-      const progress=Math.max(0,Math.min(1,window.scrollY/maxScroll));
+      const railRect=rail.getBoundingClientRect();
+      const markerH=marker.offsetHeight;
+      const minTop=0;
+      const maxTop=Math.max(0,rail.clientHeight-markerH);
 
-      const maxTop=Math.max(0,rail.clientHeight-marker.offsetHeight);
-      const top=progress*maxTop;
+      const work=railSections[0];
+      const about=railSections[1];
+      const contact=railSections[2];
 
-      marker.style.setProperty('top',`${top}px`,'important');
+      /* The marker follows scroll continuously, but the three headings are
+         exact snap/reference points on that continuous path. */
+      const workY=work.offsetTop;
+      const aboutY=about.offsetTop;
+      const contactY=contact.offsetTop;
+      const endY=Math.max(contactY+contact.offsetHeight-window.innerHeight,contactY+1);
 
-      const n=(index.textContent||'01').trim();
-      rail.classList.toggle('is-contact',n==='03');
+      const y=window.scrollY + window.innerHeight*0.42;
+
+      let p;
+      if(y<=aboutY){
+        const d=Math.max(1,aboutY-workY);
+        p=0.5*Math.max(0,Math.min(1,(y-workY)/d));
+        setRailText(work);
+      }else if(y<contactY){
+        const d=Math.max(1,contactY-aboutY);
+        p=0.5+0.5*Math.max(0,Math.min(1,(y-aboutY)/d));
+        setRailText(about);
+      }else{
+        p=1;
+        setRailText(contact);
+      }
+
+      marker.style.setProperty('top',`${minTop+p*(maxTop-minTop)}px`,'important');
     };
 
     const scheduleRail=()=>{
@@ -282,12 +318,6 @@
     addEventListener('scroll',scheduleRail,{passive:true});
     addEventListener('resize',scheduleRail,{passive:true});
     addEventListener('load',scheduleRail,{once:true});
-    if(index){
-      new MutationObserver(scheduleRail).observe(
-        index,
-        {childList:true,subtree:true,characterData:true}
-      );
-    }
     scheduleRail();
   }
 
@@ -329,8 +359,19 @@
         document.body.appendChild(menu);
       }
 
+      /* A dedicated close control inside the overlay guarantees the X is
+         visible above every project-specific header/menu implementation. */
+      let closeButton=menu.querySelector('.mobile-menu__close-final');
+      if(!closeButton){
+        closeButton=document.createElement('button');
+        closeButton.className='mobile-menu__close-final';
+        closeButton.type='button';
+        closeButton.setAttribute('aria-label','Close menu');
+        menu.prepend(closeButton);
+      }
+
       const s=document.createElement('style');
-      s.id='internal-menu-v6-style';
+      s.id='internal-menu-v8-style';
       s.textContent=`
         @media(max-width:900px){
           .site-header{
@@ -339,78 +380,68 @@
           }
           .site-header .desktop-nav,.site-header>nav{display:none!important}
 
+          /* CLOSED: exact homepage hamburger proportions */
           .site-header .menu-button{
             display:block!important;
-            width:42px!important;
-            height:42px!important;
-            min-width:42px!important;
-            padding:0!important;
-            margin:0!important;
-            border:0!important;
-            background:none!important;
-            color:#fff!important;
-            position:relative!important;
-            z-index:10022!important;
+            width:42px!important;height:42px!important;min-width:42px!important;
+            padding:10px!important;margin:0!important;
+            border:0!important;background:none!important;color:#fff!important;
+            position:relative!important;z-index:10022!important;
           }
-
-          /* Hide whatever line styling each project page brought with it. */
           .site-header .menu-button span{
-            display:none!important;
-          }
-
-          /* Draw one universal hamburger for every internal page. */
-          .site-header .menu-button::before,
-          .site-header .menu-button::after{
-            content:""!important;
             display:block!important;
-            position:absolute!important;
-            left:10px!important;
-            width:22px!important;
-            height:1px!important;
-            background:#fff!important;
-            transform-origin:center!important;
-            transition:top .2s ease,transform .22s ease!important;
+            position:static!important;
+            width:22px!important;height:1px!important;
+            padding:0!important;
+            margin:7px 0!important;
+            background:currentColor!important;
+            transform:none!important;
           }
-          .site-header .menu-button::before{top:14px!important}
-          .site-header .menu-button::after{top:27px!important}
+          .site-header .menu-button::before,
+          .site-header .menu-button::after{content:none!important}
 
-          /* Reliable X on open */
-          .site-header .menu-button[aria-expanded="true"]::before{
-            top:20.5px!important;
-            transform:rotate(45deg)!important;
-          }
-          .site-header .menu-button[aria-expanded="true"]::after{
-            top:20.5px!important;
-            transform:rotate(-45deg)!important;
+          /* While overlay is open, its own X is used. */
+          .site-header .menu-button[aria-expanded="true"]{
+            visibility:hidden!important;
           }
 
           body>.mobile-menu[data-mobile-menu]{
-            display:flex!important;
-            position:fixed!important;
-            inset:0!important;
-            z-index:10018!important;
-            background:#0f1012!important;
-            padding:100px 24px 44px!important;
-            flex-direction:column!important;
-            align-items:center!important;
-            justify-content:center!important;
-            gap:30px!important;
-            opacity:0!important;
-            visibility:hidden!important;
-            pointer-events:none!important;
-            transition:opacity .22s ease,visibility .22s ease!important;
+            display:flex!important;position:fixed!important;inset:0!important;
+            z-index:10030!important;background:#0f1012!important;
+            padding:100px 24px 44px!important;box-sizing:border-box!important;
+            flex-direction:column!important;align-items:center!important;justify-content:center!important;
+            gap:30px!important;opacity:0!important;visibility:hidden!important;
+            pointer-events:none!important;transition:opacity .22s ease,visibility .22s ease!important;
           }
           body>.mobile-menu[data-mobile-menu].open{
-            opacity:1!important;
-            visibility:visible!important;
-            pointer-events:auto!important;
+            opacity:1!important;visibility:visible!important;pointer-events:auto!important;
           }
           body>.mobile-menu[data-mobile-menu] a{
-            color:#f4f1eb!important;
-            text-decoration:none!important;
-            font:400 13px/1.2 Inter,Arial,sans-serif!important;
-            letter-spacing:.24em!important;
+            color:#f4f1eb!important;text-decoration:none!important;
+            font:400 13px/1.2 Inter,Arial,sans-serif!important;letter-spacing:.24em!important;
           }
+
+          .mobile-menu__close-final{
+            display:block!important;
+            position:fixed!important;
+            top:29px!important;
+            right:var(--pad,22px)!important;
+            width:42px!important;height:42px!important;
+            margin:0!important;padding:0!important;
+            border:0!important;background:transparent!important;
+            z-index:10040!important;
+          }
+          .mobile-menu__close-final::before,
+          .mobile-menu__close-final::after{
+            content:""!important;
+            position:absolute!important;
+            left:10px!important;top:20px!important;
+            width:22px!important;height:1px!important;
+            background:#fff!important;
+            transform-origin:center!important;
+          }
+          .mobile-menu__close-final::before{transform:rotate(45deg)!important}
+          .mobile-menu__close-final::after{transform:rotate(-45deg)!important}
         }
       `;
       document.head.appendChild(s);
@@ -429,6 +460,12 @@
         e.preventDefault();
         e.stopPropagation();
         setOpen(!menu.classList.contains('open'));
+      });
+
+      closeButton.addEventListener('click',e=>{
+        e.preventDefault();
+        e.stopPropagation();
+        setOpen(false);
       });
 
       menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>setOpen(false)));
