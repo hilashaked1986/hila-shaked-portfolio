@@ -251,118 +251,139 @@
   }
 
   /* =========================
-     HOME RAIL — SINGLE FINAL MOBILE STATE
-     Section number changes the instant the next section enters the viewport.
-     Position still travels continuously through the three visual anchors.
+     HOME RAIL — FINAL MOBILE RAIL
+     On mobile we render a separate rail so the old inline homepage rail
+     cannot overwrite its number/theme/position.
      ========================= */
   if(isHome){
-    const rail=document.querySelector('.page-rail');
-    const marker=rail?.querySelector('.page-rail__marker');
-    const index=rail?.querySelector('.page-rail__index');
-    const label=rail?.querySelector('.page-rail__label');
-    const work=document.querySelector('#work');
+    const originalRail=document.querySelector('.page-rail');
     const about=document.querySelector('#about');
     const contact=document.querySelector('#contact');
     const a01=document.querySelector('.hero .site-cta');
     const a02=document.querySelector('.about-v14__resume');
     const a03=document.querySelector('#contact .contact-final__label');
+    const mobileMQ=window.matchMedia('(max-width:900px)');
 
-    const s=document.createElement('style');
-    s.id='mobile-rail-final-style';
-    s.textContent=`
-      @media(max-width:900px){
-        .page-rail__marker{
-          background:transparent!important;
-          padding:10px 8px!important;
-          transition:none!important;
-          will-change:top!important;
-        }
-        .page-rail.is-changing .page-rail__marker{
-          opacity:1!important;transform:none!important;
-        }
-        .page-rail__index{
-          position:relative!important;z-index:2!important;
-          transition:color .15s ease!important;
-        }
-        .page-rail__index::before{
-          content:""!important;position:absolute!important;z-index:-1!important;
-          left:-8px!important;top:-10px!important;
-          width:calc(100% + 13px)!important;height:calc(100% + 18px)!important;
-          background:#0f1012!important;transition:background .15s ease!important;
-        }
-        .page-rail__label{
-          position:relative!important;z-index:3!important;background:transparent!important;
-        }
-        .page-rail.is-contact .page-rail__index{color:#171719!important}
-        .page-rail.is-contact .page-rail__index::before{background:#f4f0eb!important}
-      }
-    `;
-    document.head.appendChild(s);
+    if(originalRail&&about&&contact&&a01&&a02&&a03){
+      const clone=originalRail.cloneNode(true);
+      clone.classList.add('page-rail--mobile-final');
+      clone.removeAttribute('aria-hidden');
+      clone.setAttribute('aria-hidden','true');
 
-    if(rail&&marker&&index&&label&&work&&about&&contact&&a01&&a02&&a03){
+      const cloneIndex=clone.querySelector('.page-rail__index');
+      const cloneLabel=clone.querySelector('.page-rail__label');
+      const cloneMarker=clone.querySelector('.page-rail__marker');
+
+      cloneIndex?.removeAttribute('data-rail-index');
+      cloneLabel?.removeAttribute('data-rail-label');
+
+      originalRail.insertAdjacentElement('afterend',clone);
+
+      const style=document.createElement('style');
+      style.id='home-mobile-rail-v15';
+      style.textContent=`
+        .page-rail--mobile-final{display:none}
+        @media(max-width:900px){
+          .page-rail--source-hidden{display:none!important}
+          .page-rail--mobile-final{display:block!important}
+          .page-rail--mobile-final .page-rail__marker{
+            transition:none!important;
+            will-change:top!important;
+          }
+          .page-rail--mobile-final.is-light .page-rail__marker{
+            background:#f4f0eb!important;
+          }
+          .page-rail--mobile-final.is-light .page-rail__index{
+            color:#171719!important;
+          }
+        }
+      `;
+      document.head.appendChild(style);
+
+      /* The old inline homepage rail keeps running, but only on this hidden source rail. */
+      originalRail.classList.add('page-rail--source-hidden');
+
       const clamp=(v,min,max)=>Math.max(min,Math.min(max,v));
+      const docTop=(el)=>el.getBoundingClientRect().top+window.scrollY;
       let raf=0;
 
-      const docTop=(el)=>el.getBoundingClientRect().top+window.scrollY;
-
-      const apply=()=>{
+      const update=()=>{
         raf=0;
+        if(!mobileMQ.matches) return;
+
         const y=window.scrollY;
-        const vh=window.innerHeight;
+        const railRect=clone.getBoundingClientRect();
+        const markerH=cloneMarker.offsetHeight;
+        const minTop=10;
+        const maxTop=Math.max(minTop,clone.clientHeight-markerH-10);
 
-        /* Exact section boundaries:
-           switch only when the new section itself reaches the top of the viewport.
-           This prevents 02 from appearing over Tami4 and 03 from appearing
-           while ABOUT is still on screen. */
-        const aboutStart=docTop(about);
-        const contactStart=docTop(contact);
+        /* Switch exactly when the next section reaches the fixed rail start. */
+        const triggerY=railRect.top;
+        const aboutStart=docTop(about)-triggerY;
+        const contactStart=docTop(contact)-triggerY;
 
-        let n='01', txt='WORK', light=false;
-        if(y>=aboutStart){n='02';txt='ABOUT'}
-        if(y>=contactStart){n='03';txt='CONTACT';light=true}
+        let n='01';
+        let txt='WORK';
+        let light=false;
 
-        /* Continuous marker travel with exact reference destinations. */
-        const rr=rail.getBoundingClientRect();
-        const maxTop=Math.max(10,rail.clientHeight-marker.offsetHeight-10);
-        const labelCenter=label.offsetTop+(label.offsetHeight/2);
+        if(y>=aboutStart){
+          n='02';
+          txt='ABOUT';
+        }
+        if(y>=contactStart){
+          n='03';
+          txt='CONTACT';
+          light=true;
+        }
 
-        const topFor=(el)=>{
+        cloneIndex.textContent=n;
+        cloneLabel.textContent=txt;
+        clone.classList.toggle('is-light',light);
+        clone.classList.toggle('is-contact',light);
+
+        /* Independent visual references:
+           01 -> SELECTED WORK, 02 -> VIEW RESUME, 03 -> GET IN TOUCH. */
+        const labelCenter=cloneLabel.offsetTop+(cloneLabel.offsetHeight/2);
+
+        const targetTop=(el)=>{
           const r=el.getBoundingClientRect();
-          return clamp(r.top+(r.height/2)-rr.top-labelCenter,10,maxTop);
+          return clamp(
+            r.top+(r.height/2)-railRect.top-labelCenter,
+            minTop,maxTop
+          );
         };
 
-        const t1=topFor(a01), t2=topFor(a02), t3=topFor(a03);
+        const t1=targetTop(a01);
+        const t2=targetTop(a02);
+        const t3=targetTop(a03);
 
-        /* The marker reaches 02's VIEW RESUME reference before Contact starts,
-           and reaches 03's GET IN TOUCH reference through Contact. */
-        const resumeY=docTop(a02)-(rr.top+labelCenter);
-        const contactAnchorY=docTop(a03)-(rr.top+labelCenter);
+        const p1=0;
+        const p2=Math.max(p1+1,docTop(a02)-(railRect.top+labelCenter));
+        const p3=Math.max(p2+1,docTop(a03)-(railRect.top+labelCenter));
 
         let top=t1;
-        if(y<resumeY){
-          const p=clamp(y/Math.max(1,resumeY),0,1);
+        if(y<=p2){
+          const p=clamp((y-p1)/(p2-p1),0,1);
           top=t1+(t2-t1)*p;
-        }else if(y<contactAnchorY){
-          const p=clamp((y-resumeY)/Math.max(1,contactAnchorY-resumeY),0,1);
+        }else if(y<=p3){
+          const p=clamp((y-p2)/(p3-p2),0,1);
           top=t2+(t3-t2)*p;
-        }else top=t3;
+        }else{
+          top=t3;
+        }
 
-        /* Final state write. The homepage's older inline listener runs first;
-           this RAF is deliberately the final mobile write for each frame. */
-        index.textContent=n;
-        label.textContent=txt;
-        rail.classList.toggle('is-light',light);
-        rail.classList.toggle('is-contact',light);
-        marker.style.setProperty('top',`${Math.round(top)}px`,'important');
+        cloneMarker.style.top=`${Math.round(clamp(top,minTop,maxTop))}px`;
       };
 
       const schedule=()=>{
-        if(!raf) raf=requestAnimationFrame(apply);
+        if(!raf) raf=requestAnimationFrame(update);
       };
-      addEventListener('scroll',()=>requestAnimationFrame(schedule),{passive:true});
-      addEventListener('resize',()=>requestAnimationFrame(schedule),{passive:true});
-      addEventListener('load',()=>requestAnimationFrame(schedule),{once:true});
-      requestAnimationFrame(schedule);
+
+      window.addEventListener('scroll',schedule,{passive:true});
+      window.addEventListener('resize',schedule,{passive:true});
+      mobileMQ.addEventListener?.('change',schedule);
+      requestAnimationFrame(update);
+      window.addEventListener('load',()=>requestAnimationFrame(update),{once:true});
     }
   }
 
