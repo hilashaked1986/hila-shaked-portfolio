@@ -257,68 +257,81 @@
 
     let raf=0;
 
-    const railSections=[
-      document.querySelector('#work'),
-      document.querySelector('#about'),
-      document.querySelector('#contact')
-    ].filter(Boolean);
+    /* The homepage contains an older inline rail controller that writes marker.style.top
+       on every scroll. On mobile we own that inline property, so its writes cannot win. */
+    const nativeTopDescriptor=Object.getOwnPropertyDescriptor(CSSStyleDeclaration.prototype,'top');
+    if(nativeTopDescriptor?.set && nativeTopDescriptor?.get){
+      try{
+        Object.defineProperty(marker.style,'top',{
+          configurable:true,
+          get(){ return nativeTopDescriptor.get.call(marker.style); },
+          set(){ /* ignore the old inline homepage controller on mobile */ }
+        });
+      }catch(e){}
+    }
 
-    const setRailText=(section)=>{
-      if(!section||!index) return;
-      const value=section.dataset.railIndex || (
-        section.id==='work'?'01':section.id==='about'?'02':'03'
-      );
-      index.textContent=value;
-      rail.classList.toggle('is-contact',value==='03');
+    const anchors=[
+      {n:'01', el:document.querySelector('.hero .site-cta')},
+      {n:'02', el:document.querySelector('.about-v14__resume')},
+      {n:'03', el:document.querySelector('#contact .contact-final__label')}
+    ].filter(a=>a.el);
+
+    const anchorTop=(a)=>{
+      const rr=rail.getBoundingClientRect();
+      const ar=a.el.getBoundingClientRect();
+      const numberCenter=index.offsetTop+(index.offsetHeight/2);
+      return Math.max(0,Math.min(
+        Math.max(0,rail.clientHeight-marker.offsetHeight),
+        ar.top+(ar.height/2)-rr.top-numberCenter
+      ));
     };
 
     const moveRail=()=>{
       raf=0;
-      if(!rail||!marker||!index||railSections.length<3) return;
+      if(!rail||!marker||!index||anchors.length!==3) return;
 
-      const railRect=rail.getBoundingClientRect();
-      const markerH=marker.offsetHeight;
-      const minTop=0;
-      const maxTop=Math.max(0,rail.clientHeight-markerH);
+      const rr=rail.getBoundingClientRect();
+      const numberCenter=index.offsetTop+(index.offsetHeight/2);
+      const viewportTarget=window.innerHeight*.60;
 
-      const work=railSections[0];
-      const about=railSections[1];
-      const contact=railSections[2];
+      /* Calculate the three exact scroll positions at which each heading crosses
+         the homepage focus line. These are the rail's true reference points. */
+      const points=anchors.map(a=>{
+        const docCenter=a.el.getBoundingClientRect().top+window.scrollY+(a.el.offsetHeight/2);
+        return docCenter-viewportTarget;
+      });
 
-      /* The marker follows scroll continuously, but the three headings are
-         exact snap/reference points on that continuous path. */
-      const workY=work.offsetTop;
-      const aboutY=about.offsetTop;
-      const contactY=contact.offsetTop;
-      const endY=Math.max(contactY+contact.offsetHeight-window.innerHeight,contactY+1);
+      const tops=anchors.map(anchorTop);
+      const y=window.scrollY;
 
-      const y=window.scrollY + window.innerHeight*0.42;
-
-      let p;
-      if(y<=aboutY){
-        const d=Math.max(1,aboutY-workY);
-        p=0.5*Math.max(0,Math.min(1,(y-workY)/d));
-        setRailText(work);
-      }else if(y<contactY){
-        const d=Math.max(1,contactY-aboutY);
-        p=0.5+0.5*Math.max(0,Math.min(1,(y-aboutY)/d));
-        setRailText(about);
+      let top,active;
+      if(y<=points[0]){
+        top=tops[0]; active=0;
+      }else if(y<points[1]){
+        const t=Math.max(0,Math.min(1,(y-points[0])/Math.max(1,points[1]-points[0])));
+        top=tops[0]+(tops[1]-tops[0])*t; active=0;
+      }else if(y<points[2]){
+        const t=Math.max(0,Math.min(1,(y-points[1])/Math.max(1,points[2]-points[1])));
+        top=tops[1]+(tops[2]-tops[1])*t; active=1;
       }else{
-        p=1;
-        setRailText(contact);
+        top=tops[2]; active=2;
       }
 
-      marker.style.setProperty('top',`${minTop+p*(maxTop-minTop)}px`,'important');
+      marker.style.setProperty('top',`${top}px`,'important');
+      index.textContent=anchors[active].n;
+      rail.classList.toggle('is-contact',active===2);
+      rail.classList.toggle('is-light',active===2);
     };
 
     const scheduleRail=()=>{
       if(!raf) raf=requestAnimationFrame(moveRail);
     };
 
-    addEventListener('scroll',scheduleRail,{passive:true});
-    addEventListener('resize',scheduleRail,{passive:true});
-    addEventListener('load',scheduleRail,{once:true});
-    scheduleRail();
+    /* Run after the old homepage scroll listener so our mobile rail is the final writer. */
+    addEventListener('scroll',()=>requestAnimationFrame(scheduleRail),{passive:true});
+    addEventListener('resize',()=>requestAnimationFrame(scheduleRail),{passive:true});
+    addEventListener('load',()=>requestAnimationFrame(scheduleRail),{once:true});
+    requestAnimationFrame(scheduleRail);
   }
 
   /* =========================
@@ -416,9 +429,38 @@
           body>.mobile-menu[data-mobile-menu].open{
             opacity:1!important;visibility:visible!important;pointer-events:auto!important;
           }
+          body>.mobile-menu[data-mobile-menu]{
+            justify-content:flex-start!important;
+            padding:clamp(118px,17vh,154px) 38px 50px!important;
+            gap:0!important;
+            background:rgba(15,16,18,.985)!important;
+          }
           body>.mobile-menu[data-mobile-menu] a{
-            color:#f4f1eb!important;text-decoration:none!important;
-            font:400 13px/1.2 Inter,Arial,sans-serif!important;letter-spacing:.24em!important;
+            display:flex!important;
+            align-items:center!important;
+            width:100%!important;
+            min-height:82px!important;
+            margin:0!important;
+            padding:0!important;
+            border:0!important;
+            border-bottom:1px solid rgba(244,241,235,.14)!important;
+            color:rgba(244,241,235,.86)!important;
+            text-decoration:none!important;
+            font-family:Inter,Arial,sans-serif!important;
+            font-size:clamp(15px,4.4vw,18px)!important;
+            font-weight:400!important;
+            line-height:1.2!important;
+            letter-spacing:.24em!important;
+            transition:color .25s ease,border-color .25s ease,padding-left .25s ease!important;
+          }
+          body>.mobile-menu[data-mobile-menu] a:first-of-type{
+            border-top:1px solid rgba(244,241,235,.14)!important;
+          }
+          body>.mobile-menu[data-mobile-menu] a:hover,
+          body>.mobile-menu[data-mobile-menu] a:focus-visible{
+            color:#f4f1eb!important;
+            border-color:rgba(184,167,146,.48)!important;
+            padding-left:4px!important;
           }
 
           .mobile-menu__close-final{
