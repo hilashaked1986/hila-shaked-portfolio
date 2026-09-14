@@ -41,26 +41,56 @@
   const globalStyle=document.createElement('style');
   globalStyle.id='portfolio-final-ui-style';
   globalStyle.textContent=`
+    /* CTA: same weight and same hover behavior for BOTH homepage buttons */
     .site-cta,
     .site-cta .cta-label{
       font-weight:500!important;
       color:#b8a792!important;
     }
+    .site-cta .arrow-mark{
+      color:#b8a792!important;
+      fill:currentColor!important;
+    }
+    .site-cta:hover,
+    .site-cta:focus-visible,
+    .site-cta:hover .cta-label,
+    .site-cta:focus-visible .cta-label,
+    .site-cta:hover .arrow-mark,
+    .site-cta:focus-visible .arrow-mark{
+      color:#f4f1eb!important;
+    }
+    .site-cta:hover .arrow-mark,
+    .site-cta:focus-visible .arrow-mark{
+      fill:currentColor!important;
+    }
 
-    /* ABOUT separators — visible on both desktop and mobile */
+    /* ABOUT: top line strengthened slightly.
+       Vertical dividers stop at the bottom of the two-line words,
+       instead of stretching through the full cell height. */
     .about-v14__expertise{
       border-top:1px solid rgba(184,167,146,.58)!important;
     }
-    .about-v14__expertise span + span{
-      border-left:1px solid rgba(184,167,146,.58)!important;
+    .about-v14__expertise span{
+      position:relative!important;
+      border-left:0!important;
+    }
+    .about-v14__expertise span + span::before{
+      content:""!important;
+      position:absolute!important;
+      left:0!important;
+      top:0!important;
+      width:1px!important;
+      height:2.15em!important;
+      background:rgba(184,167,146,.58)!important;
+      pointer-events:none!important;
     }
 
     @media(max-width:900px){
       .about-v14__expertise{
         border-top-color:rgba(184,167,146,.64)!important;
       }
-      .about-v14__expertise span + span{
-        border-left-color:rgba(184,167,146,.64)!important;
+      .about-v14__expertise span + span::before{
+        background:rgba(184,167,146,.64)!important;
       }
     }
   `;
@@ -173,7 +203,7 @@
   }
 
   /* =========================
-     HOME RAIL
+     HOME RAIL — continuous movement on the line
      ========================= */
   if(isHome){
     const rail=document.querySelector('.page-rail');
@@ -181,13 +211,14 @@
     const index=rail?.querySelector('.page-rail__index');
 
     const s=document.createElement('style');
-    s.id='mobile-rail-v5-style';
+    s.id='mobile-rail-v6-style';
     s.textContent=`
       @media(max-width:900px){
         .page-rail__marker{
           background:transparent!important;
           padding:10px 8px!important;
-          transition:top .52s cubic-bezier(.22,.61,.36,1)!important;
+          transition:none!important;
+          will-change:top!important;
         }
         .page-rail.is-changing .page-rail__marker{
           opacity:1!important;
@@ -196,7 +227,7 @@
         .page-rail__index{
           position:relative!important;
           z-index:2!important;
-          transition:color .25s ease!important;
+          transition:color .2s ease!important;
         }
         .page-rail__index::before{
           content:""!important;
@@ -207,15 +238,13 @@
           width:calc(100% + 13px)!important;
           height:calc(100% + 18px)!important;
           background:#0f1012!important;
-          transition:background .25s ease!important;
+          transition:background .2s ease!important;
         }
         .page-rail__label{
           position:relative!important;
           z-index:3!important;
           background:transparent!important;
         }
-
-        /* Contact section: number block follows the light section */
         .page-rail.is-contact .page-rail__index{
           color:#171719!important;
         }
@@ -226,61 +255,40 @@
     `;
     document.head.appendChild(s);
 
-    const getAnchor=(n)=>{
-      if(n==='01') return document.querySelector('.hero .site-cta');
-      if(n==='02') return document.querySelector('.about-v14__resume');
-      if(n==='03') return document.querySelector('.contact-final__label');
-      return null;
-    };
-
-    let targetTop=0;
-    let currentTop=0;
-    let initialized=false;
-
-    const computeTarget=()=>{
+    let raf=0;
+    const moveRail=()=>{
+      raf=0;
       if(!rail||!marker||!index) return;
+
+      const maxScroll=Math.max(
+        1,
+        document.documentElement.scrollHeight-window.innerHeight
+      );
+      const progress=Math.max(0,Math.min(1,window.scrollY/maxScroll));
+
+      const maxTop=Math.max(0,rail.clientHeight-marker.offsetHeight);
+      const top=progress*maxTop;
+
+      marker.style.setProperty('top',`${top}px`,'important');
+
       const n=(index.textContent||'01').trim();
-      const anchor=getAnchor(n);
-      if(!anchor) return;
-
       rail.classList.toggle('is-contact',n==='03');
-
-      const rr=rail.getBoundingClientRect();
-      const ar=anchor.getBoundingClientRect();
-      const numberCenter=index.offsetTop+(index.offsetHeight/2);
-
-      let t=(ar.top+(ar.height/2))-rr.top-numberCenter;
-      const max=Math.max(0,rail.clientHeight-marker.offsetHeight);
-      targetTop=Math.max(0,Math.min(max,t));
-
-      if(!initialized){
-        currentTop=targetTop;
-        marker.style.top=`${currentTop}px`;
-        initialized=true;
-      }
     };
 
-    /* Smoothly chase the target instead of jumping between 01 / 02 / 03 */
-    const animateRail=()=>{
-      if(initialized && marker){
-        currentTop += (targetTop-currentTop)*0.12;
-        if(Math.abs(targetTop-currentTop)<0.1) currentTop=targetTop;
-        marker.style.top=`${currentTop}px`;
-      }
-      requestAnimationFrame(animateRail);
+    const scheduleRail=()=>{
+      if(!raf) raf=requestAnimationFrame(moveRail);
     };
 
-    const schedule=()=>requestAnimationFrame(computeTarget);
-
-    addEventListener('scroll',schedule,{passive:true});
-    addEventListener('resize',schedule,{passive:true});
-    addEventListener('load',schedule,{once:true});
+    addEventListener('scroll',scheduleRail,{passive:true});
+    addEventListener('resize',scheduleRail,{passive:true});
+    addEventListener('load',scheduleRail,{once:true});
     if(index){
-      new MutationObserver(schedule).observe(index,{childList:true,subtree:true,characterData:true});
+      new MutationObserver(scheduleRail).observe(
+        index,
+        {childList:true,subtree:true,characterData:true}
+      );
     }
-
-    computeTarget();
-    animateRail();
+    scheduleRail();
   }
 
   /* =========================
@@ -322,7 +330,7 @@
       }
 
       const s=document.createElement('style');
-      s.id='internal-menu-v5-style';
+      s.id='internal-menu-v6-style';
       s.textContent=`
         @media(max-width:900px){
           .site-header{
@@ -333,32 +341,46 @@
 
           .site-header .menu-button{
             display:block!important;
-            width:42px!important;height:42px!important;min-width:42px!important;
-            padding:10px!important;margin:0!important;
-            border:0!important;background:none!important;color:#fff!important;
-            position:relative!important;z-index:10022!important;
+            width:42px!important;
+            height:42px!important;
+            min-width:42px!important;
+            padding:0!important;
+            margin:0!important;
+            border:0!important;
+            background:none!important;
+            color:#fff!important;
+            position:relative!important;
+            z-index:10022!important;
           }
 
+          /* Hide whatever line styling each project page brought with it. */
           .site-header .menu-button span{
+            display:none!important;
+          }
+
+          /* Draw one universal hamburger for every internal page. */
+          .site-header .menu-button::before,
+          .site-header .menu-button::after{
+            content:""!important;
             display:block!important;
             position:absolute!important;
             left:10px!important;
             width:22px!important;
             height:1px!important;
-            margin:0!important;
-            background:currentColor!important;
+            background:#fff!important;
             transform-origin:center!important;
             transition:top .2s ease,transform .22s ease!important;
           }
-          .site-header .menu-button span:first-child{top:14px!important}
-          .site-header .menu-button span:last-child{top:27px!important}
+          .site-header .menu-button::before{top:14px!important}
+          .site-header .menu-button::after{top:27px!important}
 
-          .site-header .menu-button[aria-expanded="true"] span:first-child{
-            top:20px!important;
+          /* Reliable X on open */
+          .site-header .menu-button[aria-expanded="true"]::before{
+            top:20.5px!important;
             transform:rotate(45deg)!important;
           }
-          .site-header .menu-button[aria-expanded="true"] span:last-child{
-            top:20px!important;
+          .site-header .menu-button[aria-expanded="true"]::after{
+            top:20.5px!important;
             transform:rotate(-45deg)!important;
           }
 
