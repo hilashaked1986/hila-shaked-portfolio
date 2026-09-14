@@ -1,4 +1,5 @@
 (()=>{
+  window.__HILA_PORTFOLIO_FIX_VERSION__='V17';
   /* =========================
      DESKTOP: Skyhawk order/size
      ========================= */
@@ -258,13 +259,14 @@
   if(isHome){
     const originalRail=document.querySelector('.page-rail');
     const about=document.querySelector('#about');
+    const aboutTitle=document.querySelector('#about-title');
     const contact=document.querySelector('#contact');
     const a01=document.querySelector('.hero .site-cta');
     const a02=document.querySelector('.about-v14__resume');
     const a03=document.querySelector('#contact .contact-final__label');
     const mobileMQ=window.matchMedia('(max-width:900px)');
 
-    if(originalRail&&about&&contact&&a01&&a02&&a03){
+    if(originalRail&&about&&aboutTitle&&contact&&a01&&a02&&a03){
       const clone=originalRail.cloneNode(true);
       clone.classList.add('page-rail--mobile-final');
       clone.removeAttribute('aria-hidden');
@@ -286,15 +288,40 @@
         @media(max-width:900px){
           .page-rail--source-hidden{display:none!important}
           .page-rail--mobile-final{display:block!important}
+
+          /* Marker background belongs only to the number — never to the hidden label. */
           .page-rail--mobile-final .page-rail__marker{
+            min-width:0!important;
+            width:auto!important;
+            padding:0!important;
+            gap:0!important;
+            background:transparent!important;
             transition:none!important;
             will-change:top!important;
           }
-          .page-rail--mobile-final.is-light .page-rail__marker{
-            background:#f4f0eb!important;
+          .page-rail--mobile-final .page-rail__label{
+            display:none!important;
+          }
+          .page-rail--mobile-final .page-rail__index{
+            display:block!important;
+            width:auto!important;
+            min-width:0!important;
+            padding:10px 8px 10px 10px!important;
+            background:#0f1012!important;
+            color:#b8a792!important;
+            transition:background .15s ease,color .15s ease!important;
           }
           .page-rail--mobile-final.is-light .page-rail__index{
+            background:#f4f0eb!important;
             color:#171719!important;
+          }
+
+          /* Pull the mobile hero image slightly back so more of the light beams are visible. */
+          .hero .hero-image{
+            background-size:auto 96%!important;
+            background-repeat:no-repeat!important;
+            background-position:60% center!important;
+            background-color:#0f1012!important;
           }
         }
       `;
@@ -317,10 +344,13 @@
         const minTop=10;
         const maxTop=Math.max(minTop,clone.clientHeight-markerH-10);
 
-        /* Switch exactly when the next section reaches the fixed rail start. */
-        const triggerY=railRect.top;
-        const aboutStart=docTop(about)-triggerY;
-        const contactStart=docTop(contact)-triggerY;
+        /* Visible section starts:
+           02 begins when the ABOUT heading first enters the viewport.
+           03 begins the instant the light CONTACT section enters the viewport.
+           These are intentionally independent from VIEW RESUME / GET IN TOUCH,
+           which remain position reference points only. */
+        const aboutStart=docTop(aboutTitle)-(window.innerHeight * 0.92);
+        const contactStart=docTop(contact)-window.innerHeight;
 
         let n='01';
         let txt='WORK';
