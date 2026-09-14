@@ -2140,38 +2140,68 @@ main{
   .site-cta:hover .arrow-mark,.site-cta:focus-visible .arrow-mark{color:var(--ui-ivory,#f4f1eb)!important;}
 }
 
-/* FINAL QA PATCH 2026-09-13 — SELECTED WORK and VIEW RESUME must match exactly */
-@media (min-width:901px){
-  .hero-content .site-cta,
-  .about-v14__resume{
-    color:#d8be9d!important;
-    font-family:Inter,Arial,sans-serif!important;
-    font-size:10px!important;
-    font-weight:500!important;
-    letter-spacing:.26em!important;
+
+/* =========================================================
+   FINAL SOURCE FIX — MOBILE HOME RAIL + HERO
+   One rail owner lives in home-preview-v36-mobile-final.html.
+   ========================================================= */
+@media (max-width:900px){
+  /* Compact marker: background sits only behind the number. */
+  .page-rail__marker{
+    min-width:0 !important;
+    width:auto !important;
+    padding:0 !important;
+    gap:0 !important;
+    background:transparent !important;
   }
-  .hero-content .site-cta .cta-label,
-  .about-v14__resume .cta-label{
-    color:#d8be9d!important;
-    font-family:Inter,Arial,sans-serif!important;
-    font-size:10px!important;
-    font-weight:500!important;
-    line-height:1!important;
-    letter-spacing:.26em!important;
-    opacity:1!important;
+
+  .page-rail__label{
+    display:none !important;
   }
-  .hero-content .site-cta .arrow-mark,
-  .about-v14__resume .arrow-mark{
-    color:#d8be9d!important;
-    fill:#d8be9d!important;
+
+  .page-rail__index{
+    display:block !important;
+    width:auto !important;
+    min-width:0 !important;
+    padding:10px 8px 10px 10px !important;
+    background:#0f1012 !important;
+    color:var(--ui-accent) !important;
   }
-  .hero-content .site-cta:hover,
-  .hero-content .site-cta:focus-visible,
-  .about-v14__resume:hover,
-  .about-v14__resume:focus-visible,
-  .hero-content .site-cta:hover .cta-label,
-  .about-v14__resume:hover .cta-label{
-    color:var(--ui-ivory,#f4f1eb)!important;
+
+  .page-rail.is-light .page-rail__marker{
+    background:transparent !important;
+  }
+
+  .page-rail.is-light .page-rail__index{
+    background:#f4f0eb !important;
+    color:#171719 !important;
+  }
+
+  /* Keep the mobile hero composition stable while the browser chrome changes.
+     The image is slightly pulled back to reveal more of the light beams. */
+  .hero .hero-media{
+    top:0 !important;
+    right:0 !important;
+    bottom:auto !important;
+    left:0 !important;
+    height:100svh !important;
+    min-height:100svh !important;
+  }
+
+  .hero .hero-image{
+    inset:0 !important;
+    height:100svh !important;
+    min-height:100svh !important;
+    background-size:auto 96svh !important;
+    background-repeat:no-repeat !important;
+    background-position:60% center !important;
+    background-color:#0f1012 !important;
+    transform:none !important;
+  }
+
+  .hero .hero-vignette{
+    inset:0 !important;
+    height:100svh !important;
+    min-height:100svh !important;
   }
 }
-

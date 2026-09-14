@@ -11,7 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="home-preview-v36-mobile-final.css" />
-<link rel="stylesheet" href="desktop-final-v5.css">
+  <link rel="stylesheet" href="desktop-final-v5.css">
 </head>
 <body>
   <header class="site-header" data-header>
@@ -34,7 +34,6 @@
     <a href="#contact">CONTACT</a>
   </div>
 
-
   <aside class="page-rail" aria-hidden="true">
     <span class="page-rail__line"></span>
     <div class="page-rail__marker">
@@ -50,7 +49,7 @@
         <div class="hero-vignette"></div>
       </div>
       <canvas class="ambient-air" data-ambient-air data-count="90" data-opacity="0.38" data-speed="0.030" aria-hidden="true"></canvas>
-<div class="hero-content">
+      <div class="hero-content">
         <h1 id="hero-title" class="hero-enter">
           <span>Nothing</span>
           <span>becomes <em>clear</em></span>
@@ -117,11 +116,9 @@
       </div>
     </section>
 
-
-
     <section class="about-v14" id="about" data-rail-index="02" data-rail-label="ABOUT" aria-labelledby="about-title">
       <canvas class="ambient-air" data-ambient-air data-count="140" data-opacity="0.36" data-speed="0.027" aria-hidden="true"></canvas>
-<div class="about-v14__portrait reveal">
+      <div class="about-v14__portrait reveal">
         <img src="assets/hila-transparent.png"
              onerror="this.onerror=null;this.src='assets/hila.png';"
              alt="Portrait of Hila Shaked">
@@ -132,21 +129,12 @@
 
         <div class="about-v14__copy">
           <p class="about-v14__lead">Design begins with intention.</p>
-
-          <p>
-            Every project starts with a different question, but the goal is always the same:
-            to reveal what matters.
-          </p>
-
-          <p>
-            I create brand identities, websites and digital experiences shaped by thoughtful
-            decisions, careful structure and meticulous attention to detail.
-          </p>
-
-          <p>
-            Because good design isn't about adding more.<br>
-            It's about knowing what deserves to remain.
-          </p>
+          <p>Every project starts with a different question, but the goal is always the same:
+            to reveal what matters.</p>
+          <p>I create brand identities, websites and digital experiences shaped by thoughtful
+            decisions, careful structure and meticulous attention to detail.</p>
+          <p>Because good design isn't about adding more.<br>
+            It's about knowing what deserves to remain.</p>
         </div>
 
         <div class="about-v14__expertise" aria-label="Areas of expertise">
@@ -168,7 +156,6 @@
         </a>
       </div>
     </section>
-
 
     <section class="contact-v22" id="contact" data-rail-index="03" data-rail-label="CONTACT" data-rail-theme="light" aria-labelledby="contact-title">
       <div class="contact-v22__inner">
@@ -196,10 +183,7 @@
         <a href="#top">BACK TO TOP ↑</a>
       </footer>
     </section>
-
   </main>
-
-
 
   <div class="custom-cursor" aria-hidden="true">
     <span class="custom-cursor__ring"><span class="custom-cursor__label">VIEW</span></span>
@@ -212,15 +196,24 @@
     (() => {
       const rail = document.querySelector('.page-rail');
       const marker = rail?.querySelector('.page-rail__marker');
-      const index = document.querySelector('[data-rail-index]');
-      const label = document.querySelector('[data-rail-label]');
-      const sections = [...document.querySelectorAll('section[data-rail-index]')];
-      if (!rail || !marker || !index || !label || !sections.length) return;
+      const index = rail?.querySelector('[data-rail-index]');
+      const label = rail?.querySelector('[data-rail-label]');
+      const hero = document.querySelector('.hero[data-hero]');
+      const about = document.querySelector('#about');
+      const aboutTitle = document.querySelector('#about-title');
+      const contact = document.querySelector('#contact');
+      const heroCta = document.querySelector('.hero .site-cta');
+      const resumeCta = document.querySelector('.about-v14__resume');
+      const contactLabel = document.querySelector('#contact .contact-final__label');
+      const mobile = window.matchMedia('(max-width:900px)');
 
-      let activeSection = sections[0];
-      let changeTimer;
+      if (!rail || !marker || !index || !label || !hero || !about || !aboutTitle ||
+          !contact || !heroCta || !resumeCta || !contactLabel) return;
 
-      const positionMarker = (section) => {
+      const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
+      const docTop = (el) => el.getBoundingClientRect().top + window.scrollY;
+
+      const positionDesktop = (section) => {
         const anchor = section.querySelector('.site-cta, .contact-final__label, .contact-v22__eyebrow');
         if (!anchor) return;
 
@@ -230,12 +223,11 @@
         const desiredTop = anchorRect.top + (anchorRect.height / 2) - railRect.top - labelCenter;
         const minimumTop = 10;
         const maximumTop = Math.max(minimumTop, rail.clientHeight - marker.offsetHeight - 10);
-        const clampedTop = Math.min(Math.max(desiredTop, minimumTop), maximumTop);
-
-        marker.style.top = `${Math.round(clampedTop)}px`;
+        marker.style.top = `${Math.round(clamp(desiredTop, minimumTop, maximumTop))}px`;
       };
 
-      const updateRail = () => {
+      const updateDesktop = () => {
+        const sections = [...document.querySelectorAll('section[data-rail-index]')];
         const focusLine = window.innerHeight * 0.60;
         let nextSection = sections[0];
 
@@ -248,26 +240,84 @@
           if (rect.top <= focusLine) nextSection = section;
         }
 
-        const nextIndex = nextSection.dataset.railIndex || '01';
-        const nextLabel = nextSection.dataset.railLabel || '';
-        const nextTheme = nextSection.dataset.railTheme || 'dark';
-
-        activeSection = nextSection;
-        rail.classList.toggle('is-light', nextTheme === 'light');
+        index.textContent = nextSection.dataset.railIndex || '01';
+        label.textContent = nextSection.dataset.railLabel || '';
+        rail.classList.toggle('is-light', (nextSection.dataset.railTheme || 'dark') === 'light');
         rail.classList.remove('is-changing');
+        positionDesktop(nextSection);
+      };
+
+      const updateMobile = () => {
+        const y = window.scrollY;
+        const railRect = rail.getBoundingClientRect();
+        const minTop = 10;
+        const maxTop = Math.max(minTop, rail.clientHeight - marker.offsetHeight - 10);
+        const headerHeight = document.querySelector('.site-header')?.getBoundingClientRect().height || 72;
+
+        /* 02: when the ABOUT title enters the visible page.
+           03: only when CONTACT itself reaches the top content line.
+           The CTA elements are visual reference points only; they do not trigger number changes. */
+        const aboutStart = docTop(aboutTitle) - (window.innerHeight * 0.92);
+        const contactStart = docTop(contact) - headerHeight;
+
+        let nextIndex = '01';
+        let nextLabel = 'WORK';
+        let light = false;
+
+        if (y >= aboutStart) {
+          nextIndex = '02';
+          nextLabel = 'ABOUT';
+        }
+        if (y >= contactStart) {
+          nextIndex = '03';
+          nextLabel = 'CONTACT';
+          light = true;
+        }
+
         index.textContent = nextIndex;
         label.textContent = nextLabel;
-        positionMarker(activeSection);
+        rail.classList.toggle('is-light', light);
+        rail.classList.toggle('is-contact', light);
+        rail.classList.remove('is-changing');
+
+        /* Keep the smooth travel down the rail. */
+        const markerCenter = index.offsetTop + (index.offsetHeight / 2);
+        const targetTop = (el) => {
+          const rect = el.getBoundingClientRect();
+          return clamp(rect.top + rect.height / 2 - railRect.top - markerCenter, minTop, maxTop);
+        };
+
+        const t1 = targetTop(heroCta);
+        const t2 = targetTop(resumeCta);
+        const t3 = targetTop(contactLabel);
+
+        const p1 = 0;
+        const p2 = Math.max(1, docTop(resumeCta) - (railRect.top + markerCenter));
+        const p3 = Math.max(p2 + 1, docTop(contactLabel) - (railRect.top + markerCenter));
+
+        let top = t1;
+        if (y <= p2) {
+          const progress = clamp((y - p1) / (p2 - p1), 0, 1);
+          top = t1 + (t2 - t1) * progress;
+        } else if (y <= p3) {
+          const progress = clamp((y - p2) / (p3 - p2), 0, 1);
+          top = t2 + (t3 - t2) * progress;
+        } else {
+          top = t3;
+        }
+
+        marker.style.top = `${Math.round(clamp(top, minTop, maxTop))}px`;
       };
+
+      const updateRail = () => mobile.matches ? updateMobile() : updateDesktop();
 
       updateRail();
       window.addEventListener('scroll', updateRail, { passive: true });
-      window.addEventListener('resize', updateRail);
+      window.addEventListener('resize', updateRail, { passive: true });
       window.addEventListener('load', updateRail);
+      mobile.addEventListener?.('change', updateRail);
     })();
   </script>
-
-  
 
   <script>
     (() => {
@@ -320,7 +370,6 @@
 
           if (visible) {
             ctx.clearRect(0, 0, width, height);
-
             particles.forEach((particle) => {
               particle.phase += delta * 0.00018;
               particle.x += ((particle.vx * delta) / width) + Math.sin(particle.phase) * 0.000004;
@@ -356,7 +405,6 @@
               ctx.restore();
             });
           }
-
           frame = requestAnimationFrame(draw);
         };
 
@@ -376,6 +424,6 @@
       });
     })();
   </script>
-<script src="cursor-final-v5.js"></script>
+  <script src="cursor-final-v5.js"></script>
 </body>
 </html>
