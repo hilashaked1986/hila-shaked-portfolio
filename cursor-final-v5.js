@@ -310,10 +310,12 @@
         const y=window.scrollY;
         const vh=window.innerHeight;
 
-        /* Exact section-entry thresholds:
-           as soon as the first pixel of ABOUT/CONTACT enters the viewport. */
-        const aboutStart=docTop(about)-vh;
-        const contactStart=docTop(contact)-vh;
+        /* Exact section boundaries:
+           switch only when the new section itself reaches the top of the viewport.
+           This prevents 02 from appearing over Tami4 and 03 from appearing
+           while ABOUT is still on screen. */
+        const aboutStart=docTop(about);
+        const contactStart=docTop(contact);
 
         let n='01', txt='WORK', light=false;
         if(y>=aboutStart){n='02';txt='ABOUT'}
