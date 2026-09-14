@@ -330,43 +330,62 @@
       raf=0;
       if(!rail||!marker||!index||anchors.length!==3) return;
 
-      /* SECTION CHANGE happens exactly when the new section begins
-         at the bottom edge of the viewport. No delayed focus-line threshold. */
       const about=document.querySelector('#about');
       const contact=document.querySelector('#contact');
+      if(!about||!contact) return;
 
-      const aboutDocTop=about
-        ? about.getBoundingClientRect().top+window.scrollY
-        : Infinity;
-      const contactDocTop=contact
-        ? contact.getBoundingClientRect().top+window.scrollY
-        : Infinity;
+      const y=window.scrollY;
+      const vh=window.innerHeight;
 
-      const aboutStart=aboutDocTop-window.innerHeight;
-      const contactStart=contactDocTop-window.innerHeight;
+      /* NUMBER SWITCH POINTS — immediately when a section starts entering. */
+      const aboutStart=about.getBoundingClientRect().top+y-vh;
+      const contactStart=contact.getBoundingClientRect().top+y-vh;
 
       let active=0;
-      if(window.scrollY>=aboutStart) active=1;
-      if(window.scrollY>=contactStart) active=2;
+      if(y>=aboutStart) active=1;
+      if(y>=contactStart) active=2;
 
-      /* POSITION:
-         keep the smooth continuous travel, with the approved visual anchors
-         as the three destination points. */
-      const destination=anchors.map(a=>markerTopFor(a.el));
+      /* REFERENCE POINTS — separate from the switch points.
+         01 aligns with SELECTED WORK.
+         02 must pass exactly through VIEW RESUME.
+         03 must pass exactly through GET IN TOUCH. */
+      const railRect=rail.getBoundingClientRect();
+      const maxTop=Math.max(0,rail.clientHeight-marker.offsetHeight);
+      const numberCenter=index.offsetTop+(index.offsetHeight/2);
 
-      const heroPoint=0;
-      const aboutPoint=aboutStart;
-      const contactPoint=contactStart;
+      const desiredTop=(el)=>{
+        const r=el.getBoundingClientRect();
+        return clamp(
+          r.top+(r.height/2)-railRect.top-numberCenter,
+          0,maxTop
+        );
+      };
 
-      let top=destination[0];
-      if(window.scrollY<aboutPoint){
-        const t=clamp((window.scrollY-heroPoint)/Math.max(1,aboutPoint-heroPoint),0,1);
-        top=destination[0]+(destination[1]-destination[0])*t;
-      }else if(window.scrollY<contactPoint){
-        const t=clamp((window.scrollY-aboutPoint)/Math.max(1,contactPoint-aboutPoint),0,1);
-        top=destination[1]+(destination[2]-destination[1])*t;
+      const t01=desiredTop(anchors[0].el);
+      const t02=desiredTop(anchors[1].el);
+      const t03=desiredTop(anchors[2].el);
+
+      /* Scroll checkpoints where each reference element itself reaches
+         the rail's visual alignment zone. */
+      const alignY=(el)=>{
+        const r=el.getBoundingClientRect();
+        const docCenter=r.top+y+(r.height/2);
+        return docCenter-(railRect.top+numberCenter);
+      };
+
+      const p01=Math.min(0,alignY(anchors[0].el));
+      const p02=alignY(anchors[1].el);
+      const p03=alignY(anchors[2].el);
+
+      let top=t01;
+      if(y<p02){
+        const t=clamp((y-p01)/Math.max(1,p02-p01),0,1);
+        top=t01+(t02-t01)*t;
+      }else if(y<p03){
+        const t=clamp((y-p02)/Math.max(1,p03-p02),0,1);
+        top=t02+(t03-t02)*t;
       }else{
-        top=destination[2];
+        top=t03;
       }
 
       marker.style.setProperty('top',`${top}px`,'important');
