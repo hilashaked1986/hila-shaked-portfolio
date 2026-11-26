@@ -1,0 +1,160 @@
+/* SNUG-only rules: base portfolio CSS is copied verbatim, never modified. */
+.snug-gallery{padding-bottom:0!important}
+.snug-gallery>.cp-frame+.cp-frame,
+.snug-gallery>.cp-frame+.cp-pair,
+.snug-gallery>.cp-pair+.cp-frame,
+.snug-gallery>.cp-frame+.snug-chapter,
+.snug-gallery>.snug-chapter+.cp-frame,
+.snug-gallery>.snug-chapter+.snug-asymmetric,
+.snug-gallery>.snug-chapter+.snug-packaging,
+.snug-gallery>.snug-asymmetric+.snug-chapter{margin-top:var(--cp-gap)}
+.snug-gallery>.cp-frame:first-child{aspect-ratio:2.30/1!important;overflow:hidden}
+.snug-gallery>.cp-frame:first-child img{height:100%!important;object-fit:cover!important;object-position:center!important}
+.snug-gallery>.cp-frame:not(:first-child) img{width:100%;height:auto!important;object-fit:initial!important}
+.snug-gallery>.cp-pair{gap:var(--cp-gap)}
+.snug-square-pair .cp-frame{aspect-ratio:1/1!important}
+.snug-square-pair img{width:100%;height:100%!important;object-fit:cover!important}
+.snug-chapter{display:flex;align-items:center;gap:16px;margin-bottom:0;padding:clamp(12px,1.6vw,24px) 0 0}
+.snug-chapter span{font:400 9px/1.3 Inter,Arial,sans-serif;letter-spacing:.25em;color:#b8a792}
+.snug-chapter:after{content:"";height:1px;background:#303034;flex:1}
+.snug-asymmetric{display:grid;grid-template-columns:minmax(0,760fr) minmax(0,1140fr);gap:var(--cp-gap);align-items:stretch}
+.snug-asymmetric .cp-frame{height:auto!important;aspect-ratio:auto!important}
+.snug-asymmetric img{width:100%;height:100%!important;object-fit:cover!important}
+.snug-packaging{display:grid;grid-template-columns:minmax(0,1450fr) minmax(0,450fr);gap:var(--cp-gap);align-items:stretch}
+.snug-packaging-main img{width:100%;height:100%!important;object-fit:cover!important}
+.snug-packaging-side{display:grid;grid-template-rows:1fr 1fr;gap:var(--cp-gap);min-height:0}
+.snug-packaging-side .cp-frame{min-height:0;aspect-ratio:auto!important}
+.snug-packaging-side img{width:100%;height:100%!important;object-fit:cover!important}
+.snug-system{margin-top:clamp(95px,8vw,130px)!important;margin-bottom:clamp(95px,8vw,130px)!important}
+.snug-logo-system{display:flex;align-items:center;min-height:130px}
+.snug-logo-system img{width:min(360px,78%);height:auto;display:block}
+.snug-font-system{gap:clamp(24px,3vw,45px);flex-wrap:wrap}
+.snug-font-sample{font-family:Georgia,serif!important}
+.snug-font-system>div{gap:12px}
+.snug-hebrew span{font-family:"Noto Sans Hebrew",Arial,sans-serif!important}
+.snug-colors{grid-template-columns:repeat(5,minmax(0,1fr));max-width:none;width:100%}
+@media(max-width:900px){
+.snug-gallery>.cp-frame:first-child{aspect-ratio:2.30/1!important}
+.snug-gallery>.cp-frame:first-child img{height:100%!important;object-fit:cover!important}
+.snug-asymmetric{grid-template-columns:1fr}
+.snug-asymmetric img{height:auto!important}
+.snug-packaging{grid-template-columns:1fr}
+.snug-packaging-main img{height:auto!important}
+.snug-packaging-side{grid-template-columns:1fr 1fr;grid-template-rows:auto}
+.snug-packaging-side img{height:auto!important}
+.snug-colors{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media(max-width:520px){
+.snug-square-pair{grid-template-columns:1fr!important}
+.snug-colors{grid-template-columns:repeat(2,minmax(0,1fr))}
+.snug-packaging-side{gap:12px}
+.snug-gallery>.cp-frame:first-child{aspect-ratio:2.30/1!important}
+}
+
+/* V4 precision pass: gallery spacing and chapter headings */
+:root{--snug-gap:20px;--snug-section-gap:46px}
+.snug-gallery{display:flex;flex-direction:column;gap:var(--snug-gap)!important}
+.snug-gallery > *{margin-top:0!important;margin-bottom:0!important}
+.snug-gallery .cp-pair,.snug-gallery .snug-asymmetric,.snug-gallery .snug-packaging,.snug-gallery .snug-packaging-side{gap:var(--snug-gap)!important}
+.snug-gallery .cp-frame{border-radius:6px!important}
+.snug-chapter{margin-top:calc(var(--snug-section-gap) - var(--snug-gap))!important;padding:0!important;display:block!important;line-height:1.4!important}
+.snug-chapter span{display:block;font:400 10px/1.4 Inter,Arial,sans-serif;letter-spacing:.22em;color:#aaa4a0}
+.snug-chapter:after{display:none!important}
+.snug-asymmetric,.snug-packaging{min-width:0}
+.snug-asymmetric .cp-frame,.snug-packaging .cp-frame{min-width:0}
+/* Use one coherent two-column template and align all system content to the same column start. */
+.snug-system{margin-top:clamp(85px,8vw,120px)!important}
+.snug-system .sky-system__row{grid-template-columns:minmax(150px,22%) minmax(0,1fr)!important;gap:clamp(30px,5vw,90px)!important;align-items:start!important;padding:clamp(34px,3.5vw,58px) 0!important;border:0!important;border-bottom:1px solid #27282c!important}
+.snug-system .sky-system__row:last-child{border-bottom:0!important}
+.snug-system .sky-system__row:first-of-type{border-top:1px solid #27282c!important}
+.snug-logo-system{justify-content:flex-start!important;align-items:center!important;min-height:70px!important;padding:0!important;margin:0!important}
+.snug-logo-system img{display:block;width:min(320px,100%)!important;margin:0!important;object-position:left center!important}
+.snug-type-stack{display:flex;flex-direction:column;gap:32px;width:100%;min-width:0}
+.snug-type-line{display:grid!important;grid-template-columns:125px minmax(0,1fr);gap:36px!important;align-items:center!important;min-width:0}
+.snug-type-line+.snug-type-line{padding-top:32px;border-top:1px solid #27282c}
+.snug-type-line .sky-type__sample{font:400 clamp(66px,6vw,96px)/.95 Georgia,serif!important;color:#f4f1eb!important;white-space:nowrap}
+.snug-type-line .snug-hebrew-sample{font-family:'Noto Sans Hebrew',Arial,sans-serif!important;font-weight:500!important}
+.snug-type-line>div{display:flex!important;flex-direction:column!important;align-items:flex-start!important;gap:10px!important;min-width:0}
+.snug-type-line>div strong{font:500 16px/1.3 Inter,Arial,sans-serif!important}
+.snug-type-line>div span{font:400 clamp(14px,1.3vw,19px)/1.6 Inter,Arial,sans-serif!important;overflow-wrap:anywhere}
+.snug-type-line>div span[lang=he]{font-family:'Noto Sans Hebrew',Arial,sans-serif!important;align-self:flex-start;text-align:left}
+.snug-colors{max-width:none!important;width:100%!important;gap:14px!important}
+.snug-colors i{border-radius:6px!important}
+@media(max-width:900px){
+ :root{--snug-gap:16px;--snug-section-gap:34px}
+ .snug-system .sky-system__row{grid-template-columns:1fr!important;gap:24px!important}
+ .snug-type-line{grid-template-columns:105px minmax(0,1fr)!important;gap:20px!important}
+}
+@media(max-width:520px){
+ .snug-type-line{grid-template-columns:1fr!important;gap:14px!important}
+ .snug-type-line .sky-type__sample{font-size:72px!important}
+ .snug-gallery .snug-packaging-side{gap:var(--snug-gap)!important}
+}
+
+/* V5: enforce strict, independent section ordering. */
+.snug-gallery{display:block!important;padding-bottom:0!important}
+.snug-gallery>.snug-content-section{display:block!important;width:100%;margin:0!important;padding:0!important;clear:both}
+.snug-gallery>.snug-content-section+.snug-content-section{margin-top:46px!important}
+.snug-gallery>.snug-content-section.snug-cover+.snug-content-section{margin-top:46px!important}
+.snug-gallery .snug-chapter{display:block!important;margin:0 0 20px!important;padding:0!important;font:400 10px/1.4 Inter,Arial,sans-serif!important;letter-spacing:.22em;color:#aaa4a0}
+.snug-gallery .snug-chapter:after{display:none!important}
+.snug-section-images{display:flex!important;flex-direction:column!important;gap:20px!important}
+.snug-gallery .snug-section-images>.cp-frame,.snug-gallery .snug-section-images>.cp-pair,.snug-gallery .snug-section-images>.snug-asymmetric,.snug-gallery .snug-section-images>.snug-packaging{margin:0!important;width:100%}
+.snug-gallery .snug-cover>.snug-hero{aspect-ratio:1920/835!important;overflow:hidden}
+.snug-gallery .snug-cover>.snug-hero img{width:100%!important;height:100%!important;object-fit:cover!important}
+.snug-gallery .snug-section-images>.cp-frame img{width:100%!important;height:auto!important;object-fit:contain!important}
+.snug-gallery .snug-square-pair{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px!important}
+.snug-gallery .snug-square-pair .cp-frame{aspect-ratio:1/1!important}
+.snug-gallery .snug-square-pair img{width:100%!important;height:100%!important;object-fit:cover!important}
+.snug-gallery .snug-asymmetric{display:grid!important;grid-template-columns:minmax(0,760fr) minmax(0,1140fr);gap:20px!important}
+.snug-gallery .snug-packaging{display:grid!important;grid-template-columns:minmax(0,1450fr) minmax(0,450fr);gap:20px!important}
+.snug-gallery .snug-packaging-side{display:grid!important;grid-template-rows:repeat(2,minmax(0,1fr));gap:20px!important}
+@media(max-width:700px){
+ .snug-gallery>.snug-content-section+.snug-content-section{margin-top:34px!important}
+ .snug-gallery .snug-square-pair,.snug-gallery .snug-asymmetric,.snug-gallery .snug-packaging{grid-template-columns:1fr!important}
+ .snug-gallery .snug-packaging-side{grid-template-columns:repeat(2,minmax(0,1fr))!important;grid-template-rows:auto!important}
+ .snug-section-images{gap:16px!important}
+}
+
+/* Optical alignment: SVG viewBox is cropped to the actual wordmark bounds. */
+.snug-logo-system img{object-position:left center!important;margin-left:0!important}
+
+/* V9: preserve exact proportions of the new 2048x1013 cover without cropping */
+.snug-gallery .snug-cover>.snug-hero{aspect-ratio:2048/1013!important;height:auto!important;overflow:hidden!important}
+.snug-gallery .snug-cover>.snug-hero img{display:block!important;width:100%!important;height:100%!important;object-fit:contain!important;object-position:center center!important}
+
+/* V10 — dedicated 1600 × 1600 mobile artwork; preserve V9 desktop layout. */
+.snug-mobile-gallery{display:none!important}
+@media(max-width:700px){
+ .snug-gallery{display:none!important}
+ .snug-mobile-gallery{display:block!important}
+ .snug-mobile-gallery .snug-mobile-section+.snug-mobile-section{margin-top:34px!important}
+ .snug-mobile-gallery .snug-chapter{display:block!important;margin:0 0 20px!important;font:400 10px/1.4 Inter,Arial,sans-serif!important;letter-spacing:.22em;color:#aaa4a0}
+ .snug-mobile-gallery .snug-mobile-images{display:flex;flex-direction:column;gap:16px}
+ .snug-mobile-gallery .cp-frame{display:block!important;width:100%!important;aspect-ratio:1/1!important;overflow:hidden!important;border-radius:6px!important;margin:0!important}
+ .snug-mobile-gallery .cp-frame img{display:block!important;width:100%!important;height:100%!important;object-fit:contain!important}
+}
+
+/* V11: reduce Visual System wordmark by 30% on mobile only. */
+@media(max-width:700px){
+ .snug-system .snug-logo-system img{width:min(224px,70%)!important;max-width:100%!important;height:auto!important}
+}
+
+/* V12: mobile-only rhythm refinement for SNUG end sections. */
+@media(max-width:700px){
+  .snug-system{margin-top:52px!important;margin-bottom:0!important;}
+  .snug-system .sky-system__head{margin-bottom:32px!important;}
+  .snug-system .sky-system__row{padding:26px 0!important;}
+  .snug-system .snug-logo-system img{width:min(190px,60%)!important;max-width:100%!important;height:auto!important;}
+  .snug-system + .cp-more{padding-top:50px!important;}
+}
+
+/* V13: prevent inherited gallery bottom padding from doubling the gap before Brand Identity on mobile. */
+@media(max-width:700px){
+ .snug-mobile-gallery{padding-bottom:0!important;}
+}
+
+/* V14: Brand Identity eyebrow — bronze, without decorative side rules on all viewports. */
+.snug-system .sky-system__head > span{color:#b8a792!important;}
+.snug-system .sky-system__head > span::before,
+.snug-system .sky-system__head > span::after{content:none!important;display:none!important;}
